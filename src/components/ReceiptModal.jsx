@@ -20,79 +20,80 @@ export default function ReceiptModal({ data, onClose }) {
 
     return (
         <div className="modal-overlay" style={{
-            position: 'fixed', inset: 0, background: 'rgba(9, 13, 22, 0.85)',
+            position: 'fixed', inset: 0, background: 'rgba(9, 13, 22, 0.88)',
             backdropFilter: 'blur(12px)', zIndex: 2000, display: 'flex',
-            alignItems: 'center', justifyContent: 'center', padding: '1.5rem'
+            alignItems: 'center', justifyContent: 'center', padding: '1rem'
         }}>
             <div className="modal-card" style={{
-                background: 'rgba(18, 26, 43, 0.95)', border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: '24px', maxWidth: '550px', width: '100%', padding: '2.5rem', position: 'relative'
+                background: 'rgba(18, 26, 43, 0.98)', border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: '24px', maxWidth: '520px', width: '100%', maxHeight: '90vh', overflowY: 'auto',
+                padding: '1.75rem 1.25rem', position: 'relative'
             }}>
                 <button 
                     onClick={onClose}
-                    style={{ position: 'absolute', top: '20px', right: '20px', background: 'none', border: 'none', color: '#94a3b8', fontSize: '1.25rem', cursor: 'pointer' }}
+                    style={{ position: 'absolute', top: '16px', right: '16px', background: 'none', border: 'none', color: '#94a3b8', fontSize: '1.25rem', cursor: 'pointer', padding: '4px' }}
                 >
                     <X size={24} />
                 </button>
 
-                <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+                <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
                     <div style={{
-                        width: '64px', height: '64px', background: 'rgba(16, 185, 129, 0.15)',
+                        width: '56px', height: '56px', background: 'rgba(16, 185, 129, 0.15)',
                         border: '1px solid rgba(16, 185, 129, 0.4)', color: '#10b981',
                         borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        margin: '0 auto 1rem auto'
+                        margin: '0 auto 0.75rem auto'
                     }}>
-                        <CheckCircle2 size={36} />
+                        <CheckCircle2 size={32} />
                     </div>
-                    <h2 style={{ fontSize: '1.75rem', marginBottom: '0.25rem' }}>ලියාපදිංචිය සාර්ථකයි!</h2>
-                    <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>ඔබේ තොරතුරු mathsbook පන්ති පද්ධතියට ඇතුළත් විය.</p>
+                    <h2 style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>ලියාපදිංචිය සාර්ථකයි!</h2>
+                    <p style={{ color: '#94a3b8', fontSize: '0.85rem' }}>ඔබේ තොරතුරු mathsbook පන්ති පද්ධතියට ඇතුළත් විය.</p>
                 </div>
 
                 <div style={{
                     background: 'rgba(15, 23, 42, 0.6)', border: '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '16px', padding: '1.25rem', marginBottom: '1.5rem', fontSize: '0.95rem'
+                    borderRadius: '16px', padding: '1rem', marginBottom: '1.25rem', fontSize: '0.875rem'
                 }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem 0', borderBottom: '1px dashed rgba(255,255,255,0.08)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.4rem 0', borderBottom: '1px dashed rgba(255,255,255,0.08)', gap: '0.5rem' }}>
                         <span style={{ color: '#94a3b8' }}>ලියාපදිංචි අංකය:</span>
-                        <span style={{ fontWeight: 700, color: '#818cf8' }}>{data.id}</span>
+                        <span style={{ fontWeight: 700, color: '#818cf8', textAlign: 'right' }}>{data.id}</span>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem 0', borderBottom: '1px dashed rgba(255,255,255,0.08)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.4rem 0', borderBottom: '1px dashed rgba(255,255,255,0.08)', gap: '0.5rem' }}>
                         <span style={{ color: '#94a3b8' }}>ශිෂ්‍යයාගේ නම:</span>
-                        <span style={{ fontWeight: 600 }}>{data.studentName}</span>
+                        <span style={{ fontWeight: 600, textAlign: 'right' }}>{data.studentName}</span>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem 0', borderBottom: '1px dashed rgba(255,255,255,0.08)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.4rem 0', borderBottom: '1px dashed rgba(255,255,255,0.08)', gap: '0.5rem' }}>
                         <span style={{ color: '#94a3b8' }}>දුරකථන අංකය:</span>
-                        <span style={{ fontWeight: 600 }}>{data.contactNumber}</span>
+                        <span style={{ fontWeight: 600, textAlign: 'right' }}>{data.contactNumber}</span>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem 0', borderBottom: '1px dashed rgba(255,255,255,0.08)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.4rem 0', borderBottom: '1px dashed rgba(255,255,255,0.08)', gap: '0.5rem' }}>
                         <span style={{ color: '#94a3b8' }}>WhatsApp අංකය:</span>
-                        <span style={{ fontWeight: 600 }}>{data.whatsappNumber}</span>
+                        <span style={{ fontWeight: 600, textAlign: 'right' }}>{data.whatsappNumber}</span>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem 0', borderBottom: '1px dashed rgba(255,255,255,0.08)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.4rem 0', borderBottom: '1px dashed rgba(255,255,255,0.08)', gap: '0.5rem' }}>
                         <span style={{ color: '#94a3b8' }}>පාසල:</span>
-                        <span style={{ fontWeight: 600 }}>{data.schoolName}</span>
+                        <span style={{ fontWeight: 600, textAlign: 'right' }}>{data.schoolName}</span>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem 0', borderBottom: '1px dashed rgba(255,255,255,0.08)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.4rem 0', borderBottom: '1px dashed rgba(255,255,255,0.08)', gap: '0.5rem' }}>
                         <span style={{ color: '#94a3b8' }}>අවසන් වාර ලකුණු:</span>
-                        <span style={{ fontWeight: 600 }}>{data.lastTermMarks}%</span>
+                        <span style={{ fontWeight: 600, textAlign: 'right' }}>{data.lastTermMarks}%</span>
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.5rem 0' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0.4rem 0', gap: '0.5rem' }}>
                         <span style={{ color: '#94a3b8' }}>තෝරාගත් පන්තිය:</span>
-                        <span style={{ fontWeight: 700, color: '#06b6d4' }}>{data.course}</span>
+                        <span style={{ fontWeight: 700, color: '#06b6d4', textAlign: 'right' }}>{data.course}</span>
                     </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: '1rem' }}>
+                <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                     <a 
                         href={`https://wa.me/${tutorPhone}?text=${waText}`} 
                         target="_blank" 
                         rel="noreferrer" 
                         className="btn btn-whatsapp" 
-                        style={{ flex: 1 }}
+                        style={{ flex: '1 1 200px', justifyContent: 'center' }}
                     >
-                        <MessageSquare size={18} /> WhatsApp හරහා තහවුරු කරන්න
+                        <MessageSquare size={18} /> WhatsApp හරහා යවන්න
                     </a>
-                    <button className="btn btn-secondary" onClick={onClose} style={{ flex: 1 }}>
+                    <button className="btn btn-secondary" onClick={onClose} style={{ flex: '1 1 100px', justifyContent: 'center' }}>
                         වසා දමන්න
                     </button>
                 </div>

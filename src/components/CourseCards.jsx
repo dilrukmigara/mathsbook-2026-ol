@@ -11,7 +11,7 @@ export default function CourseCards({ onSelectCourse }) {
                     <p className="section-sub">සෑම ශිෂ්‍යයෙකුගේම දැනුම් මට්ටමට අනුව සැකසූ සුවිශේෂී පාඨමාලා 3ක්</p>
                 </div>
 
-                <div className="courses-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem' }}>
+                <div className="courses-grid">
                     {/* Course 1: Full Paper Discussion */}
                     <div style={{
                         background: 'linear-gradient(180deg, rgba(99, 102, 241, 0.12) 0%, rgba(18, 26, 43, 0.85) 100%)',

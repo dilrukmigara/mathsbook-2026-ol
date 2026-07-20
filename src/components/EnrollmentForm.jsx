@@ -93,27 +93,22 @@ export default function EnrollmentForm({ onShowReceipt }) {
                     <p className="section-sub">පහත පෝරමය පුරවා ඔබේ තොරතුරු ඇතුළත් කරන්න</p>
                 </div>
 
-                <div style={{
-                    background: 'linear-gradient(135deg, rgba(18, 26, 43, 0.95) 0%, rgba(15, 23, 42, 0.95) 100%)',
-                    border: '1px solid rgba(255, 255, 255, 0.08)',
-                    borderRadius: '24px',
-                    padding: '3rem',
-                    boxShadow: '0 10px 30px -5px rgba(0,0,0,0.5)',
-                    position: 'relative'
-                }}>
+                <div className="form-card-container">
                     
                     {/* Live Google Form Status Bar */}
                     <div style={{
                         background: 'rgba(16, 185, 129, 0.1)',
                         border: '1px solid rgba(16, 185, 129, 0.3)',
                         color: '#6ee7b7',
-                        padding: '0.75rem 1.25rem',
+                        padding: '0.75rem 1rem',
                         borderRadius: '16px',
                         marginBottom: '1.5rem',
                         fontSize: '0.85rem',
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between',
+                        flexWrap: 'wrap',
+                        gap: '0.5rem'
                     }}>
                         <div>
                             <CheckCircle size={16} style={{ display: 'inline', marginRight: '6px' }} />
@@ -123,7 +118,7 @@ export default function EnrollmentForm({ onShowReceipt }) {
                     </div>
 
                     <form onSubmit={handleSubmit}>
-                        <div className="form-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '1.5rem' }}>
+                        <div className="form-grid">
                             
                             {/* Student Name */}
                             <div>
