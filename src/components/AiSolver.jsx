@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import { Sparkles, Camera, Type, UploadCloud, X, Key, Brain, Copy, MessageSquare, ExternalLink, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { Sparkles, Camera, Type, UploadCloud, X, Key, Brain, Copy, MessageSquare, ExternalLink, Loader2, AlertCircle } from 'lucide-react';
 import { MATHSBOOK_CONFIG } from '../config/mathsbookConfig';
 
 export default function AiSolver() {
@@ -8,12 +10,22 @@ export default function AiSolver() {
     const [selectedImageMime, setSelectedImageMime] = useState(null);
     const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
     const [textQuery, setTextQuery] = useState('');
-    const [apiKey, setApiKey] = useState(() => localStorage.getItem('mathsbook_gemini_api_key') || MATHSBOOK_CONFIG.aiSolver.apiKey);
+    const [apiKey, setApiKey] = useState(MATHSBOOK_CONFIG.aiSolver.apiKey);
     const [showKeyInput, setShowKeyInput] = useState(false);
-    const [tempKeyInput, setTempKeyInput] = useState(apiKey);
+    const [tempKeyInput, setTempKeyInput] = useState('');
     const [loading, setLoading] = useState(false);
     const [solution, setSolution] = useState(null);
     const [errorMessage, setErrorMessage] = useState(null);
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const savedKey = localStorage.getItem('mathsbook_gemini_api_key');
+            if (savedKey) {
+                setApiKey(savedKey);
+                setTempKeyInput(savedKey);
+            }
+        }
+    }, []);
 
     const handleFileChange = (e) => {
         const file = e.target.files?.[0];
@@ -53,14 +65,6 @@ export default function AiSolver() {
     };
 
     const handleSolve = async () => {
-        const effectiveKey = (localStorage.getItem('mathsbook_gemini_api_key') || apiKey || '').trim();
-
-        if (!effectiveKey) {
-            setShowKeyInput(true);
-            setErrorMessage('ගණිත ගැටලුව විසඳීමට Gemini API Key එකක් ඇතුළත් කරන්න. (aistudio.google.com වෙතින් නොමිලේ ලබාගත හැක)');
-            return;
-        }
-
         if (activeTab === 'image' && !selectedImageBase64) {
             alert('කරුණාකර පළමුව ගණිත ගැටලුවේ ඡායාරූපයක් (Photo) ඇතුළත් කරන්න.');
             return;
@@ -75,87 +79,37 @@ export default function AiSolver() {
         setSolution(null);
         setErrorMessage(null);
 
-        const systemPrompt = MATHSBOOK_CONFIG.aiSolver.systemPrompt;
-        let contentsArray = [];
+        const customKey = (typeof window !== 'undefined' ? localStorage.getItem('mathsbook_gemini_api_key') : '') || apiKey || '';
 
-        if (activeTab === 'image' && selectedImageBase64) {
-            contentsArray = [{
-                parts: [
-                    { text: systemPrompt + "\n\nමෙම ඡායාරූපයේ ඇති ගණිත ගැටලුව පියවරෙන් පියවර පැහැදිලි සිංහලෙන් විසඳා දෙන්න." },
-                    {
-                        inline_data: {
-                            mime_type: selectedImageMime || 'image/jpeg',
-                            data: selectedImageBase64
-                        }
-                    }
-                ]
-            }];
-        } else {
-            contentsArray = [{
-                parts: [
-                    { text: systemPrompt + "\n\nප්‍රශ්නය: " + textQuery.trim() }
-                ]
-            }];
-        }
+        try {
+            // Call Next.js Server API Route (/api/solve-math)
+            const response = await fetch('/api/solve-math', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    activeTab,
+                    textQuery,
+                    selectedImageBase64,
+                    selectedImageMime,
+                    customApiKey: customKey
+                })
+            });
 
-        // List of candidate models to try in order of fallback
-        const candidateModels = [
-            MATHSBOOK_CONFIG.aiSolver.model,
-            "gemini-2.0-flash",
-            "gemini-2.0-flash-lite",
-            "gemini-2.5-flash",
-            "gemini-flash-latest"
-        ];
+            const data = await response.json();
 
-        // Deduplicate model array
-        const uniqueModels = [...new Set(candidateModels.filter(Boolean))];
-
-        let lastError = null;
-        let solText = null;
-
-        for (const modelName of uniqueModels) {
-            try {
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${effectiveKey}`;
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ contents: contentsArray })
-                });
-
-                const data = await response.json();
-
-                if (response.ok && data.candidates?.[0]?.content?.parts?.[0]?.text) {
-                    solText = data.candidates[0].content.parts[0].text;
-                    break; // Success!
-                }
-
-                if (data.error) {
-                    const errCode = data.error.code;
-                    const errMsg = data.error.message || '';
-
-                    if (errCode === 429 || errMsg.includes('Quota exceeded') || errMsg.includes('quota')) {
-                        lastError = `තෝරාගත් API Key එකෙහි Quota සීමාව ඉක්මවා ඇත (Quota Exceeded). කරුණාකර aistudio.google.com වෙතින් නව නොමිලේ API Key එකක් සදාගෙන පහතින් ඇතුළත් කරන්න.`;
-                        break;
-                    } else if (errCode === 400 || errCode === 403 || errMsg.includes('API key not valid')) {
-                        lastError = `ඔබ ඇතුළත් කළ API Key එක වැරදියි හෝ අක්‍රියයි. (Google AI Studio API Keys ආරම්භ වන්නේ AIzaSy... වලින්ය). කරුණාකර නිවැරදි API Key එකක් ඇතුළත් කරන්න.`;
-                        break;
-                    } else {
-                        lastError = data.error.message || `Gemini API දෝෂයක් සිදුවිය (${modelName}).`;
-                    }
-                }
-            } catch (err) {
-                lastError = err.message || 'සම්බන්ධතා දෝෂයක් සිදුවිය.';
+            if (!response.ok || data.error) {
+                setErrorMessage(data.error || 'Gemini API දෝෂයක් සිදුවිය.');
+                setShowKeyInput(true);
+            } else if (data.solution) {
+                setSolution(data.solution);
+            } else {
+                setErrorMessage('විසඳුම ලබාගැනීමට නොහැකි විය. කරුණාකර නැවත උත්සාහ කරන්න.');
             }
+        } catch (err) {
+            setErrorMessage('සම්බන්ධතා දෝෂයක් සිදුවිය: ' + err.message);
+        } finally {
+            setLoading(false);
         }
-
-        if (solText) {
-            setSolution(solText);
-        } else {
-            setErrorMessage(lastError || 'විසඳුම ලබාගැනීමට නොහැකි විය. කරුණාකර API Key එක පරීක්ෂා කර නැවත උත්සාහ කරන්න.');
-            setShowKeyInput(true);
-        }
-
-        setLoading(false);
     };
 
     const copySolution = () => {
@@ -164,6 +118,111 @@ export default function AiSolver() {
                 alert('විසඳුම Clipboard එකට Copy කරගන්නා ලදී!');
             });
         }
+    };
+
+    const renderFormattedSolution = (text) => {
+        if (!text) return null;
+
+        // Split text by markdown code blocks (``` ... ```)
+        const parts = text.split(/(```[\s\S]*?```)/g);
+
+        return (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', marginTop: '0.5rem' }}>
+                {parts.map((part, idx) => {
+                    if (part.startsWith('```')) {
+                        const match = part.match(/```(\w*)\n?([\s\S]*?)```/);
+                        const lang = match ? match[1] : '';
+                        const codeContent = match ? match[2].trim() : part.replace(/```/g, '').trim();
+
+                        return (
+                            <div key={idx} style={{
+                                background: '#070b14',
+                                border: '1px solid rgba(99, 102, 241, 0.4)',
+                                borderRadius: '12px',
+                                overflow: 'hidden',
+                                boxShadow: '0 4px 15px rgba(0, 0, 0, 0.5)'
+                            }}>
+                                <div style={{
+                                    background: 'rgba(99, 102, 241, 0.15)',
+                                    padding: '0.45rem 1rem',
+                                    borderBottom: '1px solid rgba(99, 102, 241, 0.2)',
+                                    display: 'flex',
+                                    justify: 'space-between',
+                                    alignItems: 'center',
+                                    fontSize: '0.75rem',
+                                    color: '#a5b4fc',
+                                    fontWeight: 600,
+                                    fontFamily: 'monospace'
+                                }}>
+                                    <span>{lang ? lang.toUpperCase() + ' CODE / MATH' : '📐 MATH EXPRESSION / STEP CODE'}</span>
+                                    <button 
+                                        onClick={() => navigator.clipboard.writeText(codeContent)}
+                                        style={{
+                                            background: 'rgba(99, 102, 241, 0.2)',
+                                            border: 'none',
+                                            color: '#c7d2fe',
+                                            padding: '0.2rem 0.6rem',
+                                            borderRadius: '6px',
+                                            cursor: 'pointer',
+                                            fontSize: '0.75rem',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            gap: '0.3rem'
+                                        }}
+                                    >
+                                        <Copy size={13} /> Copy Code
+                                    </button>
+                                </div>
+                                <pre style={{
+                                    margin: 0,
+                                    padding: '1rem 1.25rem',
+                                    overflowX: 'auto',
+                                    color: '#38bdf8',
+                                    fontFamily: 'Consolas, Monaco, "Fira Code", monospace',
+                                    fontSize: '0.92rem',
+                                    lineHeight: 1.65,
+                                    whiteSpace: 'pre',
+                                    background: '#040711'
+                                }}>
+                                    <code>{codeContent}</code>
+                                </pre>
+                            </div>
+                        );
+                    }
+
+                    // Regular text blocks: split by lines to format steps vertically
+                    const lines = part.split('\n');
+
+                    return (
+                        <div key={idx} style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                            {lines.map((line, lineIdx) => {
+                                const trimmed = line.trim();
+                                if (!trimmed) return <div key={lineIdx} style={{ height: '0.25rem' }} />;
+
+                                const isStepHeader = trimmed.startsWith('📌') || trimmed.startsWith('පියවර') || trimmed.startsWith('Step') || trimmed.startsWith('#');
+
+                                return (
+                                    <div key={lineIdx} style={{
+                                        padding: isStepHeader ? '0.75rem 1rem' : '0.2rem 0',
+                                        background: isStepHeader ? 'linear-gradient(90deg, rgba(99, 102, 241, 0.15) 0%, rgba(15, 23, 42, 0.4) 100%)' : 'transparent',
+                                        borderLeft: isStepHeader ? '4px solid #818cf8' : 'none',
+                                        borderRadius: isStepHeader ? '0 8px 8px 0' : '0',
+                                        color: isStepHeader ? '#a5b4fc' : '#f1f5f9',
+                                        fontWeight: isStepHeader ? 700 : 400,
+                                        fontSize: isStepHeader ? '1rem' : '0.95rem',
+                                        lineHeight: 1.7,
+                                        whiteSpace: 'pre-wrap',
+                                        wordBreak: 'break-word'
+                                    }}>
+                                        {line}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    );
+                })}
+            </div>
+        );
     };
 
     return (
@@ -176,7 +235,7 @@ export default function AiSolver() {
                         padding: '0.35rem 0.85rem', borderRadius: '999px',
                         display: 'inline-flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1rem'
                     }}>
-                        <Sparkles size={16} /> Powered by Gemini AI & Custom GPT
+                        <Sparkles size={16} /> Powered by Next.js Server API & Gemini AI
                     </span>
                     <h2 className="section-title">mathsbook AI Solver</h2>
                     <p className="section-sub">ඕනෑම ගණිත ගැටලුවක ඡායාරූපයක් (Photo) හෝ ප්‍රශ්නයක් ඇතුළත් කර පියවරෙන් පියවර නිවැරදි විසඳුම ලබාගන්න</p>
@@ -292,12 +351,8 @@ export default function AiSolver() {
                             <div style={{ fontSize: '0.85rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                 <Key size={16} style={{ color: '#fbbf24' }} />
                                 <span>
-                                    <strong>Gemini API Key:</strong>{' '}
-                                    {apiKey ? (
-                                        <span style={{ color: '#10b981', fontWeight: 600 }}>සක්‍රීයයි ✓</span>
-                                    ) : (
-                                        <span style={{ color: '#fbbf24', fontWeight: 600 }}>Key එකක් අවශ්‍යයි</span>
-                                    )}
+                                    <strong>Gemini Backend API Status:</strong>{' '}
+                                    <span style={{ color: '#10b981', fontWeight: 600 }}>Next.js Server Connected ✓</span>
                                 </span>
                             </div>
                             <button 
@@ -305,14 +360,14 @@ export default function AiSolver() {
                                 onClick={() => { setShowKeyInput(!showKeyInput); setTempKeyInput(apiKey); }}
                                 style={{ padding: '0.35rem 0.75rem', fontSize: '0.8rem' }}
                             >
-                                {showKeyInput ? 'සඟවන්න' : 'Key එක සැකසීමට'}
+                                {showKeyInput ? 'සඟවන්න' : 'Custom Key එකක් යෙදීමට'}
                             </button>
                         </div>
 
                         {showKeyInput && (
                             <div style={{ marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
                                 <p style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '0.75rem' }}>
-                                    Google AI Studio (<a href="https://aistudio.google.com/" target="_blank" rel="noreferrer" style={{ color: '#06b6d4' }}>aistudio.google.com</a>) වෙතින් නොමිලේ Gemini API Key එකක් ලබාගෙන මෙතැනට Paste කරන්න:
+                                    (විකල්ප) ඔබටම වෙන්වූ විශේෂිත Google AI Studio (<a href="https://aistudio.google.com/" target="_blank" rel="noreferrer" style={{ color: '#06b6d4' }}>aistudio.google.com</a>) API Key එකක් ඇත්නම් මෙතැනට යොදන්න:
                                 </p>
                                 <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
                                     <input 
@@ -333,6 +388,15 @@ export default function AiSolver() {
                                     >
                                         සුරකින්න (Save Key)
                                     </button>
+                                    {apiKey && (
+                                        <button 
+                                            className="btn btn-secondary btn-sm"
+                                            onClick={() => { setTempKeyInput(''); handleSaveKey(''); }}
+                                            style={{ padding: '0.6rem 1rem', color: '#f87171' }}
+                                        >
+                                            ඉවත් කරන්න (Clear Saved Key)
+                                        </button>
+                                    )}
                                 </div>
                             </div>
                         )}
@@ -347,7 +411,7 @@ export default function AiSolver() {
                             style={{ width: '100%', padding: '0.9rem', fontSize: '1rem', justifyContent: 'center' }}
                         >
                             {loading ? <Loader2 size={18} className="animate-spin" /> : <Sparkles size={18} />}
-                            {loading ? 'ගැටලුව විශ්ලේෂණය කරමින්...' : 'ගැටලුව විසඳන්න (Solve Problem)'}
+                            {loading ? 'ගැටලුව සේවාදායකයේ (Server) විශ්ලේෂණය කරමින්...' : 'ගැටලුව විසඳන්න (Solve Problem)'}
                         </button>
                     </div>
 
@@ -376,9 +440,7 @@ export default function AiSolver() {
                                     </a>
                                 </div>
                             </div>
-                            <div style={{ fontSize: '0.95rem', lineHeight: 1.7, color: '#f8fafc', whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-                                {solution}
-                            </div>
+                            {renderFormattedSolution(solution)}
                         </div>
                     )}
 

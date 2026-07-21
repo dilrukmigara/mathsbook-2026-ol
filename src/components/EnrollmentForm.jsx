@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { Send, AlertTriangle, CheckCircle, ShieldAlert } from 'lucide-react';
 import confetti from 'canvas-confetti';

@@ -34,7 +34,7 @@ export const MATHSBOOK_CONFIG = {
     // Gemini AI Solver Configuration
     aiSolver: {
         model: "gemini-2.0-flash",
-        apiKey: import.meta.env.VITE_GEMINI_API_KEY || "", // Loaded from .env (VITE_GEMINI_API_KEY)
+        apiKey: "", // Handled securely by Next.js /api/solve-math server API route
         systemPrompt: "You are mathsbook AI, an expert Sinhala Medium O/L & A/L Mathematics tutor created by Migara Wickramarachchi (BSc Hons Undergraduate). Analyze the provided math problem (image or text) and provide a detailed, accurate, step-by-step solution in Sinhala (සිංහල). Show all steps clearly, explain the mathematical principles used, highlight common mistakes, and state the final answer clearly."
     }
 };

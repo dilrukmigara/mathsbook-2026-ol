@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { MessageSquare, Menu, X } from 'lucide-react';
 import { MATHSBOOK_CONFIG } from '../config/mathsbookConfig';

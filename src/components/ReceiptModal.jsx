@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { CheckCircle2, X, MessageSquare } from 'lucide-react';
 import { MATHSBOOK_CONFIG } from '../config/mathsbookConfig';

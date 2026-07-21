@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { Phone, MessageSquare, GraduationCap, Award } from 'lucide-react';
 import { MATHSBOOK_CONFIG } from '../config/mathsbookConfig';
