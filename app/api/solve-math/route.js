@@ -59,7 +59,7 @@ Always format your response vertically line-by-line with clear step headings:
 
     // List of models to try in sequence for maximum reliability
     const candidateModels = [
-      "gemini-3-pro-preview",
+      "gemini-3.5-flash",
       "gemini-2.5-flash",
       "gemini-2.5-pro"
     ];
