@@ -3,8 +3,11 @@
 import React from 'react';
 import { UserCheck, MessageSquare, Phone, BookOpen, GraduationCap } from 'lucide-react';
 import { MATHSBOOK_CONFIG } from '../config/mathsbookConfig';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Hero() {
+    const { t, language } = useLanguage();
+
     return (
         <section id="home" className="hero-section" style={{ paddingTop: '120px', paddingBottom: '70px', position: 'relative', zIndex: 1 }}>
             <div className="container hero-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', alignItems: 'center' }}>
@@ -23,24 +26,24 @@ export default function Hero() {
                     }}>
                         <span style={{ width: '8px', height: '8px', background: '#10b981', borderRadius: '50%', boxShadow: '0 0 10px #10b981', flexShrink: 0 }}></span>
                         <span style={{ fontSize: '0.825rem', fontWeight: 600, color: '#818cf8' }}>
-                            2026 / 2027 ශිෂ්‍ය කණ්ඩායම් සඳහා ලියාපදිංචිය ඇරඹුණා
+                            {t('heroBadge')}
                         </span>
                     </div>
 
                     <h1 className="hero-title" style={{ fontSize: 'clamp(2rem, 5vw, 3.25rem)', lineHeight: 1.2, marginBottom: '1.25rem', letterSpacing: '-0.5px' }}>
-                        ගණිතයට <span className="gradient-text-gold">විශිෂ්ට A සාමාර්ථයකට</span> පාර කියන - <span className="gradient-text">mathsbook</span>
+                        {t('heroTitleLine1')} <span className="gradient-text-gold">{t('heroTitleLine2')}</span> - <span className="gradient-text">mathsbook</span>
                     </h1>
 
                     <p className="hero-subtitle" style={{ fontSize: '1.05rem', color: '#94a3b8', marginBottom: '1.75rem', maxWidth: '600px', lineHeight: 1.6 }}>
-                        තර්කානුකූල සිද්ධාන්ත, ක්‍රමවත් ප්‍රශ්න පත්‍ර සාකච්ඡාව සහ විශේෂිත කෙටි ක්‍රම මඟින් ගණිතය විෂයට ඉහළම ලකුණු තහවුරු කෙරෙන විශ්වාසනීය සිංහල මාධ්‍ය ගණිත පන්තිය.
+                        {t('heroSub')}
                     </p>
 
                     <div className="hero-cta-group" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2.25rem' }}>
                         <a href="#enroll" className="btn btn-primary hero-btn">
-                            <UserCheck size={18} /> දැන්ම ලියාපදිංචි වන්න
+                            <UserCheck size={18} /> {t('btnEnroll')}
                         </a>
-                        <a href={`https://wa.me/${MATHSBOOK_CONFIG.tutor.whatsapp}`} target="_blank" rel="noreferrer" className="btn btn-whatsapp hero-btn">
-                            <MessageSquare size={18} /> WhatsApp විමසීම්
+                        <a href="#ai-solver" className="btn btn-secondary hero-btn" style={{ borderColor: 'rgba(6, 182, 212, 0.4)', color: '#38bdf8' }}>
+                            {t('btnAiSolver')}
                         </a>
                     </div>
 

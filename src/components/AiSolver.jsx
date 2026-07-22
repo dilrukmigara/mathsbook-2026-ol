@@ -3,8 +3,10 @@
 import React, { useState, useEffect } from 'react';
 import { Sparkles, Camera, Type, UploadCloud, X, Key, Brain, Copy, MessageSquare, ExternalLink, Loader2, AlertCircle } from 'lucide-react';
 import { MATHSBOOK_CONFIG } from '../config/mathsbookConfig';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AiSolver() {
+    const { t, language } = useLanguage();
     const [activeTab, setActiveTab] = useState('image');
     const [selectedImageBase64, setSelectedImageBase64] = useState(null);
     const [selectedImageMime, setSelectedImageMime] = useState(null);
@@ -237,8 +239,8 @@ export default function AiSolver() {
                     }}>
                         <Sparkles size={16} /> Powered by Next.js Server API & Gemini AI
                     </span>
-                    <h2 className="section-title">mathsbook AI Solver</h2>
-                    <p className="section-sub">ඕනෑම ගණිත ගැටලුවක ඡායාරූපයක් (Photo) හෝ ප්‍රශ්නයක් ඇතුළත් කර පියවරෙන් පියවර නිවැරදි විසඳුම ලබාගන්න</p>
+                    <h2 className="section-title">{t('aiTitle')}</h2>
+                    <p className="section-sub">{t('aiSub')}</p>
                 </div>
 
                 <div className="ai-solver-card" style={{
@@ -255,14 +257,14 @@ export default function AiSolver() {
                             onClick={() => setActiveTab('image')}
                             style={{ flex: '1 1 auto', justifyContent: 'center' }}
                         >
-                            <Camera size={16} /> ඡායාරූපයක් මඟින්
+                            <Camera size={16} /> {t('tabImage')}
                         </button>
                         <button 
                             className={`btn btn-sm ${activeTab === 'text' ? 'btn-primary' : 'btn-secondary'}`}
                             onClick={() => setActiveTab('text')}
                             style={{ flex: '1 1 auto', justifyContent: 'center' }}
                         >
-                            <Type size={16} /> ප්‍රශ්නය ටයිප් කර
+                            <Type size={16} /> {t('tabText')}
                         </button>
                     </div>
 

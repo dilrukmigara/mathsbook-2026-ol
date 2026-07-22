@@ -3,8 +3,11 @@
 import React from 'react';
 import { Phone, MessageSquare, GraduationCap, Award } from 'lucide-react';
 import { MATHSBOOK_CONFIG } from '../config/mathsbookConfig';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
+    const { t } = useLanguage();
+
     return (
         <footer id="contact" style={{ background: '#05080e', borderTop: '1px solid rgba(255,255,255,0.08)', padding: '60px 0 30px 0', position: 'relative', zIndex: 1 }}>
             <div className="container">
@@ -17,19 +20,19 @@ export default function Footer() {
                             <div className="gradient-text" style={{ fontSize: '1.5rem', fontWeight: 800 }}>mathsbook</div>
                         </div>
                         <p style={{ color: '#94a3b8', fontSize: '0.95rem', marginBottom: '1.5rem' }}>
-                            සිංහල මාධ්‍ය ගණිත පන්තිය. Migara Wickramarachchi (BSc Hons Undergraduate). විශිෂ්ට ප්‍රතිඵලයකට නිවැරදිම මඟපෙන්වීම.
+                            {t('footerDesc')}
                         </p>
                     </div>
 
                     {/* Col 2 */}
                     <div>
-                        <h4 style={{ fontSize: '1.1rem', marginBottom: '1.25rem' }}>ඉක්මන් පිවිසුම්</h4>
+                        <h4 style={{ fontSize: '1.1rem', marginBottom: '1.25rem' }}>Quick Links</h4>
                         <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.9rem' }}>
-                            <li><a href="#home" style={{ color: '#94a3b8', textDecoration: 'none' }}>මුල් පිටුව</a></li>
-                            <li><a href="#about" style={{ color: '#94a3b8', textDecoration: 'none' }}>දැක්ම සහ මෙහෙවර</a></li>
-                            <li><a href="#courses" style={{ color: '#94a3b8', textDecoration: 'none' }}>පන්ති වැඩසටහන්</a></li>
-                            <li><a href="#ai-solver" style={{ color: '#06b6d4', textDecoration: 'none', fontWeight: 600 }}>AI Solver</a></li>
-                            <li><a href="#enroll" style={{ color: '#94a3b8', textDecoration: 'none' }}>ලියාපදිංචිය</a></li>
+                            <li><a href="#home" style={{ color: '#94a3b8', textDecoration: 'none' }}>{t('navHome')}</a></li>
+                            <li><a href="#about" style={{ color: '#94a3b8', textDecoration: 'none' }}>{t('navAbout')}</a></li>
+                            <li><a href="#courses" style={{ color: '#94a3b8', textDecoration: 'none' }}>{t('navCourses')}</a></li>
+                            <li><a href="#ai-solver" style={{ color: '#06b6d4', textDecoration: 'none', fontWeight: 600 }}>{t('navAiSolver')}</a></li>
+                            <li><a href="#enroll" style={{ color: '#94a3b8', textDecoration: 'none' }}>{t('navEnroll')}</a></li>
                         </ul>
                     </div>
 

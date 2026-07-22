@@ -10,6 +10,8 @@ import EnrollmentForm from '../src/components/EnrollmentForm';
 import ReceiptModal from '../src/components/ReceiptModal';
 import Footer from '../src/components/Footer';
 import FloatingWhatsapp from '../src/components/FloatingWhatsapp';
+import { LanguageProvider } from '../src/context/LanguageContext';
+import WelcomeLanguageModal from '../src/components/WelcomeLanguageModal';
 
 export default function Home() {
   const [receiptData, setReceiptData] = useState(null);
@@ -37,40 +39,43 @@ export default function Home() {
   };
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh' }}>
-      {/* Background Floating Math Symbols */}
-      <div className="bg-math-patterns">
-        {mathSymbols.map((s) => (
-          <span 
-            key={s.id} 
-            className="math-symbol"
-            style={{
-              left: s.left,
-              top: s.top,
-              animationDuration: s.duration,
-              animationDelay: s.delay,
-              fontSize: s.fontSize
-            }}
-          >
-            {s.symbol}
-          </span>
-        ))}
+    <LanguageProvider>
+      <WelcomeLanguageModal />
+      <div style={{ position: 'relative', minHeight: '100vh' }}>
+        {/* Background Floating Math Symbols */}
+        <div className="bg-math-patterns">
+          {mathSymbols.map((s) => (
+            <span 
+              key={s.id} 
+              className="math-symbol"
+              style={{
+                left: s.left,
+                top: s.top,
+                animationDuration: s.duration,
+                animationDelay: s.delay,
+                fontSize: s.fontSize
+              }}
+            >
+              {s.symbol}
+            </span>
+          ))}
+        </div>
+
+        {/* Main Page Layout */}
+        <Navbar />
+        <Hero />
+        <VisionMission />
+        <CourseCards onSelectCourse={handleSelectCourse} />
+        {/*<AiSolver />*/}
+        <EnrollmentForm onShowReceipt={(data) => setReceiptData(data)} />
+        <Footer />
+        <FloatingWhatsapp />
+
+        {/* Receipt Modal */}
+        {receiptData && (
+          <ReceiptModal data={receiptData} onClose={() => setReceiptData(null)} />
+        )}
       </div>
-
-      {/* Main Page Layout */}
-      <Navbar />
-      <Hero />
-      <VisionMission />
-      <CourseCards onSelectCourse={handleSelectCourse} />
-      {/* <AiSolver /> */}
-      <EnrollmentForm onShowReceipt={(data) => setReceiptData(data)} />
-      <Footer />
-      <FloatingWhatsapp />
-
-      {/* Receipt Modal */}
-      {receiptData && (
-        <ReceiptModal data={receiptData} onClose={() => setReceiptData(null)} />
-      )}
-    </div>
+    </LanguageProvider>
   );
 }

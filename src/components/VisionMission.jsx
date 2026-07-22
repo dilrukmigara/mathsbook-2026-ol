@@ -2,15 +2,18 @@
 
 import React from 'react';
 import { Eye, Target } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function VisionMission() {
+    const { t } = useLanguage();
+
     return (
         <section id="about" className="section-padding" style={{ background: 'rgba(15, 23, 42, 0.4)' }}>
             <div className="container">
                 <div className="section-title-wrap">
-                    <span className="section-tag">අපගේ අරමුණ</span>
-                    <h2 className="section-title">දැක්ම සහ මෙහෙවර</h2>
-                    <p className="section-sub">mathsbook හරහා සෑම දරුවෙකුටම ගණිතය විෂයයේ ඉහළම සාර්ථකත්වය අත්කර දීම</p>
+                    <span className="section-tag">mathsbook</span>
+                    <h2 className="section-title">{t('visionTitle')}</h2>
+                    <p className="section-sub">{t('visionSub')}</p>
                 </div>
 
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem' }}>
@@ -37,9 +40,9 @@ export default function VisionMission() {
                             <Eye size={30} />
                         </div>
                         
-                        <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>අපගේ දැක්ම (Vision)</h3>
+                        <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>{t('visionCard1Title')}</h3>
                         <p style={{ color: '#94a3b8', fontSize: '1.05rem', lineHeight: 1.7 }}>
-                            "ගණිතය අමාරු විෂයක් නොව ආසාවෙන් හදාරා ඉහළම ප්‍රතිඵල ලබාගත හැකි ප්‍රියතම විෂය බවට පත් කරමින්, සෑම දරුවෙකුගේම සාමාර්ථය <strong style={{ color: '#fff' }}>A මට්ටමට</strong> රැගෙන යාම."
+                            {t('visionCard1Desc')}
                         </p>
                     </div>
 
@@ -66,9 +69,9 @@ export default function VisionMission() {
                             <Target size={30} />
                         </div>
 
-                        <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>අපගේ මෙහෙවර (Mission)</h3>
+                        <h3 style={{ fontSize: '1.75rem', marginBottom: '1rem' }}>{t('visionCard2Title')}</h3>
                         <p style={{ color: '#94a3b8', fontSize: '1.05rem', lineHeight: 1.7 }}>
-                            "තර්කානුකූල චින්තනය වර්ධනය කරමින්, කෙටි ක්‍රම හා ක්‍රමවත් ප්‍රශ්න පත්‍ර සාකච්ඡාව මඟින් විභාග බිය දුරුකර නිවැරදිම මඟපෙන්වීම සහ කැපවීම තුළින් ඉහළම විභාග ජයග්‍රහණයන් තහවුරු කිරීම."
+                            {t('visionCard2Desc')}
                         </p>
                     </div>
                 </div>

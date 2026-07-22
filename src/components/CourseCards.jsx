@@ -2,15 +2,18 @@
 
 import React from 'react';
 import { ShieldAlert, Users, Target, CheckCircle, ArrowRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function CourseCards({ onSelectCourse }) {
+    const { t } = useLanguage();
+
     return (
         <section id="courses" className="section-padding">
             <div className="container">
                 <div className="section-title-wrap">
-                    <span className="section-tag">පන්ති මාදිලි 3ක්</span>
-                    <h2 className="section-title">ඔබට ගැළපෙන පන්ති වැඩසටහන තෝරාගන්න</h2>
-                    <p className="section-sub">සෑම ශිෂ්‍යයෙකුගේම දැනුම් මට්ටමට අනුව සැකසූ සුවිශේෂී පාඨමාලා 3ක්</p>
+                    <span className="section-tag">mathsbook</span>
+                    <h2 className="section-title">{t('coursesTitle')}</h2>
+                    <p className="section-sub">{t('coursesSub')}</p>
                 </div>
 
                 <div className="courses-grid">

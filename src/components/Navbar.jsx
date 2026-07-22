@@ -1,12 +1,14 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Menu, X } from 'lucide-react';
+import { MessageSquare, Menu, X, Globe } from 'lucide-react';
 import { MATHSBOOK_CONFIG } from '../config/mathsbookConfig';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Navbar() {
     const [scrolled, setScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { language, setLanguage, setShowModal, t } = useLanguage();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -26,6 +28,14 @@ export default function Navbar() {
 
     const closeMenu = () => {
         setMobileMenuOpen(false);
+    };
+
+    const toggleLanguage = () => {
+        const nextLang = language === 'si' ? 'en' : 'si';
+        setLanguage(nextLang);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('mathsbook_lang', nextLang);
+        }
     };
 
     return (
@@ -68,7 +78,7 @@ export default function Navbar() {
                             borderRadius: '999px',
                             fontWeight: 600,
                             display: 'inline-block'
-                        }}>සිංහල මාධ්‍යය</span>
+                        }}>{language === 'si' ? 'සිංහල මාධ්‍යය' : 'English Medium'}</span>
                     </div>
                 </a>
 
@@ -76,19 +86,41 @@ export default function Navbar() {
                 <ul className="nav-links desktop-only" style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '1.75rem',
+                    gap: '1.5rem',
                     listStyle: 'none'
                 }}>
-                    <li><a href="#home" style={{ color: '#f8fafc', textDecoration: 'none', fontWeight: 500 }}>මුල් පිටුව</a></li>
-                    <li><a href="#about" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>දැක්ම සහ මෙහෙවර</a></li>
-                    <li><a href="#courses" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>පන්ති වැඩසටහන්</a></li>
-                    <li><a href="#ai-solver" style={{ color: '#06b6d4', textDecoration: 'none', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>✨ AI Solver</a></li>
-                    <li><a href="#enroll" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>ලියාපදිංචිය</a></li>
-                    <li><a href="#contact" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>සම්බන්ධ කරගැනීමට</a></li>
+                    <li><a href="#home" style={{ color: '#f8fafc', textDecoration: 'none', fontWeight: 500 }}>{t('navHome')}</a></li>
+                    <li><a href="#about" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>{t('navAbout')}</a></li>
+                    <li><a href="#courses" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>{t('navCourses')}</a></li>
+                    <li><a href="#ai-solver" style={{ color: '#06b6d4', textDecoration: 'none', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>{t('navAiSolver')}</a></li>
+                    <li><a href="#enroll" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>{t('navEnroll')}</a></li>
                 </ul>
 
                 {/* Desktop Actions & Hamburger Button */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                    {/* Language Switcher Toggle Button */}
+                    <button
+                        onClick={toggleLanguage}
+                        style={{
+                            background: 'rgba(99, 102, 241, 0.15)',
+                            border: '1px solid rgba(99, 102, 241, 0.35)',
+                            color: '#c7d2fe',
+                            borderRadius: '12px',
+                            padding: '0.45rem 0.75rem',
+                            fontSize: '0.8rem',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.4rem',
+                            transition: 'all 0.2s ease'
+                        }}
+                        title="Change Language / මාධ්‍යය වෙනස් කරන්න"
+                    >
+                        <Globe size={15} style={{ color: '#06b6d4' }} />
+                        {language === 'si' ? '🇱🇰 SI' : '🇬🇧 EN'}
+                    </button>
+
                     <a 
                         href={`https://wa.me/${MATHSBOOK_CONFIG.tutor.whatsapp}`} 
                         target="_blank" 
@@ -96,7 +128,7 @@ export default function Navbar() {
                         className="btn btn-whatsapp btn-sm navbar-wa-btn"
                         style={{ padding: '0.45rem 0.85rem', fontSize: '0.85rem' }}
                     >
-                        <MessageSquare size={16} /> <span className="wa-btn-text">WhatsApp: 077 978 0053</span>
+                        <MessageSquare size={16} /> <span className="wa-btn-text">WhatsApp</span>
                     </a>
 
                     {/* Hamburger Toggle Button for Mobile */}

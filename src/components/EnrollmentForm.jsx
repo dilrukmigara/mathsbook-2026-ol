@@ -4,8 +4,10 @@ import React, { useState } from 'react';
 import { Send, AlertTriangle, CheckCircle, ShieldAlert } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { MATHSBOOK_CONFIG } from '../config/mathsbookConfig';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function EnrollmentForm({ onShowReceipt }) {
+    const { t } = useLanguage();
     const [studentName, setStudentName] = useState('');
     const [contactNumber, setContactNumber] = useState('');
     const [whatsappNumber, setWhatsappNumber] = useState('');
@@ -90,9 +92,9 @@ export default function EnrollmentForm({ onShowReceipt }) {
         <section id="enroll" className="section-padding" style={{ background: 'rgba(15, 23, 42, 0.6)' }}>
             <div className="container">
                 <div className="section-title-wrap">
-                    <span className="section-tag">ලියාපදිංචි පෝරමය</span>
-                    <h2 className="section-title">mathsbook පන්තියට එක්වන්න</h2>
-                    <p className="section-sub">පහත පෝරමය පුරවා ඔබේ තොරතුරු ඇතුළත් කරන්න</p>
+                    <span className="section-tag">mathsbook</span>
+                    <h2 className="section-title">{t('enrollTitle')}</h2>
+                    <p className="section-sub">{t('enrollSub')}</p>
                 </div>
 
                 <div className="form-card-container">
