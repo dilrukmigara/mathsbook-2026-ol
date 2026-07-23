@@ -31,7 +31,22 @@ function LMSContent() {
         if (typeof window !== 'undefined') {
             const savedUser = localStorage.getItem('mathsbook_student_session');
             if (savedUser) {
-                setUser(JSON.parse(savedUser));
+                const parsed = JSON.parse(savedUser);
+                setUser(parsed);
+                
+                // Refresh profile to load latest enrolled courses from Supabase
+                fetch('/api/admin/users')
+                    .then(r => r.json())
+                    .then(data => {
+                        if (data.success && data.users) {
+                            const fresh = data.users.find(u => u.phone === parsed.phone);
+                            if (fresh) {
+                                setUser(fresh);
+                                localStorage.setItem('mathsbook_student_session', JSON.stringify(fresh));
+                            }
+                        }
+                    })
+                    .catch(err => console.error('Error syncing profile:', err));
             }
         }
     }, []);
@@ -119,18 +134,26 @@ function LMSContent() {
         setSuccessMsg('');
     };
 
-    // Simulated Course Materials & Lessons
+    // Simulated Course Materials & Lessons mapped to specific courses
     const mockLessons = [
-        { id: 1, title: 'කුලක (Sets) - සිද්ධාන්ත පූර්ණ පුනරීක්ෂණය', duration: '1h 45m', videoId: 'dQw4w9WgXcQ' },
-        { id: 2, title: 'වර්ගජ සමීකරණ (Quadratic Equations) - කෙටි ක්‍රම', duration: '2h 15m', videoId: 'dQw4w9WgXcQ' },
-        { id: 3, title: 'ත්‍රිකෝණමිතිය (Trigonometry) - මූලික සිද්ධාන්ත', duration: '1h 30m', videoId: 'dQw4w9WgXcQ' }
+        { id: 1, title: 'කුලක (Sets) - සිද්ධාන්ත පූර්ණ පුනරීක්ෂණය [Grade 10]', duration: '1h 45m', videoId: 'dQw4w9WgXcQ', course: 'grade_10' },
+        { id: 2, title: 'වර්ගජ සමීකරණ (Quadratic Equations) - කෙටි ක්‍රම [Grade 11]', duration: '2h 15m', videoId: 'dQw4w9WgXcQ', course: 'grade_11' },
+        { id: 3, title: 'ත්‍රිකෝණමිතිය (Trigonometry) - මූලික සිද්ධාන්ත [Speed Revision]', duration: '1h 30m', videoId: 'dQw4w9WgXcQ', course: 'speed_revision' },
+        { id: 4, title: '2026 O/L පළමු පුහුණු ප්‍රශ්න පත්‍රය (Paper Theory)', duration: '2h 00m', videoId: 'dQw4w9WgXcQ', course: 'paper_theory' },
+        { id: 5, title: 'නොමිලේ ලබාදෙන ආදර්ශ ප්‍රශ්න පත්‍රය (Free Seminar Paper)', duration: '1h 50m', videoId: 'dQw4w9WgXcQ', course: 'free_paper' }
     ];
 
     const mockPDFs = [
-        { id: 1, title: 'කුලක 01 නිබන්ධනය (Sets Lecture Note)', size: '2.4 MB' },
-        { id: 2, title: 'වර්ගජ සමීකරණ ආදර්ශ ප්‍රශ්න පත්‍රය (Quadratic Equations Model Paper)', size: '1.8 MB' },
-        { id: 3, title: '2026 O/L ගණිතය අනුමාන ප්‍රශ්න පත්‍රය (Predicted Paper)', size: '3.1 MB' }
+        { id: 1, title: 'කුලක 01 නිබන්ධනය (Sets Lecture Note)', size: '2.4 MB', course: 'grade_10' },
+        { id: 2, title: 'වර්ගජ සමීකරණ ආදර්ශ ප්‍රශ්න පත්‍රය (Quadratic Equations Model Paper)', size: '1.8 MB', course: 'grade_11' },
+        { id: 3, title: 'ත්‍රිකෝණමිතිය නිබන්ධනය (Trigonometry Notes)', size: '1.9 MB', course: 'speed_revision' },
+        { id: 4, title: '2026 O/L ගණිතය අනුමාන ප්‍රශ්න පත්‍රය (Predicted Paper)', size: '3.1 MB', course: 'paper_theory' },
+        { id: 5, title: 'LMS Free Paper 01 (නොමිලේ ලබාදෙන ප්‍රශ්න පත්‍රය)', size: '1.2 MB', course: 'free_paper' }
     ];
+
+    const userEnrolled = user?.enrolledCourses || ['free_paper'];
+    const filteredLessons = mockLessons.filter(lesson => userEnrolled.includes(lesson.course));
+    const filteredPDFs = mockPDFs.filter(pdf => userEnrolled.includes(pdf.course));
 
     return (
         <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -445,7 +468,7 @@ function LMSContent() {
                         {/* TAB 1: VIDEO LESSONS */}
                         {selectedTab === 'lessons' && (
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-                                {mockLessons.map(lesson => (
+                                {filteredLessons.map(lesson => (
                                     <div key={lesson.id} style={{
                                         background: 'rgba(18, 26, 43, 0.75)',
                                         border: '1px solid rgba(255,255,255,0.05)',
@@ -473,7 +496,7 @@ function LMSContent() {
                         {/* TAB 2: STUDY MATERIALS */}
                         {selectedTab === 'materials' && (
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
-                                {mockPDFs.map(pdf => (
+                                {filteredPDFs.map(pdf => (
                                     <div key={pdf.id} style={{
                                         background: 'rgba(18, 26, 43, 0.75)',
                                         border: '1px solid rgba(255,255,255,0.05)',

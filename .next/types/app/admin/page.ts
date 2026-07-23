@@ -1,8 +1,8 @@
-// File: /Users/migara/mathsbook/app/lms/page.jsx
-import * as entry from '../../../../app/lms/page.js'
+// File: /Users/migara/mathsbook/app/admin/page.jsx
+import * as entry from '../../../../app/admin/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
-type TEntry = typeof import('../../../../app/lms/page.js')
+type TEntry = typeof import('../../../../app/admin/page.js')
 
 type SegmentParams<T extends Object = any> = T extends Record<string, any>
   ? { [K in keyof T]: T[K] extends string ? string | string[] | undefined : never }
