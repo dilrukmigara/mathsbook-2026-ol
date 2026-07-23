@@ -31,6 +31,12 @@ export const MATHSBOOK_CONFIG = {
     // Course eligibility threshold
     paperClassMinMarks: 65,
 
+    // Google Sheets Student Logs Integration
+    googleSheets: {
+        enabled: true,
+        appScriptUrl: "https://script.google.com/macros/s/AKfycby5t9p_P8kO0B9hO8k2e3c4d5f6/exec" // Update with deployed webapp url
+    },
+
     // Gemini AI Solver Configuration
     aiSolver: {
         model: "gemini-2.0-flash",

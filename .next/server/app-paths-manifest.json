@@ -1,3 +1,9 @@
 {
-  "/page": "app/page.js"
+  "/api/auth/signin/route": "app/api/auth/signin/route.js",
+  "/api/auth/signup/route": "app/api/auth/signup/route.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/solve-math/route": "app/api/solve-math/route.js",
+  "/migara/page": "app/migara/page.js",
+  "/page": "app/page.js",
+  "/lms/page": "app/lms/page.js"
 }

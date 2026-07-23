@@ -1,0 +1,34 @@
+[
+  {
+    "id": "STU-192647",
+    "name": "ashan chamika",
+    "phone": "0779780053",
+    "createdAt": "2026-07-23T14:47:57.742Z",
+    "enrolledCourses": [
+      "paper_revision",
+      "target_c"
+    ]
+  },
+  {
+    "id": "STU-989869",
+    "name": "migara",
+    "phone": "0715747680",
+    "password": "migara",
+    "createdAt": "2026-07-23T14:52:12.201Z",
+    "enrolledCourses": [
+      "paper_revision",
+      "target_c"
+    ]
+  },
+  {
+    "id": "STU-386696",
+    "name": "chamika",
+    "phone": "0776787322",
+    "password": "migara",
+    "createdAt": "2026-07-23T15:18:58.522Z",
+    "enrolledCourses": [
+      "paper_revision",
+      "target_c"
+    ]
+  }
+]

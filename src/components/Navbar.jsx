@@ -89,11 +89,12 @@ export default function Navbar() {
                     gap: '1.5rem',
                     listStyle: 'none'
                 }}>
-                    <li><a href="#home" style={{ color: '#f8fafc', textDecoration: 'none', fontWeight: 500 }}>{t('navHome')}</a></li>
-                    <li><a href="#about" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>{t('navAbout')}</a></li>
-                    <li><a href="#courses" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>{t('navCourses')}</a></li>
-                    <li><a href="#ai-solver" style={{ color: '#06b6d4', textDecoration: 'none', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>{t('navAiSolver')}</a></li>
-                    <li><a href="#enroll" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>{t('navEnroll')}</a></li>
+                    <li><a href="/#home" style={{ color: '#f8fafc', textDecoration: 'none', fontWeight: 500 }}>{t('navHome')}</a></li>
+                    <li><a href="/#about" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>{t('navAbout')}</a></li>
+                    <li><a href="/#courses" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>{t('navCourses')}</a></li>
+                    <li><a href="/#ai-solver" style={{ color: '#06b6d4', textDecoration: 'none', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>{t('navAiSolver')}</a></li>
+                    <li><a href="/#enroll" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>{t('navEnroll')}</a></li>
+                    <li><a href="/lms" style={{ color: '#fbbf24', textDecoration: 'none', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>🎓 LMS</a></li>
                 </ul>
 
                 {/* Desktop Actions & Hamburger Button */}
@@ -165,33 +166,38 @@ export default function Navbar() {
                 }}>
                     <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                         <li>
-                            <a href="#home" onClick={closeMenu} style={{ color: '#f8fafc', textDecoration: 'none', fontWeight: 600, fontSize: '1.1rem', display: 'block' }}>
+                            <a href="/#home" onClick={closeMenu} style={{ color: '#f8fafc', textDecoration: 'none', fontWeight: 600, fontSize: '1.1rem', display: 'block' }}>
                                 මුල් පිටුව (Home)
                             </a>
                         </li>
                         <li>
-                            <a href="#about" onClick={closeMenu} style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500, fontSize: '1.05rem', display: 'block' }}>
+                            <a href="/#about" onClick={closeMenu} style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500, fontSize: '1.05rem', display: 'block' }}>
                                 දැක්ම සහ මෙහෙවර (Vision & Mission)
                             </a>
                         </li>
                         <li>
-                            <a href="#courses" onClick={closeMenu} style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500, fontSize: '1.05rem', display: 'block' }}>
+                            <a href="/#courses" onClick={closeMenu} style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500, fontSize: '1.05rem', display: 'block' }}>
                                 පන්ති වැඩසටහන් (Classes)
                             </a>
                         </li>
                         <li>
-                            <a href="#ai-solver" onClick={closeMenu} style={{ color: '#06b6d4', textDecoration: 'none', fontWeight: 700, fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <a href="/#ai-solver" onClick={closeMenu} style={{ color: '#06b6d4', textDecoration: 'none', fontWeight: 700, fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                 ✨ mathsbook AI Solver
                             </a>
                         </li>
                         <li>
-                            <a href="#enroll" onClick={closeMenu} style={{ color: '#818cf8', textDecoration: 'none', fontWeight: 600, fontSize: '1.05rem', display: 'block' }}>
+                            <a href="/#enroll" onClick={closeMenu} style={{ color: '#818cf8', textDecoration: 'none', fontWeight: 600, fontSize: '1.05rem', display: 'block' }}>
                                 ලියාපදිංචි වන්න (Enrollment)
                             </a>
                         </li>
                         <li>
-                            <a href="#contact" onClick={closeMenu} style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500, fontSize: '1.05rem', display: 'block' }}>
+                            <a href="/#contact" onClick={closeMenu} style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500, fontSize: '1.05rem', display: 'block' }}>
                                 සම්බන්ධ කරගැනීමට (Contact)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/lms" onClick={closeMenu} style={{ color: '#fbbf24', textDecoration: 'none', fontWeight: 700, fontSize: '1.1rem', display: 'block' }}>
+                                🎓 LMS ශිෂ්‍ය ද්වාරය (LMS Portal)
                             </a>
                         </li>
                     </ul>
