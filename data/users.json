@@ -30,5 +30,15 @@
       "paper_revision",
       "target_c"
     ]
+  },
+  {
+    "id": "STU-130842",
+    "name": "malsha",
+    "phone": "0764605788",
+    "password": "malsha",
+    "createdAt": "2026-07-24T15:27:32.462Z",
+    "enrolledCourses": [
+      "free_paper"
+    ]
   }
 ]

@@ -22,6 +22,9 @@ function LMSContent() {
     
     // Logged In User State
     const [user, setUser] = useState(null);
+    const [videoLessons, setVideoLessons] = useState([]);
+    const [videoError, setVideoError] = useState('');
+    const [videoLoading, setVideoLoading] = useState(true);
 
     // Simulated Dashboard Data
     const [activeVideo, setActiveVideo] = useState(null);
@@ -48,6 +51,19 @@ function LMSContent() {
                     })
                     .catch(err => console.error('Error syncing profile:', err));
             }
+
+            fetch('/api/admin/video')
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success && Array.isArray(data.lessons)) {
+                        setVideoLessons(data.lessons);
+                    }
+                })
+                .catch(err => {
+                    console.error('Error loading video lessons:', err);
+                    setVideoError('Unable to load lesson videos right now.');
+                })
+                .finally(() => setVideoLoading(false));
         }
     }, []);
 
@@ -151,15 +167,16 @@ function LMSContent() {
         { id: 5, title: 'LMS Free Paper 01 (නොමිලේ ලබාදෙන ප්‍රශ්න පත්‍රය)', size: '1.2 MB', course: 'free_paper' }
     ];
 
+    const lessonsSource = videoLessons.length > 0 ? videoLessons : mockLessons;
     const userEnrolled = user?.enrolledCourses || ['free_paper'];
-    const filteredLessons = mockLessons.filter(lesson => userEnrolled.includes(lesson.course));
+    const filteredLessons = lessonsSource.filter(lesson => userEnrolled.includes(lesson.course));
     const filteredPDFs = mockPDFs.filter(pdf => userEnrolled.includes(pdf.course));
 
     return (
         <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Navbar />
             
-            <main style={{ flex: 1, paddingTop: '110px', paddingBottom: '70px', position: 'relative', zIndex: 1 }} className="container">
+            <main style={{ flex: 1, paddingTop: '110px', paddingBottom: '70px', position: 'relative', zIndex: 1 }} className="container lms-page">
                 
                 {/* Background glow effects */}
                 <div style={{
@@ -171,16 +188,16 @@ function LMSContent() {
 
                 {!user ? (
                     // AUTHENTICATION CARDS
-                    <div style={{ maxWidth: '460px', margin: '40px auto 0 auto' }}>
+                    <div className="lms-auth-shell" style={{ maxWidth: '460px', margin: '40px auto 0 auto' }}>
                         <div style={{
                             background: 'linear-gradient(135deg, rgba(26, 31, 56, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)',
                             border: '1px solid rgba(99, 102, 241, 0.35)',
                             borderRadius: '24px',
                             padding: '2.5rem 2rem',
                             boxShadow: '0 0 40px rgba(99, 102, 241, 0.2)'
-                        }}>
+                        }} className="lms-auth-card">
                             
-                            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                            <div style={{ textAlign: 'center', marginBottom: '2rem' }} className="lms-auth-heading">
                                 <span style={{
                                     background: 'linear-gradient(135deg, #a855f7 0%, #6366f1 100%)',
                                     color: '#fff', fontSize: '0.75rem', fontWeight: 700,
@@ -381,7 +398,7 @@ function LMSContent() {
                     </div>
                 ) : (
                     // STUDENT DASHBOARD SCREEN
-                    <div>
+                    <div className="lms-dashboard">
                         {/* Student Welcome Header Card */}
                         <div style={{
                             background: 'linear-gradient(135deg, rgba(26, 31, 56, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%)',
@@ -394,7 +411,7 @@ function LMSContent() {
                             alignItems: 'center',
                             flexWrap: 'wrap',
                             gap: '1.25rem'
-                        }}>
+                        }} className="lms-welcome-card">
                             <div>
                                 <h2 style={{ fontSize: '1.65rem', fontWeight: 800 }}>
                                     {language === 'si' ? `ආයුබෝවන්, ${user.name}!` : `Welcome Back, ${user.name}!`}
@@ -406,6 +423,13 @@ function LMSContent() {
                             <button className="btn btn-secondary btn-sm" onClick={handleLogout} style={{ color: '#fca5a5', borderColor: 'rgba(239,68,68,0.2)' }}>
                                 <LogOut size={16} /> Logout
                             </button>
+                        </div>
+
+                        <div className="lms-stat-strip" aria-label="Learning progress summary">
+                            <div className="lms-stat-item"><span className="lms-stat-label">Enrolled courses</span><strong>{userEnrolled.length}</strong></div>
+                            <div className="lms-stat-item"><span className="lms-stat-label">Available lessons</span><strong>{filteredLessons.length}</strong></div>
+                            <div className="lms-stat-item"><span className="lms-stat-label">Study materials</span><strong>{filteredPDFs.length}</strong></div>
+                            <div className="lms-stat-item lms-stat-highlight"><span className="lms-stat-label">Your access</span><strong>Active</strong></div>
                         </div>
 
                         {/* Video Player Modal/Overlay View */}
@@ -444,7 +468,7 @@ function LMSContent() {
                         )}
 
                         {/* Tab Switchers */}
-                        <div style={{ display: 'flex', gap: '0.75rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem', marginBottom: '1.75rem', flexWrap: 'wrap' }}>
+                        <div style={{ display: 'flex', gap: '0.75rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem', marginBottom: '1.75rem', flexWrap: 'wrap' }} className="lms-tabs">
                             <button 
                                 onClick={() => setSelectedTab('lessons')}
                                 className={`btn btn-sm ${selectedTab === 'lessons' ? 'btn-primary' : 'btn-secondary'}`}
@@ -467,7 +491,7 @@ function LMSContent() {
 
                         {/* TAB 1: VIDEO LESSONS */}
                         {selectedTab === 'lessons' && (
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }} className="lms-resource-grid">
                                 {filteredLessons.map(lesson => (
                                     <div key={lesson.id} style={{
                                         background: 'rgba(18, 26, 43, 0.75)',
@@ -478,7 +502,7 @@ function LMSContent() {
                                         flexDirection: 'column',
                                         justifyContent: 'space-between',
                                         transition: 'all 0.2s ease'
-                                    }}>
+                                    }} className="lms-resource-card lms-lesson-card">
                                         <div>
                                             <div style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.85rem' }}>
                                                 Duration: {lesson.duration}
@@ -495,7 +519,7 @@ function LMSContent() {
 
                         {/* TAB 2: STUDY MATERIALS */}
                         {selectedTab === 'materials' && (
-                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }} className="lms-resource-grid">
                                 {filteredPDFs.map(pdf => (
                                     <div key={pdf.id} style={{
                                         background: 'rgba(18, 26, 43, 0.75)',
@@ -505,7 +529,7 @@ function LMSContent() {
                                         display: 'flex',
                                         flexDirection: 'column',
                                         justifyContent: 'space-between'
-                                    }}>
+                                    }} className="lms-resource-card lms-material-card">
                                         <div>
                                             <div style={{ background: 'rgba(6, 182, 212, 0.15)', color: '#22d3ee', display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.85rem' }}>
                                                 PDF Document ({pdf.size})
@@ -528,7 +552,7 @@ function LMSContent() {
                                 borderRadius: '24px',
                                 padding: '2rem 1.5rem',
                                 textAlign: 'center'
-                            }}>
+                            }} className="lms-ai-card">
                                 <Brain size={44} style={{ color: '#06b6d4', marginBottom: '1rem' }} />
                                 <h3 style={{ fontSize: '1.35rem', fontWeight: 700, marginBottom: '0.5rem' }}>mathsbook AI Solver එකට පිවිසෙන්න</h3>
                                 <p style={{ color: '#94a3b8', fontSize: '0.9rem', maxWidth: '600px', margin: '0 auto 1.5rem auto', lineHeight: 1.6 }}>
@@ -552,7 +576,7 @@ function LMSContent() {
                             justifyContent: 'space-between',
                             flexWrap: 'wrap',
                             gap: '1rem'
-                        }}>
+                        }} className="lms-homework-card">
                             <div>
                                 <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#c7d2fe' }}>නිවාස වැඩ සහ පන්ති වැඩ Upload කිරීම (Submit Homework)</h4>
                                 <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: '0.2rem' }}>සාදන ලද නිබන්ධන හෝ උත්තර පත්‍ර මෙතැනින් Upload කරන්න</p>

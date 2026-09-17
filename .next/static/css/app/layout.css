@@ -320,6 +320,200 @@ h1, h2, h3, h4, h5, h6 {
     animation: spin 1s linear infinite;
 }
 
+/* LMS workspace */
+.lms-page {
+    --lms-ink: #0b1220;
+    --lms-panel: rgba(18, 30, 49, 0.82);
+    --lms-line: rgba(148, 163, 184, 0.16);
+    --lms-teal: #2dd4bf;
+    --lms-coral: #fb7185;
+    overflow-x: clip;
+}
+
+.lms-page::before {
+    content: '';
+    position: absolute;
+    inset: 75px 0 0;
+    pointer-events: none;
+    opacity: 0.5;
+    background-image: linear-gradient(rgba(148, 163, 184, 0.045) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px);
+    background-size: 42px 42px;
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent 78%);
+            mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+.lms-auth-shell {
+    position: relative;
+    animation: lms-rise 0.55s ease both;
+}
+
+.lms-auth-shell::before {
+    content: 'LEARN  /  PRACTISE  /  MASTER';
+    display: block;
+    margin: 0 0 1rem 0.25rem;
+    color: var(--lms-teal);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+}
+
+.lms-auth-card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(145deg, rgba(20, 34, 56, 0.98), rgba(10, 18, 31, 0.98)) !important;
+    border: 1px solid rgba(45, 212, 191, 0.28) !important;
+    border-radius: 18px !important;
+    box-shadow: 18px 18px 0 rgba(4, 9, 17, 0.35), 0 24px 55px rgba(0, 0, 0, 0.35) !important;
+}
+
+.lms-auth-card::after {
+    content: '';
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    right: -90px;
+    top: -80px;
+    border: 1px solid rgba(251, 113, 133, 0.35);
+    border-radius: 50%;
+    box-shadow: 0 0 0 18px rgba(251, 113, 133, 0.04), 0 0 0 36px rgba(251, 113, 133, 0.03);
+    pointer-events: none;
+}
+
+.lms-auth-heading h2 {
+    font-size: clamp(1.55rem, 4vw, 2rem) !important;
+    letter-spacing: -0.02em;
+}
+
+.lms-auth-heading > span {
+    background: rgba(45, 212, 191, 0.12) !important;
+    border: 1px solid rgba(45, 212, 191, 0.3);
+    color: var(--lms-teal) !important;
+    border-radius: 5px !important;
+}
+
+.lms-auth-card input {
+    background: rgba(5, 12, 22, 0.72) !important;
+    border-color: var(--lms-line) !important;
+    border-radius: 9px !important;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.lms-auth-card input:focus {
+    border-color: var(--lms-teal) !important;
+    box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.12);
+}
+
+.lms-auth-card .btn-primary {
+    background: var(--lms-teal);
+    color: #06221f;
+    box-shadow: 0 10px 24px rgba(45, 212, 191, 0.18);
+    border-radius: 9px;
+}
+
+.lms-auth-card .btn-primary:hover {
+    background: #5eead4;
+    box-shadow: 0 12px 28px rgba(45, 212, 191, 0.3);
+}
+
+.lms-welcome-card {
+    background: linear-gradient(110deg, rgba(20, 37, 57, 0.98), rgba(12, 27, 40, 0.88)) !important;
+    border: 1px solid rgba(45, 212, 191, 0.25) !important;
+    border-radius: 14px !important;
+    box-shadow: 12px 12px 0 rgba(4, 9, 17, 0.2);
+}
+
+.lms-welcome-card h2 {
+    letter-spacing: -0.025em;
+}
+
+.lms-stat-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1px;
+    gap: 1px;
+    margin: -0.6rem 0 2rem;
+    overflow: hidden;
+    border: 1px solid var(--lms-line);
+    border-radius: 12px;
+    background: var(--lms-line);
+}
+
+.lms-stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-height: 86px;
+    justify-content: center;
+    padding: 0.8rem 1.1rem;
+    background: rgba(11, 20, 34, 0.92);
+}
+
+.lms-stat-label {
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+}
+
+.lms-stat-item strong {
+    color: #e2e8f0;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.25rem;
+}
+
+.lms-stat-highlight strong {
+    color: var(--lms-teal);
+    font-size: 1rem;
+}
+
+.lms-tabs {
+    border-bottom-color: var(--lms-line) !important;
+}
+
+.lms-tabs .btn {
+    border-radius: 7px;
+}
+
+.lms-tabs .btn-primary {
+    background: var(--lms-teal);
+    color: #06221f;
+    box-shadow: none;
+}
+
+.lms-resource-card {
+    min-height: 210px;
+    background: var(--lms-panel) !important;
+    border: 1px solid var(--lms-line) !important;
+    border-radius: 12px !important;
+    box-shadow: 7px 7px 0 rgba(4, 9, 17, 0.2);
+}
+
+.lms-resource-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(45, 212, 191, 0.35) !important;
+    box-shadow: 10px 14px 0 rgba(4, 9, 17, 0.25);
+}
+
+.lms-resource-card .btn:hover {
+    border-color: var(--lms-teal);
+    color: var(--lms-teal);
+}
+
+.lms-ai-card {
+    border-radius: 14px !important;
+    border-color: rgba(45, 212, 191, 0.3) !important;
+}
+
+.lms-homework-card {
+    border-radius: 12px !important;
+    border-color: var(--lms-line) !important;
+}
+
+@keyframes lms-rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* Responsive Media Queries */
 @media (max-width: 1024px) {
     .courses-grid {
@@ -374,6 +568,45 @@ h1, h2, h3, h4, h5, h6 {
         right: 20px;
         width: 48px;
         height: 48px;
+    }
+
+    .lms-page {
+        padding-top: 94px !important;
+        padding-bottom: 45px !important;
+    }
+
+    .lms-auth-shell {
+        margin-top: 18px !important;
+    }
+
+    .lms-auth-card {
+        padding: 1.6rem 1.1rem !important;
+        box-shadow: 8px 8px 0 rgba(4, 9, 17, 0.32), 0 18px 40px rgba(0, 0, 0, 0.32) !important;
+    }
+
+    .lms-stat-strip {
+        grid-template-columns: repeat(2, 1fr);
+        margin-top: -0.8rem;
+    }
+
+    .lms-stat-item {
+        min-height: 72px;
+    }
+
+    .lms-welcome-card {
+        padding: 1.2rem !important;
+    }
+
+    .lms-resource-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .lms-tabs {
+        gap: 0.5rem !important;
+    }
+
+    .lms-tabs .btn {
+        flex: 1 1 100%;
     }
 }
 

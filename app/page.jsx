@@ -66,7 +66,7 @@ export default function Home() {
         <Hero />
         <VisionMission />
         <CourseCards onSelectCourse={handleSelectCourse} />
-        {/*<AiSolver />*/}
+        {/*<AiSolver/>*/}
         <EnrollmentForm onShowReceipt={(data) => setReceiptData(data)} />
         <Footer />
         <FloatingWhatsapp />
