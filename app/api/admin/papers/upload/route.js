@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
-import { createPaper, getLocalTopics } from '../../../papers/db.js';
+import { supabase } from '../../../auth/supabaseClient.js';
+import { createPaper, getTopics } from '../../../papers/db.js';
 
 export const config = {
   api: {
@@ -51,31 +52,80 @@ export async function POST(req) {
       );
     }
 
-    // Target directory: public/uploads/papers
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'papers');
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
-
     // Clean original filename
     const cleanBaseName = file.name
       .replace(/[^a-zA-Z0-9._-]/g, '_')
       .replace(/\.pdf$/i, '');
     const uniqueFileName = `${grade}_${Date.now()}_${cleanBaseName.slice(0, 40)}.pdf`;
-    const destinationPath = path.join(uploadDir, uniqueFileName);
 
-    // Read bytes and write to disk
+    // Read bytes
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
-    fs.writeFileSync(destinationPath, buffer);
+    const fileSizeFormatted = formatBytes(buffer.length);
+
+    let publicUrl = '';
+
+    // 1. Attempt upload to Supabase Storage bucket 'papers'
+    try {
+      const { data: uploadData, error: uploadError } = await supabase.storage
+        .from('papers')
+        .upload(uniqueFileName, buffer, {
+          contentType: 'application/pdf',
+          upsert: true
+        });
+
+      if (!uploadError && uploadData) {
+        const { data: urlData } = supabase.storage
+          .from('papers')
+          .getPublicUrl(uniqueFileName);
+        publicUrl = urlData?.publicUrl || '';
+      } else if (process.env.VERCEL) {
+        // On Vercel, filesystem is read-only. Supabase storage bucket 'papers' is required!
+        return NextResponse.json(
+          {
+            success: false,
+            error: `Vercel හි PDF සුරැකීමට Supabase Storage හි 'papers' නමින් Public Bucket එකක් අවශ්‍යයි (${uploadError?.message || 'Bucket not found'}). කරුණාකර Supabase Dashboard > Storage වෙත ගොස් 'papers' නමින් New Bucket එකක් සාදා 'Public' ලෙස සකසන්න.`
+          },
+          { status: 500 }
+        );
+      }
+    } catch (storageErr) {
+      if (process.env.VERCEL) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: `Supabase Storage සම්බන්ධතාව අසාර්ථකයි: ${storageErr.message}. කරුණාකර Supabase Dashboard > Storage වෙත ගොස් 'papers' Public Bucket එක සකසා ඇත්දැයි බලන්න.`
+          },
+          { status: 500 }
+        );
+      }
+    }
+
+    // 2. Local fallback if not on Vercel and Supabase storage not used
+    if (!publicUrl) {
+      if (process.env.VERCEL) {
+        return NextResponse.json(
+          {
+            success: false,
+            error: 'Vercel Serverless පරිසරයේ ගොනු සුරැකීමට Supabase Storage අවශ්‍ය වේ. කරුණාකර Supabase Dashboard > Storage හි "papers" Public Bucket එක සාදන්න.'
+          },
+          { status: 500 }
+        );
+      }
+
+      const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'papers');
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+      const destinationPath = path.join(uploadDir, uniqueFileName);
+      fs.writeFileSync(destinationPath, buffer);
+      publicUrl = `/uploads/papers/${uniqueFileName}`;
+    }
 
     // Resolve topic name
-    const topics = getLocalTopics();
-    const matchedTopic = topics.find(t => t.id === topicId);
+    const allTopics = await getTopics();
+    const matchedTopic = allTopics.find(t => t.id === topicId);
     const topicName = matchedTopic ? matchedTopic.name : '';
-
-    const publicUrl = `/uploads/papers/${uniqueFileName}`;
-    const fileSizeFormatted = formatBytes(buffer.length);
 
     // Save paper metadata
     const createdPaper = await createPaper({
