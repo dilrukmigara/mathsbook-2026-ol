@@ -11,13 +11,10 @@ export function middleware(request) {
     host.includes('papers.mathsbook');
 
   if (isPapersSubdomain) {
-    // If accessing root of papers subdomain, rewrite to /papers
     if (url.pathname === '/') {
       url.pathname = '/papers';
       return NextResponse.rewrite(url);
     }
-
-    // If accessing subpaths under papers subdomain that are not static or api or uploads
     if (
       !url.pathname.startsWith('/papers') &&
       !url.pathname.startsWith('/api') &&
@@ -26,6 +23,29 @@ export function middleware(request) {
       !url.pathname.includes('.')
     ) {
       url.pathname = `/papers${url.pathname}`;
+      return NextResponse.rewrite(url);
+    }
+  }
+
+  // Check if host corresponds to exam subdomain
+  // e.g. exam.mathsbook.dilrukmigara.me, exam.localhost:3000, etc.
+  const isExamSubdomain = 
+    host.startsWith('exam.') || 
+    host.includes('exam.mathsbook');
+
+  if (isExamSubdomain) {
+    if (url.pathname === '/') {
+      url.pathname = '/exam';
+      return NextResponse.rewrite(url);
+    }
+    if (
+      !url.pathname.startsWith('/exam') &&
+      !url.pathname.startsWith('/api') &&
+      !url.pathname.startsWith('/uploads') &&
+      !url.pathname.startsWith('/_next') &&
+      !url.pathname.includes('.')
+    ) {
+      url.pathname = `/exam${url.pathname}`;
       return NextResponse.rewrite(url);
     }
   }

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { UserCheck, MessageSquare, Phone, BookOpen, GraduationCap } from 'lucide-react';
+import { UserCheck, MessageSquare, Phone, BookOpen, GraduationCap, FileText } from 'lucide-react';
 import { MATHSBOOK_CONFIG } from '../config/mathsbookConfig';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -41,6 +41,9 @@ export default function Hero() {
                     <div className="hero-cta-group" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', marginBottom: '2.25rem' }}>
                         <a href="#enroll" className="btn btn-primary hero-btn">
                             <UserCheck size={18} /> {t('btnEnroll')}
+                        </a>
+                        <a href="/exam" className="btn hero-btn" style={{ background: 'linear-gradient(135deg, #d97706, #b45309)', color: '#ffffff', border: '1px solid rgba(251, 191, 36, 0.4)', boxShadow: '0 4px 15px rgba(217, 119, 6, 0.35)', display: 'inline-flex', alignItems: 'center', gap: '0.45rem', textDecoration: 'none' }}>
+                            <FileText size={18} /> Online Exams
                         </a>
                         <a href="#ai-solver" className="btn btn-secondary hero-btn" style={{ borderColor: 'rgba(6, 182, 212, 0.4)', color: '#38bdf8' }}>
                             {t('btnAiSolver')}

@@ -95,6 +95,7 @@ export default function Navbar() {
                     <li><a href="/#ai-solver" style={{ color: '#06b6d4', textDecoration: 'none', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>{t('navAiSolver')}</a></li>
                     <li><a href="/#enroll" style={{ color: '#94a3b8', textDecoration: 'none', fontWeight: 500 }}>{t('navEnroll')}</a></li>
                     <li><a href="/papers" style={{ color: '#34d399', textDecoration: 'none', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>📑 Free Papers</a></li>
+                    <li><a href="/exam" style={{ color: '#f59e0b', textDecoration: 'none', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>📝 Online Exams</a></li>
                     <li><a href="/lms" style={{ color: '#fbbf24', textDecoration: 'none', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.3rem' }}>🎓 LMS</a></li>
                 </ul>
 
@@ -199,6 +200,11 @@ export default function Navbar() {
                         <li>
                             <a href="/papers" onClick={closeMenu} style={{ color: '#34d399', textDecoration: 'none', fontWeight: 700, fontSize: '1.1rem', display: 'block' }}>
                                 📑 නොමිලේ ප්‍රශ්න පත්‍ර (Free Papers)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/exam" onClick={closeMenu} style={{ color: '#f59e0b', textDecoration: 'none', fontWeight: 700, fontSize: '1.1rem', display: 'block' }}>
+                                📝 Online Exams (MCQ පරීක්ෂණ)
                             </a>
                         </li>
                         <li>
