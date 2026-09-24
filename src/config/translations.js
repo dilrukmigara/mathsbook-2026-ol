@@ -6,8 +6,8 @@ export const TRANSLATIONS = {
   si: {
     // Navbar
     navHome: "මුල් පිටුව",
-    navAbout: "දැක්ම සහ මෙහෙවර",
-    navCourses: "පන්ති වැඩසටහන්",
+    navAbout: "අප ගැන",
+    navCourses: "පන්ති",
     navAiSolver: "✨ AI Solver",
     navEnroll: "ලියාපදිංචිය",
     navContact: "සම්බන්ධ කරගැනීමට",

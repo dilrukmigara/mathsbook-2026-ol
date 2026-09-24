@@ -201,7 +201,7 @@ function PapersContent() {
         <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Navbar />
 
-            <main style={{ flex: 1, paddingTop: '110px', paddingBottom: '80px', position: 'relative', zIndex: 1 }} className="container">
+            <main style={{ flex: 1, paddingTop: '86px', paddingBottom: '60px', position: 'relative', zIndex: 1 }} className="container">
                 {/* Background glow */}
                 <div style={{
                     position: 'absolute', top: '15%', left: '50%', transform: 'translate(-50%, -50%)',
@@ -211,17 +211,17 @@ function PapersContent() {
                 }} />
 
                 {/* Hero Header */}
-                <div style={{ textAlign: 'center', maxWidth: '820px', margin: '0 auto 2.5rem auto' }}>
+                <div style={{ textAlign: 'center', maxWidth: '840px', margin: '0 auto 2rem auto' }}>
                     <div style={{
                         display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                         background: 'rgba(99, 102, 241, 0.12)', border: '1px solid rgba(99, 102, 241, 0.35)',
-                        padding: '0.35rem 1rem', borderRadius: '999px', color: '#818cf8',
-                        fontSize: '0.85rem', fontWeight: 700, marginBottom: '1rem'
+                        padding: '0.35rem 0.95rem', borderRadius: '999px', color: '#818cf8',
+                        fontSize: '0.82rem', fontWeight: 700, marginBottom: '0.9rem'
                     }}>
-                        <Sparkles size={16} /> 100% Free Educational Papers • Grade 10 & 11
+                        <Sparkles size={15} /> 100% Free Educational Papers • Grade 10 & 11
                     </div>
 
-                    <h1 style={{ fontSize: '2.5rem', fontWeight: 900, lineHeight: 1.2, marginBottom: '0.8rem' }}>
+                    <h1 style={{ fontSize: 'clamp(2rem, 3.8vw, 2.75rem)', fontWeight: 900, lineHeight: 1.25, marginBottom: '0.85rem' }}>
                         {language === 'si' ? (
                             <>නොමිලේ ගණිත <span className="gradient-text">ප්‍රශ්න පත්‍ර සහ ආදර්ශ පත්‍ර</span></>
                         ) : (
@@ -229,7 +229,7 @@ function PapersContent() {
                         )}
                     </h1>
 
-                    <p style={{ color: '#94a3b8', fontSize: '1.05rem', lineHeight: 1.6 }}>
+                    <p style={{ color: '#94a3b8', fontSize: '1.05rem', lineHeight: 1.62 }}>
                         {language === 'si'
                             ? '10 සහ 11 ශ්‍රේණි සඳහා සියලුම පාඩම් ආවරණය වන පරිදි සකස් කරන ලද ප්‍රශ්න පත්‍ර නොමිලේ ලබාගන්න. ප්‍රශ්න පත්‍ර බාගත කිරීමට (Download) කරුණාකර ඔබගේ නොමිලේ ගිණුමෙන් ඇතුල් වන්න.'
                             : 'Access high quality topic-by-topic math exam and model papers for Grade 10 & Grade 11. Create a free account or log in to view and download all PDFs.'

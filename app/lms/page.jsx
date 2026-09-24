@@ -176,7 +176,7 @@ function LMSContent() {
         <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Navbar />
             
-            <main style={{ flex: 1, paddingTop: '110px', paddingBottom: '70px', position: 'relative', zIndex: 1 }} className="container lms-page">
+            <main style={{ flex: 1, paddingTop: '86px', paddingBottom: '60px', position: 'relative', zIndex: 1 }} className="container lms-page">
                 
                 {/* Background glow effects */}
                 <div style={{
@@ -188,16 +188,16 @@ function LMSContent() {
 
                 {!user ? (
                     // AUTHENTICATION CARDS
-                    <div className="lms-auth-shell" style={{ maxWidth: '460px', margin: '40px auto 0 auto' }}>
+                    <div className="lms-auth-shell" style={{ maxWidth: '460px', margin: '1.25rem auto 0 auto' }}>
                         <div style={{
                             background: 'linear-gradient(135deg, rgba(26, 31, 56, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)',
                             border: '1px solid rgba(99, 102, 241, 0.35)',
                             borderRadius: '24px',
-                            padding: '2.5rem 2rem',
+                            padding: '2rem 1.85rem',
                             boxShadow: '0 0 40px rgba(99, 102, 241, 0.2)'
                         }} className="lms-auth-card">
                             
-                            <div style={{ textAlign: 'center', marginBottom: '2rem' }} className="lms-auth-heading">
+                            <div style={{ textAlign: 'center', marginBottom: '1.6rem' }} className="lms-auth-heading">
                                 <span style={{
                                     background: 'linear-gradient(135deg, #a855f7 0%, #6366f1 100%)',
                                     color: '#fff', fontSize: '0.75rem', fontWeight: 700,

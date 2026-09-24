@@ -89,7 +89,7 @@ export default function EnrollmentForm({ onShowReceipt }) {
     };
 
     return (
-        <section id="enroll" className="section-padding" style={{ background: 'rgba(15, 23, 42, 0.6)' }}>
+        <section id="enroll" className="section-padding" style={{ background: 'rgba(15, 23, 42, 0.6)', scrollMarginTop: '88px' }}>
             <div className="container">
                 <div className="section-title-wrap">
                     <span className="section-tag">mathsbook</span>
