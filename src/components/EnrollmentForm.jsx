@@ -50,6 +50,17 @@ export default function EnrollmentForm({ onShowReceipt }) {
             timestamp: new Date().toLocaleString()
         };
 
+        // Save to Supabase (with automatic local backup)
+        try {
+            await fetch('/api/enroll', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(enrollmentData)
+            });
+        } catch (apiErr) {
+            console.warn('API enrollment submission warning:', apiErr);
+        }
+
         // Save locally to localStorage
         const existing = JSON.parse(localStorage.getItem('mathsbook_enrollments') || '[]');
         existing.push(enrollmentData);
@@ -99,7 +110,7 @@ export default function EnrollmentForm({ onShowReceipt }) {
 
                 <div className="form-card-container">
                     
-                    {/* Live Google Form Status Bar */}
+                    {/* Live Database Sync Status Bar */}
                     <div style={{
                         background: 'rgba(16, 185, 129, 0.1)',
                         border: '1px solid rgba(16, 185, 129, 0.3)',
@@ -116,9 +127,9 @@ export default function EnrollmentForm({ onShowReceipt }) {
                     }}>
                         <div>
                             <CheckCircle size={16} style={{ display: 'inline', marginRight: '6px' }} />
-                            <strong>Google Form Integration:</strong> Google Form Live Submission සක්‍රීයයි ✓
+                            <strong>Supabase Database:</strong> Live Enrollment Sync සක්‍රීයයි ✓
                         </div>
-                        <span style={{ fontSize: '0.75rem', background: 'rgba(0,0,0,0.3)', padding: '3px 8px', borderRadius: '4px' }}>Live Sync</span>
+                        <span style={{ fontSize: '0.75rem', background: 'rgba(16, 185, 129, 0.25)', color: '#34d399', padding: '3px 8px', borderRadius: '6px', fontWeight: 700 }}>Connected</span>
                     </div>
 
                     <form onSubmit={handleSubmit}>

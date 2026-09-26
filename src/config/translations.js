@@ -23,11 +23,11 @@ export const TRANSLATIONS = {
     selectBtn: "භාෂාව තෝරන්න (Select Language)",
 
     // Hero
-    heroBadge: "O/L & A/L ගණිතය | mathsbook",
+    heroBadge: "Ordinary Level Mathematics | mathsbook",
     heroTitleLine1: "තර්කානුකූල සිද්ධාන්ත,",
     heroTitleLine2: "ඉහළම ප්‍රථිපල තහවුරු කෙරෙන",
     heroTitleLine3: "විශේෂිත ගණිත පන්තිය",
-    heroSub: "මිගාර වික්‍රමාරච්චි (BSc Hons Undergraduate) මෙහෙයවන O/L & A/L ගණිත පන්තිය. AI Solver පද්ධතිය සමඟ තාක්ෂණිකව සන්නද්ධව ඉගෙන ගන්න.",
+    heroSub: "මිගාර වික්‍රමාරච්චි (BSc Hons Undergraduate) මෙහෙයවන සාමාන්‍ය පෙළ (Ordinary Level) ගණිත පන්තිය. AI Solver පද්ධතිය සමඟ තාක්ෂණිකව සන්නද්ධව ඉගෙන ගන්න.",
     btnEnroll: "දැන්ම ලියාපදිංචි වන්න",
     btnAiSolver: "✨ AI Solver භාවිත කරන්න",
 
@@ -93,7 +93,7 @@ export const TRANSLATIONS = {
     selectBtn: "Select Language",
 
     // Hero
-    heroBadge: "O/L & A/L Mathematics | mathsbook",
+    heroBadge: "Ordinary Level Mathematics | mathsbook",
     heroTitleLine1: "Logical Theory & Concepts,",
     heroTitleLine2: "Guaranteed Top Results",
     heroTitleLine3: "Specialized Mathematics Class",

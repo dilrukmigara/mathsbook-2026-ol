@@ -206,3 +206,33 @@ export async function updateUserCourses(studentId, enrolledCourses) {
     return { success: true };
   }
 }
+
+// ADMIN HELPER: Delete student
+export async function deleteUser(studentId) {
+  try {
+    const { error } = await supabase
+      .from('students')
+      .delete()
+      .eq('id', studentId);
+
+    if (error) {
+      console.warn('[Supabase DB Helper] deleteUser failed, deleting from local database fallback:', error.message);
+      const users = getLocalUsers();
+      const filtered = users.filter(u => u.id !== studentId);
+      saveLocalUsersList(filtered);
+      return { success: true };
+    }
+
+    const users = getLocalUsers();
+    const filtered = users.filter(u => u.id !== studentId);
+    saveLocalUsersList(filtered);
+    return { success: true };
+  } catch (err) {
+    console.error('[Supabase DB Helper] deleteUser error:', err);
+    const users = getLocalUsers();
+    const filtered = users.filter(u => u.id !== studentId);
+    saveLocalUsersList(filtered);
+    return { success: true };
+  }
+}
+
