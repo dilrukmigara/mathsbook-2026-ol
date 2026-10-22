@@ -173,16 +173,16 @@ function LMSContent() {
     const filteredPDFs = mockPDFs.filter(pdf => userEnrolled.includes(pdf.course));
 
     return (
-        <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+        <div className="mb-portal" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
             <Navbar />
             
-            <main style={{ flex: 1, paddingTop: '86px', paddingBottom: '60px', position: 'relative', zIndex: 1 }} className="container lms-page">
+            <main id="main-content" style={{ flex: 1, paddingTop: '42px', paddingBottom: '60px', position: 'relative', zIndex: 1 }} className="container lms-page">
                 
                 {/* Background glow effects */}
                 <div style={{
                     position: 'absolute', top: '20%', left: '50%', transform: 'translate(-50%, -50%)',
                     width: '600px', height: '600px',
-                    background: 'radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%)',
+                    background: 'radial-gradient(circle, rgba(7, 60, 166, 0.1) 0%, transparent 70%)',
                     filter: 'blur(50px)', zIndex: -1
                 }} />
 
@@ -190,17 +190,17 @@ function LMSContent() {
                     // AUTHENTICATION CARDS
                     <div className="lms-auth-shell" style={{ maxWidth: '460px', margin: '1.25rem auto 0 auto' }}>
                         <div style={{
-                            background: 'linear-gradient(135deg, rgba(26, 31, 56, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)',
-                            border: '1px solid rgba(99, 102, 241, 0.35)',
+                            background: 'linear-gradient(135deg, #ffffff 0%, #ffffff 100%)',
+                            border: '1px solid rgba(7, 60, 166, 0.35)',
                             borderRadius: '24px',
                             padding: '2rem 1.85rem',
-                            boxShadow: '0 0 40px rgba(99, 102, 241, 0.2)'
+                            boxShadow: '0 0 40px rgba(7, 60, 166, 0.2)'
                         }} className="lms-auth-card">
                             
                             <div style={{ textAlign: 'center', marginBottom: '1.6rem' }} className="lms-auth-heading">
                                 <span style={{
-                                    background: 'linear-gradient(135deg, #a855f7 0%, #6366f1 100%)',
-                                    color: '#fff', fontSize: '0.75rem', fontWeight: 700,
+                                    background: 'linear-gradient(135deg, #073ca6 0%, #073ca6 100%)',
+                                    color: '#10294c', fontSize: '0.75rem', fontWeight: 700,
                                     padding: '0.35rem 0.85rem', borderRadius: '999px',
                                     display: 'inline-flex', alignItems: 'center', gap: '0.4rem', marginBottom: '0.85rem'
                                 }}>
@@ -212,7 +212,7 @@ function LMSContent() {
                                         : (language === 'si' ? 'ලියාපදිංචි වීම (Sign Up)' : 'Student Registration')
                                     }
                                 </h2>
-                                <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '0.4rem' }}>
+                                <p style={{ fontSize: '0.85rem', color: '#5e6f86', marginTop: '0.4rem' }}>
                                     {authMode === 'signin'
                                         ? (language === 'si' ? 'ඔබගේ දුරකථන අංකය සහ මුරපදය ඇතුළත් කර ඇතුල් වන්න' : 'Enter your mobile number and password to login')
                                         : (language === 'si' ? 'නව ගිණුමක් සෑදීම සඳහා තොරතුරු ඇතුළත් කරන්න' : 'Fill in details to register a new student account')
@@ -225,7 +225,7 @@ function LMSContent() {
                                 <div style={{
                                     marginBottom: '1rem', background: 'rgba(239, 68, 68, 0.1)',
                                     border: '1px solid rgba(239, 68, 68, 0.3)', padding: '0.75rem 1rem',
-                                    borderRadius: '12px', color: '#fca5a5', fontSize: '0.8rem',
+                                    borderRadius: '12px', color: '#b42318', fontSize: '0.8rem',
                                     display: 'flex', gap: '0.5rem', alignItems: 'center'
                                 }}>
                                     <AlertCircle size={16} color="#ef4444" />
@@ -237,7 +237,7 @@ function LMSContent() {
                                 <div style={{
                                     marginBottom: '1rem', background: 'rgba(16, 185, 129, 0.1)',
                                     border: '1px solid rgba(16, 185, 129, 0.3)', padding: '0.75rem 1rem',
-                                    borderRadius: '12px', color: '#6ee7b7', fontSize: '0.8rem',
+                                    borderRadius: '12px', color: '#16734a', fontSize: '0.8rem',
                                     display: 'flex', gap: '0.5rem', alignItems: 'center'
                                 }}>
                                     <CheckCircle2 size={16} color="#10b981" />
@@ -249,11 +249,11 @@ function LMSContent() {
                             {authMode === 'signin' && (
                                 <form onSubmit={handleSignIn} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                                     <div>
-                                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.5rem', fontWeight: 600 }}>
+                                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#5e6f86', marginBottom: '0.5rem', fontWeight: 600 }}>
                                             {language === 'si' ? 'දුරකථන අංකය' : 'Phone Number'}
                                         </label>
                                         <div style={{ position: 'relative' }}>
-                                            <Phone size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#6366f1' }} />
+                                            <Phone size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#073ca6' }} />
                                             <input 
                                                 type="tel"
                                                 required
@@ -261,20 +261,20 @@ function LMSContent() {
                                                 value={phone}
                                                 onChange={(e) => setPhone(e.target.value)}
                                                 style={{
-                                                    width: '100%', padding: '0.8rem 1rem 0.8rem 2.5rem', background: '#090d16',
-                                                    border: '1px solid rgba(99, 102, 241, 0.4)', borderRadius: '12px',
-                                                    color: '#fff', outline: 'none', fontSize: '0.95rem'
+                                                    width: '100%', padding: '0.8rem 1rem 0.8rem 2.5rem', background: '#f6f8fc',
+                                                    border: '1px solid rgba(7, 60, 166, 0.4)', borderRadius: '12px',
+                                                    color: '#10294c', outline: 'none', fontSize: '0.95rem'
                                                 }}
                                             />
                                         </div>
                                     </div>
 
                                     <div>
-                                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.5rem', fontWeight: 600 }}>
+                                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#5e6f86', marginBottom: '0.5rem', fontWeight: 600 }}>
                                             {language === 'si' ? 'මුරපදය' : 'Password'}
                                         </label>
                                         <div style={{ position: 'relative' }}>
-                                            <Lock size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#6366f1' }} />
+                                            <Lock size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#073ca6' }} />
                                             <input 
                                                 type="password"
                                                 required
@@ -282,9 +282,9 @@ function LMSContent() {
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 style={{
-                                                    width: '100%', padding: '0.8rem 1rem 0.8rem 2.5rem', background: '#090d16',
-                                                    border: '1px solid rgba(99, 102, 241, 0.4)', borderRadius: '12px',
-                                                    color: '#fff', outline: 'none', fontSize: '0.95rem'
+                                                    width: '100%', padding: '0.8rem 1rem 0.8rem 2.5rem', background: '#f6f8fc',
+                                                    border: '1px solid rgba(7, 60, 166, 0.4)', borderRadius: '12px',
+                                                    color: '#10294c', outline: 'none', fontSize: '0.95rem'
                                                 }}
                                             />
                                         </div>
@@ -295,12 +295,12 @@ function LMSContent() {
                                     </button>
 
                                     <div style={{ textAlign: 'center', marginTop: '0.5rem' }}>
-                                        <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
+                                        <span style={{ fontSize: '0.85rem', color: '#5e6f86' }}>
                                             {language === 'si' ? 'ගිණුමක් නොමැතිද? ' : "Don't have an account? "}
                                             <button 
                                                 type="button" 
                                                 onClick={() => { setAuthMode('signup'); setErrorMsg(''); setSuccessMsg(''); }}
-                                                style={{ background: 'none', border: 'none', color: '#06b6d4', fontWeight: 700, cursor: 'pointer', padding: 0 }}
+                                                style={{ background: 'none', border: 'none', color: '#073ca6', fontWeight: 700, cursor: 'pointer', padding: 0 }}
                                             >
                                                 {language === 'si' ? 'ලියාපදිංචි වන්න' : 'Sign Up'}
                                             </button>
@@ -313,11 +313,11 @@ function LMSContent() {
                             {authMode === 'signup' && (
                                 <form onSubmit={handleSignUp} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                                     <div>
-                                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.5rem', fontWeight: 600 }}>
+                                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#5e6f86', marginBottom: '0.5rem', fontWeight: 600 }}>
                                             {language === 'si' ? 'ශිෂ්‍යයාගේ නම' : 'Student Name'}
                                         </label>
                                         <div style={{ position: 'relative' }}>
-                                            <User size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#6366f1' }} />
+                                            <User size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#073ca6' }} />
                                             <input 
                                                 type="text"
                                                 required
@@ -325,20 +325,20 @@ function LMSContent() {
                                                 value={name}
                                                 onChange={(e) => setName(e.target.value)}
                                                 style={{
-                                                    width: '100%', padding: '0.8rem 1rem 0.8rem 2.5rem', background: '#090d16',
-                                                    border: '1px solid rgba(99, 102, 241, 0.4)', borderRadius: '12px',
-                                                    color: '#fff', outline: 'none', fontSize: '0.95rem'
+                                                    width: '100%', padding: '0.8rem 1rem 0.8rem 2.5rem', background: '#f6f8fc',
+                                                    border: '1px solid rgba(7, 60, 166, 0.4)', borderRadius: '12px',
+                                                    color: '#10294c', outline: 'none', fontSize: '0.95rem'
                                                 }}
                                             />
                                         </div>
                                     </div>
 
                                     <div>
-                                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.5rem', fontWeight: 600 }}>
+                                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#5e6f86', marginBottom: '0.5rem', fontWeight: 600 }}>
                                             {language === 'si' ? 'දුරකථන අංකය' : 'Phone Number'}
                                         </label>
                                         <div style={{ position: 'relative' }}>
-                                            <Phone size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#6366f1' }} />
+                                            <Phone size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#073ca6' }} />
                                             <input 
                                                 type="tel"
                                                 required
@@ -346,20 +346,20 @@ function LMSContent() {
                                                 value={phone}
                                                 onChange={(e) => setPhone(e.target.value)}
                                                 style={{
-                                                    width: '100%', padding: '0.8rem 1rem 0.8rem 2.5rem', background: '#090d16',
-                                                    border: '1px solid rgba(99, 102, 241, 0.4)', borderRadius: '12px',
-                                                    color: '#fff', outline: 'none', fontSize: '0.95rem'
+                                                    width: '100%', padding: '0.8rem 1rem 0.8rem 2.5rem', background: '#f6f8fc',
+                                                    border: '1px solid rgba(7, 60, 166, 0.4)', borderRadius: '12px',
+                                                    color: '#10294c', outline: 'none', fontSize: '0.95rem'
                                                 }}
                                             />
                                         </div>
                                     </div>
 
                                     <div>
-                                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#94a3b8', marginBottom: '0.5rem', fontWeight: 600 }}>
+                                        <label style={{ display: 'block', fontSize: '0.85rem', color: '#5e6f86', marginBottom: '0.5rem', fontWeight: 600 }}>
                                             {language === 'si' ? 'නව මුරපදය' : 'New Password'}
                                         </label>
                                         <div style={{ position: 'relative' }}>
-                                            <Lock size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#6366f1' }} />
+                                            <Lock size={18} style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)', color: '#073ca6' }} />
                                             <input 
                                                 type="password"
                                                 required
@@ -367,9 +367,9 @@ function LMSContent() {
                                                 value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                                 style={{
-                                                    width: '100%', padding: '0.8rem 1rem 0.8rem 2.5rem', background: '#090d16',
-                                                    border: '1px solid rgba(99, 102, 241, 0.4)', borderRadius: '12px',
-                                                    color: '#fff', outline: 'none', fontSize: '0.95rem'
+                                                    width: '100%', padding: '0.8rem 1rem 0.8rem 2.5rem', background: '#f6f8fc',
+                                                    border: '1px solid rgba(7, 60, 166, 0.4)', borderRadius: '12px',
+                                                    color: '#10294c', outline: 'none', fontSize: '0.95rem'
                                                 }}
                                             />
                                         </div>
@@ -380,12 +380,12 @@ function LMSContent() {
                                     </button>
 
                                     <div style={{ textAlign: 'center', marginTop: '0.5rem' }}>
-                                        <span style={{ fontSize: '0.85rem', color: '#94a3b8' }}>
+                                        <span style={{ fontSize: '0.85rem', color: '#5e6f86' }}>
                                             {language === 'si' ? 'දැනටමත් ගිණුමක් තිබේද? ' : 'Already have an account? '}
                                             <button 
                                                 type="button" 
                                                 onClick={() => { setAuthMode('signin'); setErrorMsg(''); setSuccessMsg(''); }}
-                                                style={{ background: 'none', border: 'none', color: '#06b6d4', fontWeight: 700, cursor: 'pointer', padding: 0 }}
+                                                style={{ background: 'none', border: 'none', color: '#073ca6', fontWeight: 700, cursor: 'pointer', padding: 0 }}
                                             >
                                                 {language === 'si' ? 'ඇතුල් වන්න' : 'Sign In'}
                                             </button>
@@ -401,8 +401,8 @@ function LMSContent() {
                     <div className="lms-dashboard">
                         {/* Student Welcome Header Card */}
                         <div style={{
-                            background: 'linear-gradient(135deg, rgba(26, 31, 56, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%)',
-                            border: '1px solid rgba(99, 102, 241, 0.35)',
+                            background: 'linear-gradient(135deg, #ffffff 0%, #ffffff 100%)',
+                            border: '1px solid rgba(7, 60, 166, 0.35)',
                             borderRadius: '24px',
                             padding: '1.75rem 2rem',
                             marginBottom: '2rem',
@@ -416,11 +416,11 @@ function LMSContent() {
                                 <h2 style={{ fontSize: '1.65rem', fontWeight: 800 }}>
                                     {language === 'si' ? `ආයුබෝවන්, ${user.name}!` : `Welcome Back, ${user.name}!`}
                                 </h2>
-                                <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '0.2' }}>
-                                    LMS Student ID: <span style={{ color: '#06b6d4', fontWeight: 700 }}>{user.id}</span> | Phone: {user.phone}
+                                <p style={{ fontSize: '0.85rem', color: '#5e6f86', marginTop: '0.2' }}>
+                                    LMS Student ID: <span style={{ color: '#073ca6', fontWeight: 700 }}>{user.id}</span> | Phone: {user.phone}
                                 </p>
                             </div>
-                            <button className="btn btn-secondary btn-sm" onClick={handleLogout} style={{ color: '#fca5a5', borderColor: 'rgba(239,68,68,0.2)' }}>
+                            <button className="btn btn-secondary btn-sm" onClick={handleLogout} style={{ color: '#b42318', borderColor: 'rgba(239,68,68,0.2)' }}>
                                 <LogOut size={16} /> Logout
                             </button>
                         </div>
@@ -435,16 +435,16 @@ function LMSContent() {
                         {/* Video Player Modal/Overlay View */}
                         {activeVideo && (
                             <div style={{
-                                background: '#090d16',
-                                border: '2px solid rgba(99, 102, 241, 0.5)',
+                                background: '#f6f8fc',
+                                border: '2px solid rgba(7, 60, 166, 0.5)',
                                 borderRadius: '24px',
                                 padding: '1rem',
                                 marginBottom: '2rem',
                                 position: 'relative',
-                                boxShadow: '0 0 35px rgba(99,102,241,0.25)'
+                                boxShadow: '0 0 35px rgba(7,60,166,0.25)'
                             }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem', padding: '0 0.5rem' }}>
-                                    <h4 style={{ fontWeight: 700, color: '#c7d2fe' }}>{activeVideo.title}</h4>
+                                    <h4 style={{ fontWeight: 700, color: '#143d80' }}>{activeVideo.title}</h4>
                                     <button 
                                         onClick={() => setActiveVideo(null)}
                                         style={{ background: 'rgba(239,68,68,0.15)', border: 'none', color: '#ef4444', padding: '0.35rem 0.75rem', borderRadius: '8px', cursor: 'pointer', fontSize: '0.8rem', fontWeight: 700 }}
@@ -468,7 +468,7 @@ function LMSContent() {
                         )}
 
                         {/* Tab Switchers */}
-                        <div style={{ display: 'flex', gap: '0.75rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem', marginBottom: '1.75rem', flexWrap: 'wrap' }} className="lms-tabs">
+                        <div style={{ display: 'flex', gap: '0.75rem', borderBottom: '1px solid #e1e8f2', paddingBottom: '0.75rem', marginBottom: '1.75rem', flexWrap: 'wrap' }} className="lms-tabs">
                             <button 
                                 onClick={() => setSelectedTab('lessons')}
                                 className={`btn btn-sm ${selectedTab === 'lessons' ? 'btn-primary' : 'btn-secondary'}`}
@@ -494,8 +494,8 @@ function LMSContent() {
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }} className="lms-resource-grid">
                                 {filteredLessons.map(lesson => (
                                     <div key={lesson.id} style={{
-                                        background: 'rgba(18, 26, 43, 0.75)',
-                                        border: '1px solid rgba(255,255,255,0.05)',
+                                        background: '#ffffff',
+                                        border: '1px solid #e1e8f2',
                                         borderRadius: '20px',
                                         padding: '1.25rem',
                                         display: 'flex',
@@ -504,7 +504,7 @@ function LMSContent() {
                                         transition: 'all 0.2s ease'
                                     }} className="lms-resource-card lms-lesson-card">
                                         <div>
-                                            <div style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.85rem' }}>
+                                            <div style={{ background: 'rgba(7, 60, 166, 0.15)', color: '#174fa9', display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.85rem' }}>
                                                 Duration: {lesson.duration}
                                             </div>
                                             <h4 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '1rem', lineHeight: 1.4 }}>{lesson.title}</h4>
@@ -522,8 +522,8 @@ function LMSContent() {
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }} className="lms-resource-grid">
                                 {filteredPDFs.map(pdf => (
                                     <div key={pdf.id} style={{
-                                        background: 'rgba(18, 26, 43, 0.75)',
-                                        border: '1px solid rgba(255,255,255,0.05)',
+                                        background: '#ffffff',
+                                        border: '1px solid #e1e8f2',
                                         borderRadius: '20px',
                                         padding: '1.25rem',
                                         display: 'flex',
@@ -531,7 +531,7 @@ function LMSContent() {
                                         justifyContent: 'space-between'
                                     }} className="lms-resource-card lms-material-card">
                                         <div>
-                                            <div style={{ background: 'rgba(6, 182, 212, 0.15)', color: '#22d3ee', display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.85rem' }}>
+                                            <div style={{ background: 'rgba(6, 182, 212, 0.15)', color: '#174fa9', display: 'inline-flex', padding: '0.2rem 0.6rem', borderRadius: '6px', fontSize: '0.75rem', fontWeight: 700, marginBottom: '0.85rem' }}>
                                                 PDF Document ({pdf.size})
                                             </div>
                                             <h4 style={{ fontSize: '1.05rem', fontWeight: 700, marginBottom: '1rem', lineHeight: 1.4 }}>{pdf.title}</h4>
@@ -547,15 +547,15 @@ function LMSContent() {
                         {/* TAB 3: QUICK AI SOLVER SHORTCUT */}
                         {selectedTab === 'ai' && (
                             <div style={{
-                                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%)',
-                                border: '1px solid rgba(99, 102, 241, 0.35)',
+                                background: 'linear-gradient(135deg, rgba(7, 60, 166, 0.1) 0%, rgba(6, 182, 212, 0.05) 100%)',
+                                border: '1px solid rgba(7, 60, 166, 0.35)',
                                 borderRadius: '24px',
                                 padding: '2rem 1.5rem',
                                 textAlign: 'center'
                             }} className="lms-ai-card">
-                                <Brain size={44} style={{ color: '#06b6d4', marginBottom: '1rem' }} />
+                                <Brain size={44} style={{ color: '#073ca6', marginBottom: '1rem' }} />
                                 <h3 style={{ fontSize: '1.35rem', fontWeight: 700, marginBottom: '0.5rem' }}>mathsbook AI Solver එකට පිවිසෙන්න</h3>
-                                <p style={{ color: '#94a3b8', fontSize: '0.9rem', maxWidth: '600px', margin: '0 auto 1.5rem auto', lineHeight: 1.6 }}>
+                                <p style={{ color: '#5e6f86', fontSize: '0.9rem', maxWidth: '600px', margin: '0 auto 1.5rem auto', lineHeight: 1.6 }}>
                                     වෙබ් අඩවියේ ප්‍රධාන පිටුවට ගොස් ඕනෑම ගණිත ගැටලුවක ඡායාරූපයක් ඇතුළත් කර පියවරෙන් පියවර පැහැදිලි විසඳුම ලබාගන්න.
                                 </p>
                                 <a href="/#ai-solver" className="btn btn-primary">
@@ -567,8 +567,8 @@ function LMSContent() {
                         {/* Homework upload simulation container */}
                         <div style={{
                             marginTop: '2.5rem',
-                            background: 'rgba(18, 26, 43, 0.4)',
-                            border: '1px solid rgba(255,255,255,0.05)',
+                            background: '#ffffff',
+                            border: '1px solid #e1e8f2',
                             borderRadius: '24px',
                             padding: '1.5rem',
                             display: 'flex',
@@ -578,8 +578,8 @@ function LMSContent() {
                             gap: '1rem'
                         }} className="lms-homework-card">
                             <div>
-                                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#c7d2fe' }}>නිවාස වැඩ සහ පන්ති වැඩ Upload කිරීම (Submit Homework)</h4>
-                                <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: '0.2rem' }}>සාදන ලද නිබන්ධන හෝ උත්තර පත්‍ර මෙතැනින් Upload කරන්න</p>
+                                <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#143d80' }}>නිවාස වැඩ සහ පන්ති වැඩ Upload කිරීම (Submit Homework)</h4>
+                                <p style={{ color: '#5e6f86', fontSize: '0.85rem', marginTop: '0.2rem' }}>සාදන ලද නිබන්ධන හෝ උත්තර පත්‍ර මෙතැනින් Upload කරන්න</p>
                             </div>
                             <button className="btn btn-secondary btn-sm" onClick={() => alert('PDF/Image ගොනුව සාර්ථකව උඩුගත කරන ලදී (Homework Submitted)!')}>
                                 <UploadCloud size={16} /> Upload Answers

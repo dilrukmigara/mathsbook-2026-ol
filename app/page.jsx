@@ -1,81 +1,44 @@
 'use client';
-
-import React, { useState, useEffect } from 'react';
+import {useState} from 'react';
+import Link from 'next/link';
+import {ArrowUpRight, ArrowRight, BookOpen, FileText, GraduationCap, ClipboardCheck, Check, Target, Layers, ChevronDown, MessageCircle} from 'lucide-react';
 import Navbar from '../src/components/Navbar';
-import Hero from '../src/components/Hero';
-import VisionMission from '../src/components/VisionMission';
-import CourseCards from '../src/components/CourseCards';
-import AiSolver from '../src/components/AiSolver';
+import Footer from '../src/components/Footer';
 import EnrollmentForm from '../src/components/EnrollmentForm';
 import ReceiptModal from '../src/components/ReceiptModal';
-import Footer from '../src/components/Footer';
-import FloatingWhatsapp from '../src/components/FloatingWhatsapp';
-import { LanguageProvider } from '../src/context/LanguageContext';
-import WelcomeLanguageModal from '../src/components/WelcomeLanguageModal';
+import {LanguageProvider, useLanguage} from '../src/context/LanguageContext';
+import {MATHSBOOK_CONFIG} from '../src/config/mathsbookConfig';
 
-export default function Home() {
-  const [receiptData, setReceiptData] = useState(null);
-  const [mathSymbols, setMathSymbols] = useState([]);
-
-  useEffect(() => {
-    const symbolsList = ['∑', '∫', 'π', '√x', 'sin θ', 'lim', 'f(x)', '∆', '∞', 'tan θ', 'd/dx', 'A⁺'];
-    const generated = Array.from({ length: 18 }).map((_, i) => ({
-      id: i,
-      symbol: symbolsList[Math.floor(Math.random() * symbolsList.length)],
-      left: `${Math.random() * 95}%`,
-      top: `${Math.random() * 95}%`,
-      duration: `${8 + Math.random() * 10}s`,
-      delay: `${Math.random() * 5}s`,
-      fontSize: `${1.5 + Math.random() * 2}rem`
-    }));
-    setMathSymbols(generated);
-  }, []);
-
-  const handleSelectCourse = () => {
-    const enrollSection = document.getElementById('enroll');
-    if (enrollSection) {
-      enrollSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  return (
-    <LanguageProvider>
-      <WelcomeLanguageModal />
-      <div style={{ position: 'relative', minHeight: '100vh' }}>
-        {/* Background Floating Math Symbols */}
-        <div className="bg-math-patterns">
-          {mathSymbols.map((s) => (
-            <span 
-              key={s.id} 
-              className="math-symbol"
-              style={{
-                left: s.left,
-                top: s.top,
-                animationDuration: s.duration,
-                animationDelay: s.delay,
-                fontSize: s.fontSize
-              }}
-            >
-              {s.symbol}
-            </span>
-          ))}
-        </div>
-
-        {/* Main Page Layout */}
-        <Navbar />
-        <Hero />
-        <VisionMission />
-        <CourseCards onSelectCourse={handleSelectCourse} />
-        {/*<AiSolver/>*/}
-        <EnrollmentForm onShowReceipt={(data) => setReceiptData(data)} />
-        <Footer />
-        <FloatingWhatsapp />
-
-        {/* Receipt Modal */}
-        {receiptData && (
-          <ReceiptModal data={receiptData} onClose={() => setReceiptData(null)} />
-        )}
-      </div>
-    </LanguageProvider>
-  );
+const courses=[
+ {id:'full_paper',number:'01',icon:ClipboardCheck,title:'Full Paper Discussion',tag:['ලකුණු 65+ සඳහා','For students scoring 65+'],description:['දන්න දේ තවත් හොඳින්. ප්‍රශ්න පත්‍ර පුහුණුවෙන් ඔබේ ඊළඟ ඉලක්කයට.','Turn what you know into confident answers with focused paper practice.'],features:[['කාලයට අනුව ප්‍රශ්න පත්‍ර පුහුණුව','Timed paper practice'],['Marking scheme සමඟ සාකච්ඡාව','Marking scheme discussions'],['වේගය සහ නිවැරදිභාවය','Speed and accuracy']]},
+ {id:'paper_revision',number:'02',icon:Layers,title:'Paper + Revision',tag:['සියලුම සිසුන් සඳහා','Open to every student'],description:['සිද්ධාන්ත මතක් කරගමු. ප්‍රශ්න විසඳමු. විශ්වාසයෙන් ඉදිරියට යමු.','Revisit the theory, work through questions and build confidence, one lesson at a time.'],features:[['පාඩමෙන් පාඩම පුනරීක්ෂණය','Topic-by-topic revision'],['පසුගිය සහ ආදර්ශ ප්‍රශ්න පත්‍ර','Past and model papers'],['පියවරෙන් පියවර පැහැදිලි කිරීම්','Step-by-step explanations']]},
+ {id:'target_c',number:'03',icon:Target,title:"Target ‘C’ Pass",tag:['මූලික දැනුමෙන් ඉදිරියට','Start with the foundations'],description:['ගණිතයට අලුත් ආරම්භයක්. මූලික සංකල්ප පැහැදිලිව ඉගෙන ගන්න.','Make a fresh start in maths with clear explanations and a stronger foundation.'],features:[['මූලික සංකල්ප සඳහා පුහුණුව','Build essential maths skills'],['Base papers සහ සරල අභ්‍යාස','Base papers and guided exercises'],['පුද්ගලික මඟපෙන්වීම','Supportive personal guidance']]}
+];
+function HomeContent(){
+ const {language}=useLanguage(); const en=language==='en'; const ix=en?1:0;
+ const [receipt,setReceipt]=useState(null); const [course,setCourse]=useState('paper_revision');
+ const pickCourse=id=>{setCourse(id);document.getElementById('enroll')?.scrollIntoView({behavior:'smooth'});};
+ return <div className="mb-home"><Navbar/><main id="main-content">
+ <section id="home" className="mb-hero mb-shell">
+   <div className="mb-hero-top"><span className="mb-eyebrow"><span className="mb-dot"/>O/L MATHEMATICS · 2026</span><span className="mb-hero-note">A little practice. A big difference.</span></div>
+   <div className="mb-cover"><img src="/brand/mathsbook-cover.png" alt="Maths Book — Just Do Maths. O/L Mathematics with Migara Wickramarachchi." width="2058" height="764" fetchPriority="high"/></div>
+   <div className="mb-hero-bottom"><div><h1>{en?'Your next chapter starts here.':'ගණිතයට අලුත් ආරම්භයක්.'}</h1><p>{en?'Understand clearly. Practise consistently. Move forward with confidence.':'පැහැදිලිව ඉගෙන ගන්න. ක්‍රමවත්ව පුහුණු වෙන්න. විශ්වාසයෙන් ඉදිරියට යන්න.'}</p></div><div className="mb-hero-actions"><a className="mb-button mb-button-orange" href="#courses">{en?'Find your class':'ඔබේ පන්තිය තෝරන්න'}<ArrowUpRight size={19}/></a><a className="mb-text-link" href="#resources">{en?'Explore free resources':'නොමිලේ ඉගෙන ගන්න'}<ArrowRight size={17}/></a></div></div>
+ </section>
+ <section id="resources" className="mb-shell mb-resources" aria-label="Learning resources">
+   {[
+    {href:'/papers',icon:FileText,kicker:'THE PAPER LIBRARY',title:en?'A little practice, every day.':'පුහුණුවෙන් ඉදිරියට.',text:en?'Grade 10 & 11 papers, ready for your next study session.':'10 සහ 11 ශ්‍රේණි සඳහා ප්‍රශ්න පත්‍ර එකම තැනක.',label:en?'Explore papers':'ප්‍රශ්න පත්‍ර බලන්න',badge:'FREE'},
+    {href:'/exam',icon:ClipboardCheck,kicker:'TEST YOURSELF',title:en?'Know where you stand.':'ඔබේ දැනුම මැනගන්න.',text:en?'Online MCQs with marks and explanations to help you improve.':'Online MCQ පුහුණුව, ලකුණු සහ පිළිතුරු විවරණ.',label:en?'Try an exam':'විභාගයකට පිවිසෙන්න',badge:'PRACTISE'},
+    {href:'/lms',icon:GraduationCap,kicker:'YOUR LEARNING SPACE',title:en?'Your classroom, online.':'ඔබේම ඉගෙනුම් අවකාශය.',text:en?'Sign in to access your enrolled classes and learning materials.':'ඔබේ පන්ති සහ ඉගෙනුම් ද්‍රව්‍ය වෙත පහසුවෙන් පිවිසෙන්න.',label:en?'Open student portal':'Student Portal',badge:'LEARN'}
+   ].map(({href,icon:Icon,kicker,title,text,label,badge})=><Link href={href} className="mb-resource-card" key={href}><div className="mb-card-top"><span className="mb-icon"><Icon size={23}/></span><span className="mb-mini-tag">{badge}</span></div><span className="mb-kicker">{kicker}</span><h2>{title}</h2><p>{text}</p><span className="mb-card-link">{label}<ArrowUpRight size={19}/></span></Link>)}
+ </section>
+ <section id="courses" className="mb-section mb-shell">
+   <div className="mb-section-heading"><div><span className="mb-eyebrow">FIND YOUR WAY FORWARD</span><h2>{en?'Different starting points.':'ඔබේ මට්ටමට ගැලපෙන'}<br/><span>{en?'One shared ambition.':'හරිම පන්තිය.'}</span></h2></div><p>{en?'Whether you are building the basics or aiming higher, there is a class for your next step.':'මූලික දැනුම ගොඩනගන්න හෝ ඉහළ ලකුණක් ඉලක්ක කරන්න — ඔබේ ගමනට ගැලපෙන පන්තිය මෙතැනින් තෝරගන්න.'}</p></div>
+   <div className="mb-course-grid">{courses.map(({id,number,icon:Icon,title,tag,description,features})=><article className={`mb-course-card ${id==='paper_revision'?'mb-course-featured':''}`} key={id}><div className="mb-card-top"><span className="mb-icon"><Icon size={25}/></span><span className="mb-course-number">/{number}</span></div><span className="mb-course-tag">{tag[ix]}</span><h3>{title}</h3><p>{description[ix]}</p><ul>{features.map(f=><li key={f[1]}><Check size={16}/>{f[ix]}</li>)}</ul><button className={`mb-button ${id==='paper_revision'?'mb-button-orange':'mb-button-outline'}`} onClick={()=>pickCourse(id)}>{en?'Choose this class':'මේ පන්තිය තෝරන්න'}<ArrowUpRight size={18}/></button></article>)}</div>
+ </section>
+ <section id="about" className="mb-about-wrap"><div className="mb-shell mb-about"><div className="mb-about-intro"><span className="mb-eyebrow">THE MATHSBOOK WAY</span><h2>{en?'Less confusion.':'අමාරුයි කියන ගණිතය,'}<br/><span>{en?'More “I get it.”':'තේරෙන විදිහට.'}</span></h2><p>{en?'Maths makes more sense when you understand the why. Learn with Migara Wickramarachchi, one clear step at a time.':'සූත්‍ර මතක තියාගන්න විතරක් නෙවෙයි. ඒවා වැඩ කරන හැටි තේරුම් ගන්න. මිගාර වික්‍රමාරච්චි සමඟ පියවරෙන් පියවර ඉගෙන ගන්න.'}</p><div className="mb-tutor"><img src="/images/migara.png" alt="Migara Wickramarachchi" width="54" height="54" loading="lazy"/><div><strong>{en?'Migara Wickramarachchi':'මිගාර වික්‍රමාරච්චි'}</strong><span>BSc (Hons) Undergraduate</span></div></div></div><div className="mb-method-grid">{[{n:'01',icon:BookOpen,t:en?'Understand the why':'හේතුව තේරුම් ගන්න',p:en?'Clear concepts before shortcuts.':'මූලික සංකල්ප සරලව, පැහැදිලිව.'},{n:'02',icon:FileText,t:en?'Put it into practice':'ප්‍රශ්න විසඳලා බලන්න',p:en?'Build skills with guided paper practice.':'ක්‍රමවත් ප්‍රශ්න පත්‍ර පුහුණුවක්.'},{n:'03',icon:Target,t:en?'Learn from every attempt':'වැරදුණු තැනින් ඉගෙන ගන්න',p:en?'Use explanations to make your next attempt better.':'පිළිතුරු විවරණයෙන් දැනුම වැඩි කරගන්න.'}].map(({n,icon:Icon,t,p})=><div className="mb-method" key={n}><span className="mb-icon"><Icon size={21}/></span><div><h3>{t}</h3><p>{p}</p></div><span className="mb-method-number">{n}</span></div>)}</div></div></section>
+ <EnrollmentForm selectedCourseId={course} onCourseChange={setCourse} onShowReceipt={setReceipt}/>
+ <section className="mb-shell mb-faq"><div><span className="mb-eyebrow">GOOD TO KNOW</span><h2>{en?'A few things you might ask.':'ඔබට ඇතිවෙන ප්‍රශ්න.'}</h2></div><div>{[[en?'Which class is right for me?':'මට ගැලපෙන්නේ මොන පන්තියද?',en?'Full Paper is for students scoring 65 or above. Paper + Revision is open to everyone. Target C focuses on the foundations. Contact us if you would like help choosing.':'ලකුණු 65 හෝ වැඩි සිසුන්ට Full Paper පන්තියත්, සියලුම සිසුන්ට Paper + Revision පන්තියත් තිබෙනවා. මූලික දැනුම වර්ධනය කරගැනීමට Target C පන්තිය තෝරාගන්න පුළුවන්.'],[en?'Are the papers and online exams free?':'Papers සහ online exams නොමිලේද?',en?'Yes. Create a free student account to download papers and take the available online exams.':'ඔව්. නොමිලේ student account එකක් සාදා ප්‍රශ්න පත්‍ර බාගත කරගන්න සහ පවතින online exams සඳහා පෙනී සිටින්න පුළුවන්.'],[en?'How do I find class times and fees?':'පන්ති වේලාවන් සහ ගාස්තු දැනගන්නේ කොහොමද?',en?'Contact us on WhatsApp for the latest schedule, fees and details for your chosen class.':'ඔබ තෝරාගත් පන්තියේ නවතම වේලාවන්, ගාස්තු සහ වැඩි විස්තර සඳහා WhatsApp හරහා අප අමතන්න.']].map(([q,a])=><details key={q}><summary>{q}<ChevronDown size={18}/></summary><p>{a}</p></details>)}</div></section>
+ <section className="mb-shell"><div className="mb-contact-banner"><div><span className="mb-eyebrow">LET’S TAKE THE NEXT STEP</span><h2>{en?'Your next step? Just Do Maths.':'ඔබේ ඊළඟ පියවර? Just Do Maths.'}</h2></div><a href={`https://wa.me/${MATHSBOOK_CONFIG.tutor.whatsapp}`} target="_blank" rel="noreferrer" className="mb-button mb-button-white"><MessageCircle size={20}/>{en?'Talk to your tutor':'ගුරුවරයා අමතන්න'}<ArrowUpRight size={18}/></a></div></section>
+ </main><Footer/>{receipt&&<ReceiptModal data={receipt} onClose={()=>setReceipt(null)}/>}</div>;
 }
+export default function Home(){return <LanguageProvider><HomeContent/></LanguageProvider>;}

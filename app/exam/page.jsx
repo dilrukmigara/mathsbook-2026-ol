@@ -270,14 +270,14 @@ function ExamPlatformContent() {
         switch (tier) {
             case 'excellent':
                 return {
-                    color: '#34d399',
+                    color: '#16734a',
                     bg: 'rgba(16, 185, 129, 0.12)',
                     border: 'rgba(52, 211, 153, 0.35)',
                     glow: '0 0 20px rgba(16, 185, 129, 0.2)'
                 };
             case 'good':
                 return {
-                    color: '#fbbf24',
+                    color: '#a94e08',
                     bg: 'rgba(251, 191, 36, 0.12)',
                     border: 'rgba(251, 191, 36, 0.35)',
                     glow: '0 0 20px rgba(251, 191, 36, 0.2)'
@@ -300,39 +300,39 @@ function ExamPlatformContent() {
     };
 
     return (
-        <div style={{
+        <div className="mb-portal" style={{
             minHeight: '100vh',
             display: 'flex',
             flexDirection: 'column',
-            backgroundColor: '#090d16',
-            color: '#f8fafc',
+            backgroundColor: '#f6f8fc',
+            color: '#10294c',
             fontFamily: "'Noto Sans Sinhala', 'Plus Jakarta Sans', sans-serif",
             position: 'relative',
             overflowX: 'hidden'
         }}>
             <style dangerouslySetInnerHTML={{ __html: `
                 .exam-paper-card {
-                    background: rgba(18, 26, 43, 0.72);
+                    background: #ffffff;
                     backdrop-filter: blur(16px);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border: 1px solid #e1e8f2;
                     border-radius: 18px;
                     padding: 1.45rem;
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-                    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+                    box-shadow: 0 10px 25px -5px rgba(16, 41, 76, 0.08);
                     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
                 }
                 .exam-paper-card:hover {
                     transform: translateY(-4px);
-                    border-color: rgba(99, 102, 241, 0.45);
-                    box-shadow: 0 16px 35px -8px rgba(99, 102, 241, 0.25);
+                    border-color: rgba(7, 60, 166, 0.45);
+                    box-shadow: 0 16px 35px -8px rgba(7, 60, 166, 0.25);
                 }
                 .exam-option-card {
                     padding: 0.95rem 1.15rem;
                     border-radius: 14px;
-                    border: 1px solid rgba(255, 255, 255, 0.09);
-                    background: rgba(15, 23, 42, 0.65);
+                    border: 1px solid #e1e8f2;
+                    background: #ffffff;
                     cursor: pointer;
                     display: flex;
                     align-items: center;
@@ -340,14 +340,14 @@ function ExamPlatformContent() {
                     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
                 }
                 .exam-option-card:hover {
-                    background: rgba(30, 41, 69, 0.75);
-                    border-color: rgba(99, 102, 241, 0.4);
+                    background: #edf3ff;
+                    border-color: rgba(7, 60, 166, 0.4);
                     transform: translateX(3px);
                 }
                 .exam-option-card.selected {
-                    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(6, 182, 212, 0.12) 100%);
-                    border: 1.5px solid #818cf8;
-                    box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+                    background: linear-gradient(135deg, rgba(7, 60, 166, 0.2) 0%, rgba(6, 182, 212, 0.12) 100%);
+                    border: 1.5px solid #174fa9;
+                    box-shadow: 0 0 20px rgba(7, 60, 166, 0.3);
                 }
                 .pill-btn {
                     transition: all 0.15s ease;
@@ -365,7 +365,7 @@ function ExamPlatformContent() {
                 transform: 'translate(-50%, 0)',
                 width: '800px',
                 height: '350px',
-                background: 'radial-gradient(ellipse at 50% 20%, rgba(99, 102, 241, 0.14) 0%, transparent 65%)',
+                background: 'radial-gradient(ellipse at 50% 20%, rgba(7, 60, 166, 0.14) 0%, transparent 65%)',
                 filter: 'blur(75px)',
                 pointerEvents: 'none',
                 zIndex: 0
@@ -374,7 +374,7 @@ function ExamPlatformContent() {
             <Navbar />
 
             {/* Main Interactive Container */}
-            <main style={{ flex: 1, paddingTop: '86px', paddingBottom: '60px', position: 'relative', zIndex: 1 }} className="container">
+            <main id="main-content" style={{ flex: 1, paddingTop: '42px', paddingBottom: '60px', position: 'relative', zIndex: 1 }} className="container">
 
                 {/* 1. Header */}
                 <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto 2rem auto' }}>
@@ -382,16 +382,16 @@ function ExamPlatformContent() {
                         display: 'inline-flex',
                         alignItems: 'center',
                         gap: '0.5rem',
-                        background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(6, 182, 212, 0.12) 100%)',
-                        border: '1px solid rgba(99, 102, 241, 0.3)',
+                        background: 'linear-gradient(135deg, rgba(7, 60, 166, 0.15) 0%, rgba(6, 182, 212, 0.12) 100%)',
+                        border: '1px solid rgba(7, 60, 166, 0.3)',
                         padding: '0.35rem 1rem',
                         borderRadius: '999px',
-                        color: '#a5b4fc',
+                        color: '#174fa9',
                         fontSize: '0.82rem',
                         fontWeight: 700,
                         marginBottom: '0.85rem'
                     }}>
-                        <Sparkles size={15} color="#38bdf8" /> 
+                        <Sparkles size={15} color="#174fa9" />
                         <span>100% Free Online Mathematics MCQ Platform • O/L 2026</span>
                     </div>
 
@@ -409,7 +409,7 @@ function ExamPlatformContent() {
                         )}
                     </h1>
 
-                    <p style={{ color: '#94a3b8', fontSize: '1.05rem', lineHeight: 1.62, maxWidth: '660px', margin: '0 auto' }}>
+                    <p style={{ color: '#5e6f86', fontSize: '1.05rem', lineHeight: 1.62, maxWidth: '660px', margin: '0 auto' }}>
                         {language === 'si'
                             ? 'සෑම ප්‍රශ්න පත්‍රයකටම පෙනී සිට ස්වයංක්‍රීය ලකුණු, ප්‍රතිශත සහ ප්‍රවීණතා මට්ටම ලබාගන්න. අවසානයේ සෑම ප්‍රශ්නයකටම අදාළ පූර්ණ සිද්ධාන්ත විවරණ (Explanations) අධ්‍යයනය කරන්න.'
                             : 'Practice O/L Mathematics MCQ papers online for free. Get instant marks, percentage, motivational feedback, and in-depth step-by-step theory explanations.'
@@ -422,11 +422,11 @@ function ExamPlatformContent() {
                     <div style={{
                         maxWidth: '460px',
                         margin: '0 auto 2.5rem auto',
-                        background: 'linear-gradient(145deg, rgba(26, 38, 64, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%)',
-                        border: '1px solid rgba(99, 102, 241, 0.28)',
+                        background: 'linear-gradient(145deg, #ffffff 0%, #ffffff 100%)',
+                        border: '1px solid rgba(7, 60, 166, 0.28)',
                         borderRadius: '22px',
                         padding: '1.85rem',
-                        boxShadow: '0 16px 40px rgba(0, 0, 0, 0.5)',
+                        boxShadow: '0 16px 40px rgba(16, 41, 76, 0.08)',
                         backdropFilter: 'blur(20px)'
                     }}>
                         <div style={{ textAlign: 'center', marginBottom: '1.4rem' }}>
@@ -434,23 +434,23 @@ function ExamPlatformContent() {
                                 width: '48px',
                                 height: '48px',
                                 borderRadius: '15px',
-                                background: 'rgba(99, 102, 241, 0.2)',
-                                border: '1px solid rgba(99, 102, 241, 0.35)',
+                                background: 'rgba(7, 60, 166, 0.2)',
+                                border: '1px solid rgba(7, 60, 166, 0.35)',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 margin: '0 auto 0.75rem auto'
                             }}>
-                                <Lock size={22} color="#818cf8" />
+                                <Lock size={22} color="#174fa9" />
                             </div>
-                            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', marginBottom: '0.25rem' }}>
+                            <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#10294c', marginBottom: '0.25rem' }}>
                                 {authMode === 'signin' ? (
                                     language === 'si' ? 'විභාගය ආරම්භ කිරීමට ඇතුල් වන්න' : 'Log in to Access Online Exams'
                                 ) : (
                                     language === 'si' ? 'නොමිලේ ශිෂ්‍ය ගිණුමක් සාදන්න' : 'Create Free Student Account'
                                 )}
                             </h3>
-                            <p style={{ color: '#94a3b8', fontSize: '0.82rem' }}>
+                            <p style={{ color: '#5e6f86', fontSize: '0.82rem' }}>
                                 {language === 'si' ? 'ප්‍රශ්න පත්‍ර සියල්ල සිසුන්ට 100%ක් නොමිලේ ලබාදේ.' : 'All MCQ papers are 100% free for all students.'}
                             </p>
                         </div>
@@ -458,10 +458,10 @@ function ExamPlatformContent() {
                         {/* Mode Switcher */}
                         <div style={{
                             display: 'flex',
-                            background: 'rgba(15, 23, 42, 0.8)',
+                            background: '#ffffff',
                             padding: '4px',
                             borderRadius: '14px',
-                            border: '1px solid rgba(255, 255, 255, 0.08)',
+                            border: '1px solid #e1e8f2',
                             marginBottom: '1.25rem'
                         }}>
                             <button
@@ -471,8 +471,8 @@ function ExamPlatformContent() {
                                     padding: '0.6rem',
                                     border: 'none',
                                     borderRadius: '10px',
-                                    background: authMode === 'signin' ? 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)' : 'transparent',
-                                    color: authMode === 'signin' ? '#ffffff' : '#94a3b8',
+                                    background: authMode === 'signin' ? 'linear-gradient(135deg, #073ca6 0%, #073ca6 100%)' : 'transparent',
+                                    color: authMode === 'signin' ? '#ffffff' : '#5e6f86',
                                     fontWeight: 700,
                                     fontSize: '0.82rem',
                                     cursor: 'pointer',
@@ -488,8 +488,8 @@ function ExamPlatformContent() {
                                     padding: '0.6rem',
                                     border: 'none',
                                     borderRadius: '10px',
-                                    background: authMode === 'signup' ? 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)' : 'transparent',
-                                    color: authMode === 'signup' ? '#ffffff' : '#94a3b8',
+                                    background: authMode === 'signup' ? 'linear-gradient(135deg, #073ca6 0%, #073ca6 100%)' : 'transparent',
+                                    color: authMode === 'signup' ? '#ffffff' : '#5e6f86',
                                     fontWeight: 700,
                                     fontSize: '0.82rem',
                                     cursor: 'pointer',
@@ -525,7 +525,7 @@ function ExamPlatformContent() {
                                 border: '1px solid rgba(16, 185, 129, 0.35)',
                                 padding: '0.7rem 0.9rem',
                                 borderRadius: '12px',
-                                color: '#34d399',
+                                color: '#16734a',
                                 fontSize: '0.82rem',
                                 display: 'flex',
                                 alignItems: 'center',
@@ -539,7 +539,7 @@ function ExamPlatformContent() {
                         {authMode === 'signin' ? (
                             <form onSubmit={handleSignIn} style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
                                 <div>
-                                    <label style={{ display: 'block', fontSize: '0.8rem', color: '#cbd5e1', marginBottom: '0.35rem', fontWeight: 600 }}>
+                                    <label style={{ display: 'block', fontSize: '0.8rem', color: '#4d607a', marginBottom: '0.35rem', fontWeight: 600 }}>
                                         {language === 'si' ? 'දුරකථන අංකය (Phone Number)' : 'Phone Number'}
                                     </label>
                                     <input 
@@ -551,10 +551,10 @@ function ExamPlatformContent() {
                                         style={{
                                             width: '100%',
                                             padding: '0.75rem 0.95rem',
-                                            background: 'rgba(15, 23, 42, 0.8)',
-                                            border: '1px solid rgba(255, 255, 255, 0.12)',
+                                            background: '#ffffff',
+                                            border: '1px solid #e1e8f2',
                                             borderRadius: '12px',
-                                            color: '#f8fafc',
+                                            color: '#10294c',
                                             fontSize: '0.9rem',
                                             outline: 'none',
                                             boxSizing: 'border-box'
@@ -563,7 +563,7 @@ function ExamPlatformContent() {
                                 </div>
 
                                 <div>
-                                    <label style={{ display: 'block', fontSize: '0.8rem', color: '#cbd5e1', marginBottom: '0.35rem', fontWeight: 600 }}>
+                                    <label style={{ display: 'block', fontSize: '0.8rem', color: '#4d607a', marginBottom: '0.35rem', fontWeight: 600 }}>
                                         {language === 'si' ? 'මුරපදය (Password)' : 'Password'}
                                     </label>
                                     <input 
@@ -575,10 +575,10 @@ function ExamPlatformContent() {
                                         style={{
                                             width: '100%',
                                             padding: '0.75rem 0.95rem',
-                                            background: 'rgba(15, 23, 42, 0.8)',
-                                            border: '1px solid rgba(255, 255, 255, 0.12)',
+                                            background: '#ffffff',
+                                            border: '1px solid #e1e8f2',
                                             borderRadius: '12px',
-                                            color: '#f8fafc',
+                                            color: '#10294c',
                                             fontSize: '0.9rem',
                                             outline: 'none',
                                             boxSizing: 'border-box'
@@ -593,8 +593,8 @@ function ExamPlatformContent() {
                                         marginTop: '0.3rem',
                                         padding: '0.8rem',
                                         borderRadius: '12px',
-                                        background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #06b6d4 100%)',
-                                        color: '#ffffff',
+                                        background: 'linear-gradient(135deg, #073ca6 0%, #073ca6 50%, #073ca6 100%)',
+                                        color: '#10294c',
                                         border: 'none',
                                         fontWeight: 700,
                                         fontSize: '0.9rem',
@@ -612,7 +612,7 @@ function ExamPlatformContent() {
                         ) : (
                             <form onSubmit={handleSignUp} style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
                                 <div>
-                                    <label style={{ display: 'block', fontSize: '0.8rem', color: '#cbd5e1', marginBottom: '0.35rem', fontWeight: 600 }}>
+                                    <label style={{ display: 'block', fontSize: '0.8rem', color: '#4d607a', marginBottom: '0.35rem', fontWeight: 600 }}>
                                         {language === 'si' ? 'ඔබගේ නම (Student Name)' : 'Student Name'}
                                     </label>
                                     <input 
@@ -624,10 +624,10 @@ function ExamPlatformContent() {
                                         style={{
                                             width: '100%',
                                             padding: '0.75rem 0.95rem',
-                                            background: 'rgba(15, 23, 42, 0.8)',
-                                            border: '1px solid rgba(255, 255, 255, 0.12)',
+                                            background: '#ffffff',
+                                            border: '1px solid #e1e8f2',
                                             borderRadius: '12px',
-                                            color: '#f8fafc',
+                                            color: '#10294c',
                                             fontSize: '0.9rem',
                                             outline: 'none',
                                             boxSizing: 'border-box'
@@ -636,7 +636,7 @@ function ExamPlatformContent() {
                                 </div>
 
                                 <div>
-                                    <label style={{ display: 'block', fontSize: '0.8rem', color: '#cbd5e1', marginBottom: '0.35rem', fontWeight: 600 }}>
+                                    <label style={{ display: 'block', fontSize: '0.8rem', color: '#4d607a', marginBottom: '0.35rem', fontWeight: 600 }}>
                                         {language === 'si' ? 'දුරකථන අංකය (Phone Number)' : 'Phone Number'}
                                     </label>
                                     <input 
@@ -648,10 +648,10 @@ function ExamPlatformContent() {
                                         style={{
                                             width: '100%',
                                             padding: '0.75rem 0.95rem',
-                                            background: 'rgba(15, 23, 42, 0.8)',
-                                            border: '1px solid rgba(255, 255, 255, 0.12)',
+                                            background: '#ffffff',
+                                            border: '1px solid #e1e8f2',
                                             borderRadius: '12px',
-                                            color: '#f8fafc',
+                                            color: '#10294c',
                                             fontSize: '0.9rem',
                                             outline: 'none',
                                             boxSizing: 'border-box'
@@ -660,7 +660,7 @@ function ExamPlatformContent() {
                                 </div>
 
                                 <div>
-                                    <label style={{ display: 'block', fontSize: '0.8rem', color: '#cbd5e1', marginBottom: '0.35rem', fontWeight: 600 }}>
+                                    <label style={{ display: 'block', fontSize: '0.8rem', color: '#4d607a', marginBottom: '0.35rem', fontWeight: 600 }}>
                                         {language === 'si' ? 'නව මුරපදයක් (Create Password)' : 'Create Password'}
                                     </label>
                                     <input 
@@ -672,10 +672,10 @@ function ExamPlatformContent() {
                                         style={{
                                             width: '100%',
                                             padding: '0.75rem 0.95rem',
-                                            background: 'rgba(15, 23, 42, 0.8)',
-                                            border: '1px solid rgba(255, 255, 255, 0.12)',
+                                            background: '#ffffff',
+                                            border: '1px solid #e1e8f2',
                                             borderRadius: '12px',
-                                            color: '#f8fafc',
+                                            color: '#10294c',
                                             fontSize: '0.9rem',
                                             outline: 'none',
                                             boxSizing: 'border-box'
@@ -690,8 +690,8 @@ function ExamPlatformContent() {
                                         marginTop: '0.3rem',
                                         padding: '0.8rem',
                                         borderRadius: '12px',
-                                        background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #06b6d4 100%)',
-                                        color: '#ffffff',
+                                        background: 'linear-gradient(135deg, #073ca6 0%, #073ca6 50%, #073ca6 100%)',
+                                        color: '#10294c',
                                         border: 'none',
                                         fontWeight: 700,
                                         fontSize: '0.9rem',
@@ -711,8 +711,8 @@ function ExamPlatformContent() {
                 ) : (
                     // Logged in student badge
                     <div style={{
-                        background: 'linear-gradient(135deg, rgba(26, 38, 64, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%)',
-                        border: '1px solid rgba(99, 102, 241, 0.3)',
+                        background: 'linear-gradient(135deg, #ffffff 0%, #ffffff 100%)',
+                        border: '1px solid rgba(7, 60, 166, 0.3)',
                         borderRadius: '16px',
                         padding: '0.9rem 1.4rem',
                         marginBottom: '2rem',
@@ -728,8 +728,8 @@ function ExamPlatformContent() {
                                 width: '38px',
                                 height: '38px',
                                 borderRadius: '12px',
-                                background: 'linear-gradient(135deg, #6366f1, #06b6d4)',
-                                color: '#ffffff',
+                                background: 'linear-gradient(135deg, #073ca6, #073ca6)',
+                                color: '#10294c',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'center',
@@ -739,12 +739,12 @@ function ExamPlatformContent() {
                                 {user.name ? user.name.charAt(0).toUpperCase() : 'S'}
                             </div>
                             <div>
-                                <div style={{ fontSize: '1rem', fontWeight: 800, color: '#f8fafc' }}>
+                                <div style={{ fontSize: '1rem', fontWeight: 800, color: '#10294c' }}>
                                     {user.name}
                                 </div>
-                                <div style={{ fontSize: '0.78rem', color: '#94a3b8', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                                    <CheckCircle2 size={13} color="#34d399" /> 
-                                    <span style={{ color: '#34d399', fontWeight: 600 }}>Online Exams Active</span>
+                                <div style={{ fontSize: '0.78rem', color: '#5e6f86', display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                                    <CheckCircle2 size={13} color="#16734a" />
+                                    <span style={{ color: '#16734a', fontWeight: 600 }}>Online Exams Active</span>
                                     <span>•</span>
                                     <span>{user.phone}</span>
                                 </div>
@@ -758,9 +758,9 @@ function ExamPlatformContent() {
                                     style={{
                                         padding: '0.45rem 0.95rem',
                                         borderRadius: '10px',
-                                        background: 'rgba(255, 255, 255, 0.08)',
-                                        color: '#e2e8f0',
-                                        border: '1px solid rgba(255, 255, 255, 0.15)',
+                                        background: '#e1e8f2',
+                                        color: '#203656',
+                                        border: '1px solid #e1e8f2',
                                         fontSize: '0.8rem',
                                         fontWeight: 700,
                                         cursor: 'pointer'
@@ -803,27 +803,27 @@ function ExamPlatformContent() {
                             gap: '0.85rem'
                         }}>
                             <div>
-                                <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                    <BarChart3 size={20} color="#818cf8" />
+                                <h3 style={{ fontSize: '1.35rem', fontWeight: 800, color: '#10294c', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <BarChart3 size={20} color="#174fa9" />
                                     <span>{language === 'si' ? 'පවතින ප්‍රශ්න පත්‍ර (Available Exam Papers)' : 'Available Exam Papers'}</span>
                                 </h3>
-                                <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginTop: '0.15rem' }}>
+                                <p style={{ color: '#5e6f86', fontSize: '0.85rem', marginTop: '0.15rem' }}>
                                     Select any paper to begin. Practice anytime with automated scoring & theory explanations.
                                 </p>
                             </div>
                             <div style={{
-                                background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%)',
-                                border: '1px solid rgba(99, 102, 241, 0.3)',
+                                background: 'linear-gradient(135deg, rgba(7, 60, 166, 0.15) 0%, rgba(6, 182, 212, 0.15) 100%)',
+                                border: '1px solid rgba(7, 60, 166, 0.3)',
                                 borderRadius: '999px',
                                 padding: '0.35rem 0.95rem',
                                 fontSize: '0.8rem',
                                 fontWeight: 700,
-                                color: '#a5b4fc',
+                                color: '#174fa9',
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: '0.35rem'
                             }}>
-                                <Zap size={13} color="#38bdf8" />
+                                <Zap size={13} color="#174fa9" />
                                 <span>Total Papers: {papers.length}</span>
                             </div>
                         </div>
@@ -833,26 +833,26 @@ function ExamPlatformContent() {
                                 <div style={{
                                     width: '38px',
                                     height: '38px',
-                                    border: '3px solid rgba(99, 102, 241, 0.2)',
-                                    borderTopColor: '#818cf8',
+                                    border: '3px solid rgba(7, 60, 166, 0.2)',
+                                    borderTopColor: '#174fa9',
                                     borderRadius: '50%',
                                     margin: '0 auto 1rem auto'
                                 }} className="animate-spin" />
-                                <p style={{ color: '#94a3b8', fontSize: '0.9rem' }}>Loading exam papers...</p>
+                                <p style={{ color: '#5e6f86', fontSize: '0.9rem' }}>Loading exam papers...</p>
                             </div>
                         ) : papers.length === 0 ? (
                             <div style={{
-                                background: 'rgba(18, 26, 43, 0.6)',
-                                border: '1px solid rgba(255, 255, 255, 0.08)',
+                                background: '#ffffff',
+                                border: '1px solid #e1e8f2',
                                 borderRadius: '20px',
                                 padding: '3.5rem 2rem',
                                 textAlign: 'center'
                             }}>
-                                <BookOpen size={46} color="#818cf8" style={{ margin: '0 auto 1rem auto', opacity: 0.6 }} />
-                                <h4 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#f8fafc', marginBottom: '0.4rem' }}>
+                                <BookOpen size={46} color="#174fa9" style={{ margin: '0 auto 1rem auto', opacity: 0.6 }} />
+                                <h4 style={{ fontSize: '1.15rem', fontWeight: 700, color: '#10294c', marginBottom: '0.4rem' }}>
                                     No exam papers available yet
                                 </h4>
-                                <p style={{ color: '#94a3b8', fontSize: '0.88rem' }}>
+                                <p style={{ color: '#5e6f86', fontSize: '0.88rem' }}>
                                     The administrator will upload new MCQ papers shortly.
                                 </p>
                             </div>
@@ -863,9 +863,9 @@ function ExamPlatformContent() {
                                         <div>
                                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.85rem' }}>
                                                 <span style={{
-                                                    background: 'rgba(99, 102, 241, 0.15)',
-                                                    color: '#a5b4fc',
-                                                    border: '1px solid rgba(99, 102, 241, 0.35)',
+                                                    background: 'rgba(7, 60, 166, 0.15)',
+                                                    color: '#174fa9',
+                                                    border: '1px solid rgba(7, 60, 166, 0.35)',
                                                     padding: '3px 10px',
                                                     borderRadius: '8px',
                                                     fontSize: '0.75rem',
@@ -875,7 +875,7 @@ function ExamPlatformContent() {
                                                 </span>
                                                 <span style={{
                                                     background: 'rgba(16, 185, 129, 0.15)',
-                                                    color: '#34d399',
+                                                    color: '#16734a',
                                                     border: '1px solid rgba(16, 185, 129, 0.35)',
                                                     padding: '2px 8px',
                                                     borderRadius: '6px',
@@ -889,12 +889,12 @@ function ExamPlatformContent() {
                                                 </span>
                                             </div>
 
-                                            <h4 style={{ fontSize: '1.18rem', fontWeight: 800, color: '#f8fafc', lineHeight: 1.35, marginBottom: '0.65rem' }}>
+                                            <h4 style={{ fontSize: '1.18rem', fontWeight: 800, color: '#10294c', lineHeight: 1.35, marginBottom: '0.65rem' }}>
                                                 {paper.title}
                                             </h4>
 
                                             {paper.description && (
-                                                <p style={{ fontSize: '0.84rem', color: '#94a3b8', lineHeight: 1.5, marginBottom: '1.2rem' }}>
+                                                <p style={{ fontSize: '0.84rem', color: '#5e6f86', lineHeight: 1.5, marginBottom: '1.2rem' }}>
                                                     {paper.description}
                                                 </p>
                                             )}
@@ -904,17 +904,17 @@ function ExamPlatformContent() {
                                                 gap: '1rem',
                                                 flexWrap: 'wrap',
                                                 fontSize: '0.8rem',
-                                                color: '#cbd5e1',
+                                                color: '#4d607a',
                                                 paddingTop: '0.75rem',
-                                                borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                                                borderTop: '1px solid #e1e8f2',
                                                 marginBottom: '1.25rem'
                                             }}>
                                                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                                                    <FileText size={14} color="#818cf8" />
+                                                    <FileText size={14} color="#174fa9" />
                                                     <strong>{paper.total_questions || '5'} Questions</strong>
                                                 </span>
                                                 <span style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                                                    <Clock size={14} color="#38bdf8" />
+                                                    <Clock size={14} color="#174fa9" />
                                                     <span>{paper.duration_minutes || '45'} Mins</span>
                                                 </span>
                                             </div>
@@ -927,8 +927,8 @@ function ExamPlatformContent() {
                                                 width: '100%',
                                                 padding: '0.8rem',
                                                 borderRadius: '12px',
-                                                background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #06b6d4 100%)',
-                                                color: '#ffffff',
+                                                background: 'linear-gradient(135deg, #073ca6 0%, #073ca6 50%, #073ca6 100%)',
+                                                color: '#10294c',
                                                 border: 'none',
                                                 fontWeight: 800,
                                                 fontSize: '0.88rem',
@@ -953,9 +953,9 @@ function ExamPlatformContent() {
                 {viewMode === 'taking' && activePaper && currentQ && (
                     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
                         <div style={{
-                            background: 'rgba(18, 26, 43, 0.8)',
+                            background: '#ffffff',
                             backdropFilter: 'blur(16px)',
-                            border: '1px solid rgba(99, 102, 241, 0.3)',
+                            border: '1px solid rgba(7, 60, 166, 0.3)',
                             borderRadius: '20px',
                             padding: '1.2rem 1.6rem',
                             marginBottom: '1.25rem',
@@ -963,27 +963,27 @@ function ExamPlatformContent() {
                         }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.85rem', marginBottom: '0.85rem' }}>
                                 <div>
-                                    <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#38bdf8', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                    <span style={{ fontSize: '0.75rem', fontWeight: 800, color: '#174fa9', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                                         {activePaper.title}
                                     </span>
-                                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', marginTop: '0.15rem' }}>
+                                    <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#10294c', marginTop: '0.15rem' }}>
                                         Question {currentQuestionIndex + 1} of {activePaper.questions.length}
                                     </h3>
                                 </div>
                                 <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
                                     <div style={{
-                                        background: 'rgba(99, 102, 241, 0.15)',
-                                        border: '1px solid rgba(99, 102, 241, 0.3)',
+                                        background: 'rgba(7, 60, 166, 0.15)',
+                                        border: '1px solid rgba(7, 60, 166, 0.3)',
                                         borderRadius: '10px',
                                         padding: '0.4rem 0.85rem',
                                         fontSize: '0.82rem',
                                         fontWeight: 700,
-                                        color: '#a5b4fc',
+                                        color: '#174fa9',
                                         display: 'flex',
                                         alignItems: 'center',
                                         gap: '0.35rem'
                                     }}>
-                                        <CheckCircle size={13} color="#34d399" />
+                                        <CheckCircle size={13} color="#16734a" />
                                         <span>Answered: {answeredCount}/{activePaper.questions.length}</span>
                                     </div>
                                     <button
@@ -992,7 +992,7 @@ function ExamPlatformContent() {
                                             padding: '0.48rem 1rem',
                                             borderRadius: '10px',
                                             background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                                            color: '#ffffff',
+                                            color: '#10294c',
                                             border: 'none',
                                             fontWeight: 800,
                                             fontSize: '0.82rem',
@@ -1011,7 +1011,7 @@ function ExamPlatformContent() {
                             <div style={{
                                 width: '100%',
                                 height: '5px',
-                                background: 'rgba(255, 255, 255, 0.08)',
+                                background: '#e1e8f2',
                                 borderRadius: '999px',
                                 overflow: 'hidden',
                                 marginBottom: '0.95rem'
@@ -1019,32 +1019,32 @@ function ExamPlatformContent() {
                                 <div style={{
                                     height: '100%',
                                     width: `${Math.round((answeredCount / activePaper.questions.length) * 100)}%`,
-                                    background: 'linear-gradient(90deg, #6366f1 0%, #06b6d4 100%)',
+                                    background: 'linear-gradient(90deg, #073ca6 0%, #073ca6 100%)',
                                     borderRadius: '999px',
                                     transition: 'width 0.35s ease'
                                 }} />
                             </div>
 
                             {/* Question Pills */}
-                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', paddingTop: '0.75rem', borderTop: '1px solid #e1e8f2' }}>
                                 {activePaper.questions.map((q, idx) => {
                                     const isAnswered = !!studentAnswers[q.id];
                                     const isCurrent = currentQuestionIndex === idx;
                                     
-                                    let bg = 'rgba(255, 255, 255, 0.04)';
-                                    let border = 'rgba(255, 255, 255, 0.1)';
-                                    let color = '#94a3b8';
+                                    let bg = '#e1e8f2';
+                                    let border = '#e1e8f2';
+                                    let color = '#5e6f86';
                                     let shadow = 'none';
 
                                     if (isCurrent) {
-                                        bg = 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)';
-                                        border = '#818cf8';
+                                        bg = 'linear-gradient(135deg, #073ca6 0%, #073ca6 100%)';
+                                        border = '#174fa9';
                                         color = '#ffffff';
-                                        shadow = '0 0 12px rgba(99, 102, 241, 0.5)';
+                                        shadow = '0 0 12px rgba(7, 60, 166, 0.5)';
                                     } else if (isAnswered) {
                                         bg = 'rgba(16, 185, 129, 0.18)';
                                         border = 'rgba(16, 185, 129, 0.4)';
-                                        color = '#34d399';
+                                        color = '#16734a';
                                     }
 
                                     return (
@@ -1074,9 +1074,9 @@ function ExamPlatformContent() {
 
                         {/* Current Question Card */}
                         <div style={{
-                            background: 'rgba(18, 26, 43, 0.85)',
+                            background: '#ffffff',
                             backdropFilter: 'blur(20px)',
-                            border: '1px solid rgba(99, 102, 241, 0.25)',
+                            border: '1px solid rgba(7, 60, 166, 0.25)',
                             borderRadius: '22px',
                             padding: '1.85rem',
                             marginBottom: '1.5rem',
@@ -1086,23 +1086,23 @@ function ExamPlatformContent() {
                                 display: 'inline-flex',
                                 alignItems: 'center',
                                 gap: '0.35rem',
-                                background: 'rgba(99, 102, 241, 0.15)',
-                                color: '#a5b4fc',
-                                border: '1px solid rgba(99, 102, 241, 0.35)',
+                                background: 'rgba(7, 60, 166, 0.15)',
+                                color: '#174fa9',
+                                border: '1px solid rgba(7, 60, 166, 0.35)',
                                 padding: '3px 10px',
                                 borderRadius: '8px',
                                 fontSize: '0.78rem',
                                 fontWeight: 800,
                                 marginBottom: '0.95rem'
                             }}>
-                                <Sparkles size={12} color="#38bdf8" />
+                                <Sparkles size={12} color="#174fa9" />
                                 <span>Question {currentQuestionIndex + 1} of {activePaper.questions.length}</span>
                             </div>
 
                             <h2 style={{
                                 fontSize: '1.25rem',
                                 fontWeight: 800,
-                                color: '#f8fafc',
+                                color: '#10294c',
                                 lineHeight: 1.55,
                                 marginBottom: '1.6rem'
                             }}>
@@ -1128,9 +1128,9 @@ function ExamPlatformContent() {
                                                 width: '34px',
                                                 height: '34px',
                                                 borderRadius: '10px',
-                                                background: isSelected ? 'linear-gradient(135deg, #6366f1 0%, #06b6d4 100%)' : 'rgba(255, 255, 255, 0.06)',
-                                                color: isSelected ? '#ffffff' : '#cbd5e1',
-                                                border: isSelected ? 'none' : '1px solid rgba(255, 255, 255, 0.15)',
+                                                background: isSelected ? 'linear-gradient(135deg, #073ca6 0%, #073ca6 100%)' : '#e1e8f2',
+                                                color: isSelected ? '#ffffff' : '#4d607a',
+                                                border: isSelected ? 'none' : '1px solid #e1e8f2',
                                                 display: 'flex',
                                                 alignItems: 'center',
                                                 justifyContent: 'center',
@@ -1143,7 +1143,7 @@ function ExamPlatformContent() {
                                             <div style={{
                                                 fontSize: '0.98rem',
                                                 fontWeight: isSelected ? 700 : 500,
-                                                color: isSelected ? '#ffffff' : '#e2e8f0',
+                                                color: isSelected ? '#ffffff' : '#203656',
                                                 flex: 1
                                             }}>
                                                 {opt.text}
@@ -1153,8 +1153,8 @@ function ExamPlatformContent() {
                                                     width: '22px',
                                                     height: '22px',
                                                     borderRadius: '50%',
-                                                    background: 'linear-gradient(135deg, #6366f1, #06b6d4)',
-                                                    color: '#ffffff',
+                                                    background: 'linear-gradient(135deg, #073ca6, #073ca6)',
+                                                    color: '#10294c',
                                                     display: 'flex',
                                                     alignItems: 'center',
                                                     justifyContent: 'center'
@@ -1174,7 +1174,7 @@ function ExamPlatformContent() {
                                 alignItems: 'center',
                                 marginTop: '1.85rem',
                                 paddingTop: '1.25rem',
-                                borderTop: '1px solid rgba(255, 255, 255, 0.08)'
+                                borderTop: '1px solid #e1e8f2'
                             }}>
                                 <button
                                     onClick={() => setCurrentQuestionIndex(prev => Math.max(0, prev - 1))}
@@ -1182,9 +1182,9 @@ function ExamPlatformContent() {
                                     style={{
                                         padding: '0.65rem 1.25rem',
                                         borderRadius: '12px',
-                                        background: currentQuestionIndex === 0 ? 'rgba(255, 255, 255, 0.03)' : 'rgba(255, 255, 255, 0.08)',
-                                        color: currentQuestionIndex === 0 ? '#475569' : '#e2e8f0',
-                                        border: '1px solid rgba(255, 255, 255, 0.12)',
+                                        background: currentQuestionIndex === 0 ? '#e1e8f2' : '#e1e8f2',
+                                        color: currentQuestionIndex === 0 ? '#475569' : '#203656',
+                                        border: '1px solid #e1e8f2',
                                         fontWeight: 700,
                                         fontSize: '0.85rem',
                                         cursor: currentQuestionIndex === 0 ? 'not-allowed' : 'pointer',
@@ -1202,8 +1202,8 @@ function ExamPlatformContent() {
                                         style={{
                                             padding: '0.65rem 1.35rem',
                                             borderRadius: '12px',
-                                            background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-                                            color: '#ffffff',
+                                            background: 'linear-gradient(135deg, #073ca6 0%, #073ca6 100%)',
+                                            color: '#10294c',
                                             border: 'none',
                                             fontWeight: 800,
                                             fontSize: '0.85rem',
@@ -1222,7 +1222,7 @@ function ExamPlatformContent() {
                                             padding: '0.65rem 1.45rem',
                                             borderRadius: '12px',
                                             background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-                                            color: '#ffffff',
+                                            color: '#10294c',
                                             border: 'none',
                                             fontWeight: 800,
                                             fontSize: '0.85rem',
@@ -1246,8 +1246,8 @@ function ExamPlatformContent() {
                     return (
                         <div style={{ maxWidth: '680px', margin: '0 auto' }}>
                             <div style={{
-                                background: 'linear-gradient(135deg, rgba(26, 38, 64, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%)',
-                                border: '1px solid rgba(99, 102, 241, 0.3)',
+                                background: 'linear-gradient(135deg, #ffffff 0%, #ffffff 100%)',
+                                border: '1px solid rgba(7, 60, 166, 0.3)',
                                 borderRadius: '26px',
                                 padding: '2.2rem 1.8rem',
                                 textAlign: 'center',
@@ -1273,7 +1273,7 @@ function ExamPlatformContent() {
                                 <span style={{
                                     fontSize: '0.8rem',
                                     fontWeight: 800,
-                                    color: '#38bdf8',
+                                    color: '#174fa9',
                                     textTransform: 'uppercase',
                                     letterSpacing: '0.6px'
                                 }}>
@@ -1290,8 +1290,8 @@ function ExamPlatformContent() {
                                     {examResult.percentage}%
                                 </h2>
                                 
-                                <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#cbd5e1', marginBottom: '1.4rem' }}>
-                                    Marks: <span style={{ color: '#38bdf8', fontWeight: 800 }}>{examResult.marks}</span> / {examResult.total_questions}
+                                <div style={{ fontSize: '1.05rem', fontWeight: 700, color: '#4d607a', marginBottom: '1.4rem' }}>
+                                    Marks: <span style={{ color: '#174fa9', fontWeight: 800 }}>{examResult.marks}</span> / {examResult.total_questions}
                                 </div>
 
                                 {/* Motivational banner */}
@@ -1306,10 +1306,10 @@ function ExamPlatformContent() {
                                     <h4 style={{ fontSize: '1.12rem', fontWeight: 800, color: darkMotivation.color, marginBottom: '0.3rem' }}>
                                         {examResult.motivation.title}
                                     </h4>
-                                    <p style={{ fontSize: '0.98rem', fontWeight: 600, color: '#f8fafc', marginBottom: '0.25rem' }}>
+                                    <p style={{ fontSize: '0.98rem', fontWeight: 600, color: '#10294c', marginBottom: '0.25rem' }}>
                                         "{examResult.motivation.message}"
                                     </p>
-                                    <p style={{ fontSize: '0.85rem', color: '#cbd5e1', lineHeight: 1.5 }}>
+                                    <p style={{ fontSize: '0.85rem', color: '#4d607a', lineHeight: 1.5 }}>
                                         {examResult.motivation.messageSi}
                                     </p>
                                 </div>
@@ -1317,13 +1317,13 @@ function ExamPlatformContent() {
                                 {/* Stats Grid */}
                                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.85rem', marginBottom: '1.85rem' }}>
                                     <div style={{
-                                        background: 'rgba(15, 23, 42, 0.65)',
-                                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                                        background: '#ffffff',
+                                        border: '1px solid #e1e8f2',
                                         borderRadius: '14px',
                                         padding: '0.85rem'
                                     }}>
-                                        <div style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700 }}>Total</div>
-                                        <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#f8fafc', marginTop: '0.15rem' }}>
+                                        <div style={{ fontSize: '0.75rem', color: '#5e6f86', fontWeight: 700 }}>Total</div>
+                                        <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#10294c', marginTop: '0.15rem' }}>
                                             {examResult.total_questions}
                                         </div>
                                     </div>
@@ -1333,8 +1333,8 @@ function ExamPlatformContent() {
                                         borderRadius: '14px',
                                         padding: '0.85rem'
                                     }}>
-                                        <div style={{ fontSize: '0.75rem', color: '#34d399', fontWeight: 700 }}>Correct</div>
-                                        <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#34d399', marginTop: '0.15rem' }}>
+                                        <div style={{ fontSize: '0.75rem', color: '#16734a', fontWeight: 700 }}>Correct</div>
+                                        <div style={{ fontSize: '1.5rem', fontWeight: 900, color: '#16734a', marginTop: '0.15rem' }}>
                                             {examResult.correct_answers}
                                         </div>
                                     </div>
@@ -1359,8 +1359,8 @@ function ExamPlatformContent() {
                                             width: '100%',
                                             padding: '0.9rem',
                                             borderRadius: '14px',
-                                            background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #06b6d4 100%)',
-                                            color: '#ffffff',
+                                            background: 'linear-gradient(135deg, #073ca6 0%, #073ca6 50%, #073ca6 100%)',
+                                            color: '#10294c',
                                             border: 'none',
                                             fontWeight: 800,
                                             fontSize: '0.92rem',
@@ -1380,9 +1380,9 @@ function ExamPlatformContent() {
                                             style={{
                                                 padding: '0.75rem',
                                                 borderRadius: '12px',
-                                                background: 'rgba(255, 255, 255, 0.08)',
-                                                color: '#e2e8f0',
-                                                border: '1px solid rgba(255, 255, 255, 0.15)',
+                                                background: '#e1e8f2',
+                                                color: '#203656',
+                                                border: '1px solid #e1e8f2',
                                                 fontWeight: 700,
                                                 fontSize: '0.85rem',
                                                 cursor: 'pointer',
@@ -1399,9 +1399,9 @@ function ExamPlatformContent() {
                                             style={{
                                                 padding: '0.75rem',
                                                 borderRadius: '12px',
-                                                background: 'rgba(99, 102, 241, 0.12)',
-                                                color: '#a5b4fc',
-                                                border: '1px solid rgba(99, 102, 241, 0.3)',
+                                                background: 'rgba(7, 60, 166, 0.12)',
+                                                color: '#174fa9',
+                                                border: '1px solid rgba(7, 60, 166, 0.3)',
                                                 fontWeight: 700,
                                                 fontSize: '0.85rem',
                                                 cursor: 'pointer'
@@ -1420,8 +1420,8 @@ function ExamPlatformContent() {
                 {viewMode === 'review' && examResult && (
                     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
                         <div style={{
-                            background: 'linear-gradient(135deg, rgba(26, 38, 64, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%)',
-                            border: '1px solid rgba(99, 102, 241, 0.35)',
+                            background: 'linear-gradient(135deg, #ffffff 0%, #ffffff 100%)',
+                            border: '1px solid rgba(7, 60, 166, 0.35)',
                             borderRadius: '20px',
                             padding: '1.2rem 1.6rem',
                             marginBottom: '1.4rem',
@@ -1433,11 +1433,11 @@ function ExamPlatformContent() {
                             boxShadow: '0 8px 25px rgba(0, 0, 0, 0.4)'
                         }}>
                             <div>
-                                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc' }}>
+                                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#10294c' }}>
                                     Question Review & Theory Explanations
                                 </h3>
-                                <p style={{ fontSize: '0.84rem', color: '#94a3b8', marginTop: '0.15rem' }}>
-                                    Paper: {examResult.paper_title} • Score: <strong style={{ color: '#38bdf8' }}>{examResult.marks}/{examResult.total_questions}</strong> ({examResult.percentage}%)
+                                <p style={{ fontSize: '0.84rem', color: '#5e6f86', marginTop: '0.15rem' }}>
+                                    Paper: {examResult.paper_title} • Score: <strong style={{ color: '#174fa9' }}>{examResult.marks}/{examResult.total_questions}</strong> ({examResult.percentage}%)
                                 </p>
                             </div>
                             <button
@@ -1445,8 +1445,8 @@ function ExamPlatformContent() {
                                 style={{
                                     padding: '0.5rem 1.1rem',
                                     borderRadius: '10px',
-                                    background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
-                                    color: '#ffffff',
+                                    background: 'linear-gradient(135deg, #073ca6 0%, #073ca6 100%)',
+                                    color: '#10294c',
                                     border: 'none',
                                     fontWeight: 700,
                                     fontSize: '0.82rem',
@@ -1462,7 +1462,7 @@ function ExamPlatformContent() {
                                 <div
                                     key={item.question_id || idx}
                                     style={{
-                                        background: 'rgba(18, 26, 43, 0.8)',
+                                        background: '#ffffff',
                                         backdropFilter: 'blur(16px)',
                                         border: item.is_correct ? '1.5px solid rgba(16, 185, 129, 0.4)' : '1.5px solid rgba(239, 68, 68, 0.4)',
                                         borderRadius: '20px',
@@ -1471,13 +1471,13 @@ function ExamPlatformContent() {
                                     }}
                                 >
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
-                                        <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#38bdf8' }}>
+                                        <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#174fa9' }}>
                                             Question {idx + 1}
                                         </span>
                                         {item.is_correct ? (
                                             <span style={{
                                                 background: 'rgba(16, 185, 129, 0.15)',
-                                                color: '#34d399',
+                                                color: '#16734a',
                                                 border: '1px solid rgba(16, 185, 129, 0.4)',
                                                 padding: '3px 10px',
                                                 borderRadius: '8px',
@@ -1507,7 +1507,7 @@ function ExamPlatformContent() {
                                         )}
                                     </div>
 
-                                    <h4 style={{ fontSize: '1.12rem', fontWeight: 800, color: '#f8fafc', lineHeight: 1.45, marginBottom: '1.15rem' }}>
+                                    <h4 style={{ fontSize: '1.12rem', fontWeight: 800, color: '#10294c', lineHeight: 1.45, marginBottom: '1.15rem' }}>
                                         {item.question_text}
                                     </h4>
 
@@ -1521,14 +1521,14 @@ function ExamPlatformContent() {
                                             const isStudentPick = item.student_answer === opt.letter;
                                             const isCorrectAnswer = item.correct_answer === opt.letter;
 
-                                            let bg = 'rgba(15, 23, 42, 0.6)';
-                                            let border = 'rgba(255, 255, 255, 0.08)';
-                                            let badgeColor = '#94a3b8';
+                                            let bg = '#ffffff';
+                                            let border = '#e1e8f2';
+                                            let badgeColor = '#5e6f86';
 
                                             if (isCorrectAnswer) {
                                                 bg = 'rgba(16, 185, 129, 0.15)';
                                                 border = 'rgba(16, 185, 129, 0.5)';
-                                                badgeColor = '#34d399';
+                                                badgeColor = '#16734a';
                                             } else if (isStudentPick && !item.is_correct) {
                                                 bg = 'rgba(239, 68, 68, 0.15)';
                                                 border = 'rgba(239, 68, 68, 0.5)';
@@ -1550,11 +1550,11 @@ function ExamPlatformContent() {
                                                     }}
                                                 >
                                                     <strong style={{ color: badgeColor, minWidth: '18px' }}>{opt.letter}.</strong>
-                                                    <span style={{ color: '#f8fafc', fontWeight: isCorrectAnswer || isStudentPick ? 700 : 500 }}>
+                                                    <span style={{ color: '#10294c', fontWeight: isCorrectAnswer || isStudentPick ? 700 : 500 }}>
                                                         {opt.text}
                                                     </span>
                                                     {isCorrectAnswer && (
-                                                        <span style={{ marginLeft: 'auto', fontSize: '0.72rem', color: '#34d399', fontWeight: 800 }}>
+                                                        <span style={{ marginLeft: 'auto', fontSize: '0.72rem', color: '#16734a', fontWeight: 800 }}>
                                                             ✓ Correct
                                                         </span>
                                                     )}
@@ -1570,16 +1570,16 @@ function ExamPlatformContent() {
 
                                     {/* Explanation */}
                                     <div style={{
-                                        background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(6, 182, 212, 0.06) 100%)',
-                                        border: '1px solid rgba(99, 102, 241, 0.3)',
+                                        background: 'linear-gradient(135deg, rgba(7, 60, 166, 0.1) 0%, rgba(6, 182, 212, 0.06) 100%)',
+                                        border: '1px solid rgba(7, 60, 166, 0.3)',
                                         borderRadius: '14px',
                                         padding: '1rem 1.25rem'
                                     }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#a5b4fc', fontWeight: 800, fontSize: '0.85rem', marginBottom: '0.45rem' }}>
-                                            <BookOpen size={15} color="#818cf8" />
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem', color: '#174fa9', fontWeight: 800, fontSize: '0.85rem', marginBottom: '0.45rem' }}>
+                                            <BookOpen size={15} color="#174fa9" />
                                             <span>සිද්ධාන්ත විවරණය (Theory & Concept Explanation):</span>
                                         </div>
-                                        <p style={{ color: '#cbd5e1', fontSize: '0.88rem', lineHeight: 1.6, whiteSpace: 'pre-line' }}>
+                                        <p style={{ color: '#4d607a', fontSize: '0.88rem', lineHeight: 1.6, whiteSpace: 'pre-line' }}>
                                             {item.explanation || 'මෙම ප්‍රශ්නයට අදාළ සටහනක් නොමැත.'}
                                         </p>
                                     </div>
@@ -1635,8 +1635,8 @@ function ExamPlatformContent() {
                     padding: '1.25rem'
                 }}>
                     <div style={{
-                        background: 'linear-gradient(135deg, rgba(26, 38, 64, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%)',
-                        border: '1px solid rgba(99, 102, 241, 0.35)',
+                        background: 'linear-gradient(135deg, #fff 0%, #ffffff 100%)',
+                        border: '1px solid rgba(7, 60, 166, 0.35)',
                         borderRadius: '22px',
                         maxWidth: '420px',
                         width: '100%',
@@ -1648,20 +1648,20 @@ function ExamPlatformContent() {
                             width: '50px',
                             height: '50px',
                             borderRadius: '15px',
-                            background: 'rgba(99, 102, 241, 0.2)',
-                            border: '1px solid rgba(99, 102, 241, 0.4)',
+                            background: 'rgba(7, 60, 166, 0.2)',
+                            border: '1px solid rgba(7, 60, 166, 0.4)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
                             margin: '0 auto 1rem auto'
                         }}>
-                            <Send size={22} color="#818cf8" />
+                            <Send size={22} color="#174fa9" />
                         </div>
-                        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#f8fafc', marginBottom: '0.35rem' }}>
+                        <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#10294c', marginBottom: '0.35rem' }}>
                             Submit Exam Paper?
                         </h3>
-                        <p style={{ color: '#94a3b8', fontSize: '0.88rem', marginBottom: '1.35rem', lineHeight: 1.5 }}>
-                            You have answered <strong style={{ color: '#38bdf8' }}>{answeredCount}</strong> of <strong style={{ color: '#f8fafc' }}>{activePaper?.questions?.length}</strong> questions.
+                        <p style={{ color: '#5e6f86', fontSize: '0.88rem', marginBottom: '1.35rem', lineHeight: 1.5 }}>
+                            You have answered <strong style={{ color: '#174fa9' }}>{answeredCount}</strong> of <strong style={{ color: '#10294c' }}>{activePaper?.questions?.length}</strong> questions.
                             {answeredCount < (activePaper?.questions?.length || 0) && (
                                 <span style={{ display: 'block', color: '#f87171', marginTop: '0.3rem', fontWeight: 700 }}>
                                     ⚠️ Warning: There are {activePaper.questions.length - answeredCount} unanswered questions!
@@ -1676,9 +1676,9 @@ function ExamPlatformContent() {
                                     flex: 1,
                                     padding: '0.75rem',
                                     borderRadius: '12px',
-                                    background: 'rgba(255, 255, 255, 0.08)',
-                                    border: '1px solid rgba(255, 255, 255, 0.15)',
-                                    color: '#cbd5e1',
+                                    background: '#e1e8f2',
+                                    border: '1px solid #e1e8f2',
+                                    color: '#4d607a',
                                     fontWeight: 700,
                                     fontSize: '0.85rem',
                                     cursor: 'pointer'
@@ -1695,7 +1695,7 @@ function ExamPlatformContent() {
                                     borderRadius: '12px',
                                     background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
                                     border: 'none',
-                                    color: '#ffffff',
+                                    color: '#10294c',
                                     fontWeight: 800,
                                     fontSize: '0.85rem',
                                     cursor: 'pointer'

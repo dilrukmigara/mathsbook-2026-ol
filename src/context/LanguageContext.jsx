@@ -18,8 +18,8 @@ export function LanguageProvider({ children }) {
                 setLanguage(savedLang);
                 setShowModal(false);
             } else {
-                // Show welcome modal if no language selection saved yet
-                setShowModal(true);
+                // Default to Sinhala; language can be changed from the navigation.
+                setShowModal(false);
             }
         }
     }, []);

@@ -1,7 +1,7 @@
 /**
  * mathsbook Configuration File - React Version
  * Tutor: Migara Wickramarachchi (BSc Hons Undergraduate)
- * Contact: 0779780053
+ * Contact: 0729780053
  */
 
 export const MATHSBOOK_CONFIG = {
@@ -9,8 +9,8 @@ export const MATHSBOOK_CONFIG = {
         name: "Migara Wickramarachchi",
         nameSinhala: "මිගාර වික්‍රමාරච්චි",
         qualification: "BSc (Hons) Undergraduate",
-        phone: "0779780053",
-        whatsapp: "94779780053", // Without leading 0 for direct wa.me link
+        phone: "0729780053",
+        whatsapp: "94729780053", // Without leading 0 for direct wa.me link
         medium: "Sinhala Medium (සිංහල මාධ්‍යය)",
     },
     

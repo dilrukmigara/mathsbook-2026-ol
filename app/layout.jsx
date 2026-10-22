@@ -1,4 +1,5 @@
 import './globals.css';
+import './brand.css';
 
 export const metadata = {
   title: 'mathsbook - සිංහල මාධ්‍ය ගණිත පන්තිය | Migara Wickramarachchi',
@@ -16,7 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="si" suppressHydrationWarning>
       <head>
-        <link rel="icon" href="/favicon.svg" />
+        <link rel="icon" href="/brand/mathsbook-logo.png" />
       </head>
       <body suppressHydrationWarning>
         {children}

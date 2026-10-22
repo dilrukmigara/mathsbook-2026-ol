@@ -263,11 +263,11 @@ export default function Hero() {
                             }}>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', fontSize: '0.86rem', color: '#cbd5e1' }}>
                                     <Phone size={15} style={{ color: '#818cf8', flexShrink: 0 }} />
-                                    <span>Hotline: <a href={`tel:${MATHSBOOK_CONFIG.tutor.phone}`} style={{ color: '#ffffff', textDecoration: 'none', fontWeight: 700 }}>077 978 0053</a></span>
+                                    <span>Hotline: <a href={`tel:${MATHSBOOK_CONFIG.tutor.phone}`} style={{ color: '#ffffff', textDecoration: 'none', fontWeight: 700 }}>072 978 0053</a></span>
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', fontSize: '0.86rem', color: '#cbd5e1' }}>
                                     <MessageSquare size={15} style={{ color: '#25D366', flexShrink: 0 }} />
-                                    <span>WhatsApp: <a href={`https://wa.me/${MATHSBOOK_CONFIG.tutor.whatsapp}`} target="_blank" rel="noreferrer" style={{ color: '#ffffff', textDecoration: 'none', fontWeight: 700 }}>077 978 0053</a></span>
+                                    <span>WhatsApp: <a href={`https://wa.me/${MATHSBOOK_CONFIG.tutor.whatsapp}`} target="_blank" rel="noreferrer" style={{ color: '#ffffff', textDecoration: 'none', fontWeight: 700 }}>072 978 0053</a></span>
                                 </div>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.7rem', fontSize: '0.86rem', color: '#cbd5e1' }}>
                                     <BookOpen size={15} style={{ color: '#fbbf24', flexShrink: 0 }} />

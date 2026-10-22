@@ -11,7 +11,7 @@ export default function FloatingWhatsapp() {
             target="_blank" 
             rel="noreferrer" 
             className="whatsapp-float-btn"
-            title="Chat on WhatsApp 0779780053"
+            title="Chat on WhatsApp 0729780053"
         >
             <MessageSquare size={28} />
         </a>
