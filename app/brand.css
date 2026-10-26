@@ -151,7 +151,24 @@
 .mb-portal .lms-auth-heading>span{background:#edf3ff!important;color:var(--mb-blue)!important}
 .mb-portal .exam-paper-card{box-shadow:0 8px 24px #163c740c}
 /* Editorial hero: live typography and geometry instead of a flattened cover. */
-.mb-home{background-color:#f8faff;background-image:radial-gradient(circle at 88% 5%,#dceaffaa,transparent 27%),radial-gradient(circle at 3% 30%,#fff0df77,transparent 24%),radial-gradient(#073ca614 .7px,transparent .7px);background-size:auto,auto,15px 15px}
+/* Layered paper texture, architectural grid and restrained brand-colour washes. */
+.mb-home,.mb-portal{
+ background-color:#eef3fa;
+ background-image:url('/textures/paper-grain.svg'),
+   radial-gradient(ellipse at 95% 12%,#b2d2fc99 0%,transparent 52%),
+   radial-gradient(ellipse at 0% 65%,#ffe0bd77 0%,transparent 48%),
+   linear-gradient(120deg,transparent 35%,#ffffffa8 50%,transparent 66%),
+   linear-gradient(#3869ae0c 1px,transparent 1px),
+   linear-gradient(90deg,#3869ae0c 1px,transparent 1px);
+ background-size:180px 180px,100% 1100px,100% 1300px,100% 1600px,48px 48px,48px 48px;
+ background-repeat:repeat;
+}
+.mb-home .mb-about-wrap{background-color:#dfeafa99;background-image:url('/textures/paper-grain.svg');border-color:#cddced}
+.mb-home .mb-enroll-wrap{background-color:#f7f9fc66;background-image:url('/textures/paper-grain.svg')}
+.mb-home .mb-footer,.mb-portal .mb-footer{background-color:#e7eef8;background-image:url('/textures/paper-grain.svg'),radial-gradient(ellipse at 95% 0%,#d1e2fa,transparent 65%)}
+.mb-home .mb-resource-card,.mb-home .mb-social-card,.mb-home .mb-course-card:not(.mb-course-featured),.mb-home .mb-enroll-form{box-shadow:0 8px 28px -20px #123b8455;border-color:#d4dfed;background-color:#ffffffed}
+@media(max-width:650px){.mb-home,.mb-portal{background-size:180px 180px,100% 800px,100% 1100px,100% 1300px,36px 36px,36px 36px}}
+
 .mb-editorial-hero{display:grid;grid-template-columns:1.15fr 1fr;align-items:center;gap:75px;padding:45px 0 65px}
 .mb-hero-label{font-size:10px;font-weight:800;letter-spacing:2.2px;color:#6a7e99}
 .mb-hero-copy h1{font-family:'Outfit',sans-serif;font-size:clamp(72px,7.5vw,110px);line-height:.95;letter-spacing:-5px;font-weight:800;color:#10294c;margin:22px 0 26px}
