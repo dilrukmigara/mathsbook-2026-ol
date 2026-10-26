@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { MessageSquare } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { MATHSBOOK_CONFIG } from '../config/mathsbookConfig';
 
 export default function FloatingWhatsapp() {
@@ -12,8 +12,9 @@ export default function FloatingWhatsapp() {
             rel="noreferrer" 
             className="whatsapp-float-btn"
             title="Chat on WhatsApp 0729780053"
+            aria-label="Chat on WhatsApp: 0729780053"
         >
-            <MessageSquare size={28} />
+            <MessageCircle size={28} aria-hidden="true"/>
         </a>
     );
 }

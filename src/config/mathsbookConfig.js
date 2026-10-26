@@ -5,6 +5,7 @@
  */
 
 export const MATHSBOOK_CONFIG = {
+    social: { tiktok: '', youtube: '', facebook: '' },
     tutor: {
         name: "Migara Wickramarachchi",
         nameSinhala: "මිගාර වික්‍රමාරච්චි",
