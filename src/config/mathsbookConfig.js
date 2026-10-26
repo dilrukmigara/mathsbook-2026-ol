@@ -5,7 +5,11 @@
  */
 
 export const MATHSBOOK_CONFIG = {
-    social: { tiktok: '', youtube: '', facebook: '' },
+    social: {
+        tiktok: 'https://www.tiktok.com/@mathsbooklk',
+        youtube: 'https://youtube.com/@mathsbooklk?si=h0ZwyhIuGUsaIGJQ',
+        facebook: 'https://www.facebook.com/profile.php?id=61578317724522'
+    },
     tutor: {
         name: "Migara Wickramarachchi",
         nameSinhala: "මිගාර වික්‍රමාරච්චි",
