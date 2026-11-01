@@ -6,7 +6,7 @@ assert.equal(new URL(base).hostname,'127.0.0.1');
 const adminPhone = process.env.TEST_ADMIN_PHONE || 'test-admin';
 const adminPassword = process.env.TEST_ADMIN_PASSWORD || 'local-test-password';
 async function request(path,{method='GET',body,cookie,origin}={}) {
-  const response=await fetch(base+path,{method,headers:{...(body?{'Content-Type':'application/json'}:{}),...(cookie?{cookie}:{}),...(origin?{origin}:{})},...(body?{body:JSON.stringify(body)}:{})});
+  const response=await fetch(base+path,{method,headers:{...(body?{'Content-Type':'application/json'}:{}),...(cookie?{cookie}:{}),origin: origin || base},...(body?{body:JSON.stringify(body)}:{})});
   const data=await response.json();
   return {status:response.status,data,cookie:response.headers.get('set-cookie')?.split(';')[0]};
 }

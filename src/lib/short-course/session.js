@@ -32,7 +32,15 @@ export async function getSession(role = 'student') {
 }
 export function sameOrigin(req) {
   const origin = req.headers.get('origin');
-  return !origin || origin === new URL(req.url).origin;
+  if (!origin) return true;
+  try {
+    const source = new URL(origin);
+    // Next.js may construct req.url with an internal hostname. Compare the
+    // browser-facing Host header, retaining the scheme check behind Vercel.
+    const host = req.headers.get('host') || new URL(req.url).host;
+    const protocol = req.headers.get('x-forwarded-proto')?.split(',')[0].trim() || new URL(req.url).protocol.slice(0, -1);
+    return source.host === host && source.protocol === `${protocol}:`;
+  } catch { return false; }
 }
 export function constantEqual(a, b) {
   const left = createHmac('sha256', sessionSecret()).update(a).digest();
