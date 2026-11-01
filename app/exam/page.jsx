@@ -146,7 +146,8 @@ function ExamPlatformContent() {
         }
     };
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        await fetch('/api/auth/signout', {method:'POST'});
         setUser(null);
         if (typeof window !== 'undefined') {
             localStorage.removeItem('mathsbook_student_session');

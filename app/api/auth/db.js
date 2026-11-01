@@ -236,3 +236,14 @@ export async function deleteUser(studentId) {
   }
 }
 
+
+// Return only the current student's public profile, never their password.
+export async function findPublicUserById(id) {
+  const {data, error} = await supabase.from('students').select('id,name,phone,enrolled_courses').eq('id', id).maybeSingle();
+  if (error) {
+    if (process.env.VERCEL) throw new Error('Profile unavailable');
+    const user = getLocalUsers().find(u => u.id === id);
+    return user ? {id:user.id, name:user.name, phone:user.phone, enrolledCourses:user.enrolledCourses} : null;
+  }
+  return data ? {id:data.id, name:data.name, phone:data.phone, enrolledCourses:data.enrolled_courses || ['free_paper']} : null;
+}

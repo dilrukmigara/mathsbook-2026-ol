@@ -10,7 +10,7 @@ export default function Navbar() {
   const { language, selectLanguage } = useLanguage();
   const pathname = usePathname();
   const en = language === 'en';
-  const links = [['/#home', en ? 'Home' : 'මුල් පිටුව'], ['/#courses', en ? 'Our classes' : 'අපේ පන්ති'], ['/papers', en ? 'Free papers' : 'ප්‍රශ්න පත්‍ර'], ['/exam', en ? 'Online exams' : 'Online විභාග']];
+  const links = [['/100n1', '100න් 1ක්'], ['/#home', en ? 'Home' : 'මුල් පිටුව'], ['/#courses', en ? 'Our classes' : 'අපේ පන්ති'], ['/papers', en ? 'Free papers' : 'ප්‍රශ්න පත්‍ර'], ['/exam', en ? 'Online exams' : 'Online විභාග']];
   return <header className="mb-header">
     <a className="mb-skip" href="#main-content">Skip to content</a>
     <div className="mb-shell mb-nav">

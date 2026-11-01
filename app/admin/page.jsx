@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import './admin.css';
+import ShortCourseAdmin from '../../src/components/ShortCourseAdmin';
 import AdminNavigation from '../../src/components/AdminNavigation';
 import { LanguageProvider } from '../../src/context/LanguageContext';
 import { 
@@ -122,12 +123,6 @@ function AdminContent() {
     const [enrollmentFeedbackMsg, setEnrollmentFeedbackMsg] = useState('');
     const [enrollmentFeedbackErr, setEnrollmentFeedbackErr] = useState('');
 
-    const ADMIN_CREDENTIALS = {
-        phone: '0715747680',
-        password: 'supermigara',
-        role: 'admin'
-    };
-
     const COURSE_CONFIG = [
         { key: 'free_paper', label: '📑 Free Papers & Seminars', short: 'Free Paper', color: '#10b981', bg: 'rgba(16, 185, 129, 0.15)', border: 'rgba(16, 185, 129, 0.35)', locked: true },
         { key: 'grade_10', label: '📘 10 ශ්‍රේණිය - සිද්ධාන්ත සහ පුනරීක්ෂණ', short: 'Grade 10', color: '#175f9c', bg: 'rgba(56, 189, 248, 0.15)', border: 'rgba(56, 189, 248, 0.35)' },
@@ -137,41 +132,27 @@ function AdminContent() {
     ];
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const session = sessionStorage.getItem('mathsbook_admin_session');
-            if (session) {
-                const parsed = JSON.parse(session);
-                if (parsed?.role === 'admin') {
-                    setIsAuthenticated(true);
-                    fetchExamPapers();
-                    fetchPapersAndTopics();
-                    fetchStudents();
-                    fetchVideoLessons();
-                    fetchEnrollments();
-                }
-            }
-        }
+        fetch('/api/admin/session').then(r => r.json()).then(data => {
+            if (data.user) { setIsAuthenticated(true); loadAdminData(); }
+        }).catch(() => {});
     }, []);
 
-    const handleAuthSubmit = (e) => {
-        e.preventDefault();
-        if (phoneInput.trim() === ADMIN_CREDENTIALS.phone && passwordInput.trim() === ADMIN_CREDENTIALS.password) {
-            setIsAuthenticated(true);
-            setAuthError('');
-            if (typeof window !== 'undefined') {
-                sessionStorage.setItem('mathsbook_admin_session', JSON.stringify(ADMIN_CREDENTIALS));
-            }
-            fetchExamPapers();
-            fetchPapersAndTopics();
-            fetchStudents();
-            fetchVideoLessons();
-            fetchEnrollments();
-        } else {
-            setAuthError('Phone number or password is incorrect. Please try again.');
-        }
+    function loadAdminData() {
+        fetchExamPapers(); fetchPapersAndTopics(); fetchStudents();
+        fetchVideoLessons(); fetchEnrollments();
+    }
+    const handleAuthSubmit = async (e) => {
+        e.preventDefault(); setAuthError('');
+        try {
+            const response = await fetch('/api/admin/session', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({phone: phoneInput, password: passwordInput})});
+            const data = await response.json();
+            if (!response.ok) throw new Error(data.error);
+            setIsAuthenticated(true); setPasswordInput(''); loadAdminData();
+        } catch (error) { setAuthError(error.message || 'Login failed. Please retry.'); }
     };
 
-    const handleAdminLogout = () => {
+    const handleAdminLogout = async () => {
+        await fetch('/api/admin/session', {method: 'DELETE'});
         setIsAuthenticated(false);
         if (typeof window !== 'undefined') {
             sessionStorage.removeItem('mathsbook_admin_session');
@@ -853,6 +834,7 @@ function AdminContent() {
                         {/* ============================================================ */}
                         {/* TAB 1: ONLINE EXAMS MANAGEMENT (CSV Question Upload)         */}
                         {/* ============================================================ */}
+                        {activeTab === 'short-course' && <ShortCourseAdmin/>}
                         {activeTab === 'exams' && (
                             <div>
                                 {examMessage && (
