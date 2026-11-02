@@ -1,11 +1,14 @@
+import {setSession, sessionSecret, sameOrigin} from '../../../../src/lib/short-course/session';
 import { NextResponse } from 'next/server';
 import { findUserByPhone } from '../db';
 
 export async function POST(req) {
+  if (!sameOrigin(req)) return NextResponse.json({error: 'Forbidden'}, {status: 403});
   try {
+    sessionSecret();
     const { phone, password } = await req.json();
     
-    if (!phone || !password) {
+    if (typeof phone !== 'string' || typeof password !== 'string' || !phone.trim() || !password.trim()) {
       return NextResponse.json(
         { success: false, error: 'කරුණාකර දුරකථන අංකය සහ මුරපදය ඇතුළත් කරන්න.' },
         { status: 400 }
@@ -32,7 +35,7 @@ export async function POST(req) {
       );
     }
 
-    return NextResponse.json({
+    return setSession(NextResponse.json({
       success: true,
       user: {
         id: user.id,
@@ -41,7 +44,7 @@ export async function POST(req) {
         enrolledCourses: user.enrolledCourses
       },
       message: 'සාර්ථකව ඇතුල් විය!'
-    });
+    }), user);
 
   } catch (err) {
     return NextResponse.json(

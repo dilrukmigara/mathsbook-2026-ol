@@ -1,3 +1,4 @@
+import {requireAdmin} from '../../../../src/lib/short-course/session';
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
@@ -54,6 +55,7 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const body = await req.json();
     const { action, id, title, course, duration, videoUrl, videoId } = body;
@@ -136,6 +138,7 @@ export async function POST(req) {
 }
 
 export async function DELETE(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');

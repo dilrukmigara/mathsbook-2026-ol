@@ -1,3 +1,4 @@
+import {requireAdmin} from '../../../../../src/lib/short-course/session';
 import { NextResponse } from 'next/server';
 import fs from 'fs';
 import path from 'path';
@@ -20,6 +21,7 @@ function formatBytes(bytes, decimals = 1) {
 }
 
 export async function POST(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const formData = await req.formData();
     const file = formData.get('file');

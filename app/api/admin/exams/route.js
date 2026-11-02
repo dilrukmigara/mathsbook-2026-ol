@@ -1,3 +1,4 @@
+import {requireAdmin} from '../../../../src/lib/short-course/session';
 import { NextResponse } from 'next/server';
 import { 
   getExamPapers, 
@@ -7,7 +8,8 @@ import {
   parseCsvQuestions 
 } from '../../exams/db.js';
 
-export async function GET() {
+export async function GET(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const papers = await getExamPapers();
     return NextResponse.json({ success: true, papers });
@@ -20,6 +22,7 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const body = await req.json();
     const { action } = body;
@@ -88,6 +91,7 @@ export async function POST(req) {
 }
 
 export async function DELETE(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const { searchParams } = new URL(req.url);
     const paperId = searchParams.get('id');

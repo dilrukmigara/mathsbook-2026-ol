@@ -32,25 +32,12 @@ function LMSContent() {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            const savedUser = localStorage.getItem('mathsbook_student_session');
-            if (savedUser) {
-                const parsed = JSON.parse(savedUser);
-                setUser(parsed);
-                
-                // Refresh profile to load latest enrolled courses from Supabase
-                fetch('/api/admin/users')
-                    .then(r => r.json())
-                    .then(data => {
-                        if (data.success && data.users) {
-                            const fresh = data.users.find(u => u.phone === parsed.phone);
-                            if (fresh) {
-                                setUser(fresh);
-                                localStorage.setItem('mathsbook_student_session', JSON.stringify(fresh));
-                            }
-                        }
-                    })
-                    .catch(err => console.error('Error syncing profile:', err));
-            }
+            fetch('/api/auth/session').then(r => r.json()).then(data => {
+                if (data.user) {
+                    setUser(data.user);
+                    localStorage.setItem('mathsbook_student_session', JSON.stringify(data.user));
+                } else { localStorage.removeItem('mathsbook_student_session'); }
+            }).catch(() => {});
 
             fetch('/api/admin/video')
                 .then(r => r.json())
@@ -137,7 +124,8 @@ function LMSContent() {
         }
     };
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        await fetch('/api/auth/signout', {method: 'POST'});
         setUser(null);
         if (typeof window !== 'undefined') {
             localStorage.removeItem('mathsbook_student_session');

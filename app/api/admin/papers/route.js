@@ -1,3 +1,4 @@
+import {requireAdmin} from '../../../../src/lib/short-course/session';
 import { NextResponse } from 'next/server';
 import { 
   getTopics, 
@@ -8,7 +9,8 @@ import {
   deletePaper 
 } from '../../papers/db.js';
 
-export async function GET() {
+export async function GET(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const [topics, papers] = await Promise.all([
       getTopics(),
@@ -24,6 +26,7 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const body = await req.json();
     const { action } = body;
@@ -55,6 +58,7 @@ export async function POST(req) {
 }
 
 export async function PUT(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const body = await req.json();
     const { paperId, updates } = body;
@@ -81,6 +85,7 @@ export async function PUT(req) {
 }
 
 export async function DELETE(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const { searchParams } = new URL(req.url);
     const type = searchParams.get('type'); // 'paper' or 'topic'

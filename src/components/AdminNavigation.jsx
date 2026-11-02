@@ -1,6 +1,7 @@
 'use client';
 import { FileSpreadsheet, FileText, Users, Video, ClipboardList, ArrowUpRight } from 'lucide-react';
 const areas = [
+ {id:'short-course',title:'100න් 1ක්',si:'විනාඩි 2න්',description:'හැඳින්වීම, වීඩියෝ, සටහන් සහ පසුගිය විභාග ප්‍රශ්න කළමනාකරණය කරන්න.',icon:Video},
  {id:'exams',title:'Online exams',si:'මාර්ගගත විභාග',description:'Create papers, upload questions and review exams.',icon:FileSpreadsheet},
  {id:'papers',title:'Paper library',si:'ප්‍රශ්න පත්‍ර',description:'Upload PDFs and organise topic folders.',icon:FileText},
  {id:'students',title:'Students',si:'සිසුන්',description:'Find students and manage course access.',icon:Users},

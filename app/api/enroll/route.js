@@ -1,3 +1,4 @@
+import {requireAdmin} from '../../../src/lib/short-course/session';
 import { NextResponse } from 'next/server';
 import { saveEnrollment, getAllEnrollments, deleteEnrollment } from './db';
 
@@ -29,7 +30,8 @@ export async function POST(req) {
   }
 }
 
-export async function GET() {
+export async function GET(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const enrollments = await getAllEnrollments();
     return NextResponse.json({ success: true, enrollments });
@@ -43,6 +45,7 @@ export async function GET() {
 }
 
 export async function DELETE(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');

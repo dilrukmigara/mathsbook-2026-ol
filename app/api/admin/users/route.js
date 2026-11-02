@@ -1,7 +1,9 @@
+import {requireAdmin} from '../../../../src/lib/short-course/session';
 import { NextResponse } from 'next/server';
 import { getAllUsers, updateUserCourses, deleteUser } from '../../auth/db';
 
-export async function GET() {
+export async function GET(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const users = await getAllUsers();
     return NextResponse.json({ success: true, users });
@@ -14,6 +16,7 @@ export async function GET() {
 }
 
 export async function POST(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const { id, enrolledCourses } = await req.json();
     
@@ -47,6 +50,7 @@ export async function POST(req) {
 }
 
 export async function DELETE(req) {
+  const rejection = await requireAdmin(req); if (rejection) return rejection;
   try {
     const { searchParams } = new URL(req.url);
     const id = searchParams.get('id');
